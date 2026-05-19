@@ -8,7 +8,8 @@ namespace Inventory_System.Enums
 {
     public enum RoleType
     {
-        Admin,
-        Employee
+        Admin = 1,
+        Employee = 2,
+        Client = 3
     }
 }

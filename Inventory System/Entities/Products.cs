@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inventory_System.Entities
 {
-    public class Products
+    public partial class Products
     {
         [Key]
         public int Id { get; set; }

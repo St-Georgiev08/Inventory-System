@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inventory_System.Entities
 {
-    public class AuditLogs
+    public partial class AuditLogs
     {
         [Key]
         public int Id { get; set; }

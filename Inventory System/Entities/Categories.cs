@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inventory_System.Entities
 {
-    public class Categories
+    public partial class Categories
     {
         [Key]
         public int Id { get; set; }

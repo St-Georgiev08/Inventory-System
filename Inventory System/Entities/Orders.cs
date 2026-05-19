@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inventory_System.Entities
 {
-    public class Orders
+    public partial class Orders
     {
         [Key]
         public int Id { get; set; }
@@ -15,9 +15,6 @@ namespace Inventory_System.Entities
         [Required]
         public int UserId { get; set; }
         public User User { get; set; }
-        [Required]
-        public int CustomerId { get; set; }
-        public Customers Customer { get; set; }
         [Required]
         public DateTime OrderDate { get; set; }
         [Required]

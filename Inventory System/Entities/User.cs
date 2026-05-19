@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Inventory_System.Entities
 {
-    public class User
+    public partial class User
     {
         [Key]
         public int Id { get; set; }
@@ -20,6 +20,11 @@ namespace Inventory_System.Entities
         public string PasswordHash { get; set; }
         [Required]
         public RoleType Role { get; set; }
+        [MaxLength(10)]
+        public string PhoneNumber { get; set; }
+        [MaxLength(254)]
+        public string? Email { get; set; }
+
 
         public ICollection<Products> CreatedProducts { get; set; } = new List<Products>();
         public ICollection<Products> UpdatedProducts { get; set; } = new List<Products>();

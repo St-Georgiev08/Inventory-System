@@ -12,12 +12,15 @@ namespace Inventory_System
 {
     public class SalesManagementSystemContext:DbContext
     {
-        public DbSet<Customers> Customers { get; set; }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderItems> OrderItems { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<Suppliers> Suppliers { get; set; }
         public DbSet<ProductSuppliers> ProductSuppliers { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<AuditLogs> AuditLogs { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder();
@@ -44,10 +47,10 @@ namespace Inventory_System
                 .WithMany(x=>x.Products)
                 .HasForeignKey(x=>x.CategoryId).OnDelete(DeleteBehavior.Restrict);
             // Configure the one-to-many relationship between Orders and Customers
-            modelBuilder.Entity<Orders>()
-                .HasOne(o => o.Customer)
-                .WithMany(c => c.Orders)
-                .HasForeignKey(o => o.CustomerId).OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Orders>()
+            //    .HasOne(o => o.Customer)
+            //    .WithMany(c => c.Orders)
+            //    .HasForeignKey(o => o.CustomerId).OnDelete(DeleteBehavior.Restrict);
 
             // Configure the many-to-many relationship between Products and Orders
              modelBuilder.Entity<OrderItems>()

@@ -73,38 +73,6 @@ namespace Inventory_System.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Inventory_System.Entities.Customers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(254)
-                        .HasColumnType("nvarchar(254)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("Inventory_System.Entities.OrderItems", b =>
                 {
                     b.Property<int>("OrderId")
@@ -134,9 +102,6 @@ namespace Inventory_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -147,8 +112,6 @@ namespace Inventory_System.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.HasIndex("UserId");
 
@@ -249,10 +212,19 @@ namespace Inventory_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -264,7 +236,7 @@ namespace Inventory_System.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.AuditLogs", b =>
@@ -299,19 +271,11 @@ namespace Inventory_System.Migrations
 
             modelBuilder.Entity("Inventory_System.Entities.Orders", b =>
                 {
-                    b.HasOne("Inventory_System.Entities.Customers", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Inventory_System.Entities.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Customer");
 
                     b.Navigation("User");
                 });
@@ -364,11 +328,6 @@ namespace Inventory_System.Migrations
             modelBuilder.Entity("Inventory_System.Entities.Categories", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Inventory_System.Entities.Customers", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.Orders", b =>
