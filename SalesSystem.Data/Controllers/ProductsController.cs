@@ -37,9 +37,9 @@ namespace SalesSystem.Data.Controllers
              }
              return prod;
         }
-          public async Task<string> AddProduct(string name, decimal price, int quantity, int CreatedBy, int catId)
+          public async Task<string> AddProduct(string name, decimal price, int quantity, int catId)
         {
-              if (string.IsNullOrEmpty(name) || price <= 0 || quantity < 0 || CreatedBy < 0 || catId < 0)
+              if (string.IsNullOrEmpty(name) || price <= 0 || quantity < 0 || catId < 0)
               {
                   throw new ArgumentException("Invalid input data");
               }
@@ -48,18 +48,17 @@ namespace SalesSystem.Data.Controllers
                   Name = name,
                   Price = price,
                   Quantity = quantity,
-                  CreatedBy = CreatedBy,
                   CategoryId = catId
               });
               return "Product added successfully";
         }
-         public async Task<string> UpdateProduct(int id, string name, decimal price, int quantity, int CreatedBy, int? updatedBy, int catId)
+         public async Task<string> UpdateProduct(int id, string name, decimal price, int quantity, int catId)
         {
-              if (id < 0 || string.IsNullOrEmpty(name) || price <= 0 || quantity < 0 || CreatedBy < 0 || catId < 0)
+              if (id < 0 || string.IsNullOrEmpty(name) || price <= 0 || quantity < 0)
               {
                   throw new ArgumentException("Invalid input data");
               }
-              await product.Update(id, name, price, quantity, CreatedBy, updatedBy, catId);
+              await product.Update(id, name, price, quantity, catId);
               return "Product updated successfully";
          }
           public async Task<string> DeleteProduct(int id)

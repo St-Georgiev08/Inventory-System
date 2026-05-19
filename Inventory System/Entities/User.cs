@@ -19,6 +19,7 @@ namespace Inventory_System.Entities
         [MaxLength(256)]
         public string PasswordHash { get; set; }
         [Required]
+
         public RoleType Role { get; set; }
         [MaxLength(10)]
         public string PhoneNumber { get; set; }
@@ -26,8 +27,8 @@ namespace Inventory_System.Entities
         public string? Email { get; set; }
 
 
-        public ICollection<Products> CreatedProducts { get; set; } = new List<Products>();
-        public ICollection<Products> UpdatedProducts { get; set; } = new List<Products>();
+        public ICollection<ProductDetails> CreatedProducts { get; set; } = new List<ProductDetails>();
+        public ICollection<ProductDetails> UpdatedProducts { get; set; } = new List<ProductDetails>();
         public ICollection<Orders> Orders { get; set; }
         = new List<Orders>();
 

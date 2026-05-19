@@ -33,7 +33,7 @@ namespace SalesSystem.Data.Servises
             await _context.Products.AddAsync(products);
             await _context.SaveChangesAsync();
         }
-        public async Task Update(int id, string name, decimal price, int quantity, int CreatedBy, int? updatedBy, int catId)
+        public async Task Update(int id, string name, decimal price, int quantity, int CateID)
         {
 
             var find = await _context.Products.FindAsync(id);
@@ -42,9 +42,7 @@ namespace SalesSystem.Data.Servises
                 find.Name = name;
                 find.Price = price;
                 find.Quantity = quantity;
-                find.CreatedBy = CreatedBy;
-                find.UpdatedBy = updatedBy;
-                find.CategoryId = catId;
+                find.CategoryId = CateID;
                 await _context.SaveChangesAsync();
             }
         }

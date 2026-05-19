@@ -4,6 +4,7 @@ using Inventory_System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory_System.Migrations
 {
     [DbContext(typeof(SalesManagementSystemContext))]
-    partial class SalesManagementSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20260519122009_AddingConversionsAndConstraints2")]
+    partial class AddingConversionsAndConstraints2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,18 +141,12 @@ namespace Inventory_System.Migrations
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
 
                     b.HasIndex("UpdatedBy");
 
@@ -193,9 +190,15 @@ namespace Inventory_System.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("statusId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("statusId")
+                        .IsUnique();
 
                     b.ToTable("Products");
                 });
@@ -272,17 +275,6 @@ namespace Inventory_System.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "stoichogeorgiev@gmail.com",
-                            PasswordHash = "admin123",
-                            PhoneNumber = "0895650627",
-                            Role = "Admin",
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.AuditLogs", b =>
@@ -334,20 +326,12 @@ namespace Inventory_System.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Inventory_System.Entities.Products", "Products")
-                        .WithOne("Status")
-                        .HasForeignKey("Inventory_System.Entities.ProductDetails", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Inventory_System.Entities.User", "UpdatedByUser")
                         .WithMany("UpdatedProducts")
                         .HasForeignKey("UpdatedBy")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("CreatedByUser");
-
-                    b.Navigation("Products");
 
                     b.Navigation("UpdatedByUser");
                 });
@@ -379,7 +363,15 @@ namespace Inventory_System.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Inventory_System.Entities.ProductDetails", "Status")
+                        .WithOne("Products")
+                        .HasForeignKey("Inventory_System.Entities.Products", "statusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.Categories", b =>
@@ -392,14 +384,17 @@ namespace Inventory_System.Migrations
                     b.Navigation("OrderItems");
                 });
 
+            modelBuilder.Entity("Inventory_System.Entities.ProductDetails", b =>
+                {
+                    b.Navigation("Products")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Inventory_System.Entities.Products", b =>
                 {
                     b.Navigation("OrderItems");
 
                     b.Navigation("ProductSuppliers");
-
-                    b.Navigation("Status")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.Suppliers", b =>

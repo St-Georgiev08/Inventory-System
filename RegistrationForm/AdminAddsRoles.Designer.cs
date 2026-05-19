@@ -35,8 +35,8 @@
             label5 = new Label();
             label6 = new Label();
             groupBox1 = new GroupBox();
-            radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
@@ -50,11 +50,12 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(324, 28);
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.Location = new Point(133, 19);
             label1.Name = "label1";
-            label1.Size = new Size(158, 20);
+            label1.Size = new Size(534, 41);
             label1.TabIndex = 0;
-            label1.Text = "Registrated by ADMIN";
+            label1.Text = "Registrate new employees or admins";
             // 
             // label2
             // 
@@ -112,18 +113,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Roles";
             // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Font = new Font("Segoe UI", 12F);
-            radioButton1.Location = new Point(45, 35);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(91, 32);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Admin";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
             // radioButton2
             // 
             radioButton2.AutoSize = true;
@@ -135,6 +124,18 @@
             radioButton2.TabStop = true;
             radioButton2.Text = "Employee";
             radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Font = new Font("Segoe UI", 12F);
+            radioButton1.Location = new Point(45, 35);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(91, 32);
+            radioButton1.TabIndex = 0;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Admin";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 

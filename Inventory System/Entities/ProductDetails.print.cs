@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Inventory_System.Entities
 {
-    public partial class Products
+    public partial class ProductDetails
     {
         public override string ToString()
         {
-            return $"Id: {Id}, Name: {Name}, Price: {Price}, Quantity: {Quantity}, Category: {Category.Name}\n";
+            return $" Created By: {CreatedByUser.Username}, Updated By: {(UpdatedByUser != null ? UpdatedByUser.Username : "N/A")}\n";
         }
     }
 }

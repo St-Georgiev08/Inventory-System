@@ -20,7 +20,8 @@ namespace Inventory_System
         public DbSet<Categories> Categories { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<AuditLogs> AuditLogs { get; set; }
-        
+        public DbSet<ProductDetails> ProductDetails { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder();
@@ -75,18 +76,29 @@ namespace Inventory_System
                 .WithMany(x=>x.AuditLogs)
                 .HasForeignKey(x=>x.UserId).OnDelete(DeleteBehavior.Cascade);
 
-            //Configure the one-to-many relationship between Users and Products
-            modelBuilder.Entity<Products>()
-                .HasOne(x => x.CreatedByUser)
-                .WithMany(x => x.CreatedProducts)
-                .HasForeignKey(x => x.CreatedBy).OnDelete(DeleteBehavior.Cascade);
+            //Configure the one-to-many relationship between Users and ProductDetails
 
-            modelBuilder.Entity<Products>()
+
+            modelBuilder.Entity<ProductDetails>()
+                .HasOne(x=>x.CreatedByUser).WithMany(x=>x.CreatedProducts).HasForeignKey(x=>x.CreatedBy).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<ProductDetails>()
                 .HasOne(x => x.UpdatedByUser)
                 .WithMany(x => x.UpdatedProducts)
                 .HasForeignKey(x => x.UpdatedBy).OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<ProductDetails>()
+                .HasOne(x => x.Products)
+                .WithOne(x => x.Status)
+                .HasForeignKey<ProductDetails>(x => x.ProductId).OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<User>().HasIndex(u => u.Username)
+                .IsUnique();
+            modelBuilder.Entity<Suppliers>().HasIndex(s => s.Name)
+                .IsUnique();
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, Username = "admin", PasswordHash = "admin123", PhoneNumber = "0895650627", Email = "stoichogeorgiev@gmail.com", Role = Enums.RoleType.Admin }
+            );
+            modelBuilder.Entity<User>().Property(x => x.Role).HasConversion<string>();
 
         }
     }
