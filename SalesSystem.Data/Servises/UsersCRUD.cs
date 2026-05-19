@@ -1,5 +1,6 @@
 ﻿using Inventory_System;
 using Inventory_System.Entities;
+using Inventory_System.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,10 @@ namespace SalesSystem.Data.Servises
         {
             _context = new();
         }
+        public async Task<int> Count()
+        {
+            return await _context.Users.CountAsync();
+        }   
         public async Task<List<User>> GetAll()
         {
             return await _context.Users.ToListAsync();
@@ -27,8 +32,21 @@ namespace SalesSystem.Data.Servises
         public async Task Add(User user)
         {
            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+           await _context.SaveChangesAsync();
         }
-        
+        public async Task Update(int id, string username, string pass, RoleType role, string phone, string email)
+        {
+            var find = await _context.Users.FindAsync(id);
+            if(find != null)
+            {
+                find.Username = username;
+                find.PasswordHash = pass;
+                find.Role = role;
+                find.PhoneNumber = phone;
+                find.Email = email;
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 }

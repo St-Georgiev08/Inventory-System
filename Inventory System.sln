@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory System", "Invento
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesSystem.Data", "SalesSystem.Data\SalesSystem.Data.csproj", "{F7F72BC0-BEFD-4728-8C12-97C53BAA218C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationForm", "RegistrationForm\RegistrationForm.csproj", "{DEDCEDA0-20F0-4686-A1B1-A26B1FEA1278}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F7F72BC0-BEFD-4728-8C12-97C53BAA218C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7F72BC0-BEFD-4728-8C12-97C53BAA218C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7F72BC0-BEFD-4728-8C12-97C53BAA218C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEDCEDA0-20F0-4686-A1B1-A26B1FEA1278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEDCEDA0-20F0-4686-A1B1-A26B1FEA1278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEDCEDA0-20F0-4686-A1B1-A26B1FEA1278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEDCEDA0-20F0-4686-A1B1-A26B1FEA1278}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
