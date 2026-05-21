@@ -48,5 +48,14 @@ namespace SalesSystem.Data.Servises
             }
         }
 
+        internal async Task Delete(int id)
+        {
+            var find = await _context.Users.FindAsync(id);
+            if (find != null)
+            {
+                _context.Users.Remove(find);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

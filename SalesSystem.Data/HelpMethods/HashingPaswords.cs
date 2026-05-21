@@ -22,5 +22,11 @@ namespace SalesSystem.Data.HelpMethods
             }
 
         }
+
+        internal async Task<bool> VerifyPassword(string password, string passwordHash)
+        {
+            string hashOfInput = await HashPassword(password);
+            return StringComparer.OrdinalIgnoreCase.Compare(hashOfInput, passwordHash) == 0;
+        }
     }
 }

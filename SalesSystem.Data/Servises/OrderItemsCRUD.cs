@@ -54,5 +54,10 @@ namespace SalesSystem.Data.Servises
                 await _context.SaveChangesAsync();
             }
          }
+
+        public async Task<OrderItems> GetById(int id)
+        {
+            return await _context.OrderItems.FindAsync(id);
+        }
     }
 }

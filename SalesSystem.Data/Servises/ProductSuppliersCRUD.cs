@@ -52,5 +52,10 @@ namespace SalesSystem.Data.Servises
                 await _context.SaveChangesAsync();
             }
         }
+
+        internal async Task<ProductSuppliers> GetById(int id)
+        {
+            return await _context.ProductSuppliers.FindAsync(id);
+        }
     }
 }

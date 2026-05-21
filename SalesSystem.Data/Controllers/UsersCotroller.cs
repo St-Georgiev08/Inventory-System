@@ -81,5 +81,33 @@ namespace SalesSystem.Data.Controllers
             await users.Update(id, username, hash, parsedRole, phone, email);
             return "User updated successfully";
         }
+        public async Task<string> DeleteUserAsync(int id)
+        {
+            if (id < 0)
+            {
+                throw new ArgumentException("Invalid User ID");
+            }
+            await users.Delete(id);
+            return "User deleted successfully";
+        }
+        public async Task<string> AuthenticateUserAsync(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("Username and password are required");
+            }
+            var user = (await users.GetAll()).FirstOrDefault(u => u.Username == username);
+            if (user == null)
+            {
+                throw new ArgumentException("User not found");
+            }
+            var hashing = new HashingPaswords();
+            bool isPasswordValid = await hashing.VerifyPassword(password, user.PasswordHash);
+            if (!isPasswordValid)
+            {
+                throw new ArgumentException("Invalid password");
+            }
+            return "Authentication successful";
+        }
     }
 }

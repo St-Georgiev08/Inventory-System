@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory_System.Migrations
 {
     [DbContext(typeof(SalesManagementSystemContext))]
-    [Migration("20260519062902_try")]
-    partial class @try
+    [Migration("20260521095158_CreateDB")]
+    partial class CreateDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,6 +121,44 @@ namespace Inventory_System.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Inventory_System.Entities.ProductDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.HasIndex("UpdatedBy");
+
+                    b.ToTable("ProductDetails");
+                });
+
             modelBuilder.Entity("Inventory_System.Entities.ProductSuppliers", b =>
                 {
                     b.Property<int>("ProductId")
@@ -147,9 +185,6 @@ namespace Inventory_System.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -161,16 +196,9 @@ namespace Inventory_System.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CreatedBy");
-
-                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Products");
                 });
@@ -204,6 +232,9 @@ namespace Inventory_System.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Suppliers");
                 });
 
@@ -215,13 +246,23 @@ namespace Inventory_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -230,7 +271,21 @@ namespace Inventory_System.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Username")
+                        .IsUnique();
+
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "stoichogeorgiev@gmail.com",
+                            PasswordHash = "admin123",
+                            PhoneNumber = "0895650627",
+                            Role = "Admin",
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.AuditLogs", b =>
@@ -274,6 +329,32 @@ namespace Inventory_System.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Inventory_System.Entities.ProductDetails", b =>
+                {
+                    b.HasOne("Inventory_System.Entities.User", "CreatedByUser")
+                        .WithMany("CreatedProducts")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Inventory_System.Entities.Products", "Products")
+                        .WithOne("Status")
+                        .HasForeignKey("Inventory_System.Entities.ProductDetails", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Inventory_System.Entities.User", "UpdatedByUser")
+                        .WithMany("UpdatedProducts")
+                        .HasForeignKey("UpdatedBy")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("UpdatedByUser");
+                });
+
             modelBuilder.Entity("Inventory_System.Entities.ProductSuppliers", b =>
                 {
                     b.HasOne("Inventory_System.Entities.Products", "Product")
@@ -301,22 +382,7 @@ namespace Inventory_System.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Inventory_System.Entities.User", "CreatedByUser")
-                        .WithMany("CreatedProducts")
-                        .HasForeignKey("CreatedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Inventory_System.Entities.User", "UpdatedByUser")
-                        .WithMany("UpdatedProducts")
-                        .HasForeignKey("UpdatedBy")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Category");
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("UpdatedByUser");
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.Categories", b =>
@@ -334,6 +400,9 @@ namespace Inventory_System.Migrations
                     b.Navigation("OrderItems");
 
                     b.Navigation("ProductSuppliers");
+
+                    b.Navigation("Status")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Inventory_System.Entities.Suppliers", b =>
