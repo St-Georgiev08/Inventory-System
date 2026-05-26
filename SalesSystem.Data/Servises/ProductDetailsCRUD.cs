@@ -33,7 +33,7 @@ namespace SalesSystem.Data.Servises
             await product.ProductDetails.AddAsync(details);
             await product.SaveChangesAsync();
         }
-        public async Task Update(int id, string description, string img)
+        public async Task Update(int id, string? description, string img)
         {
             var find = await product.ProductDetails.FindAsync(id);
             if (find != null)

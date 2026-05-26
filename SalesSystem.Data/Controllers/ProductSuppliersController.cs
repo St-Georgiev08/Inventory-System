@@ -1,4 +1,5 @@
-﻿using SalesSystem.Data.Servises;
+﻿using Inventory_System.Entities;
+using SalesSystem.Data.Servises;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,15 @@ namespace SalesSystem.Data.Controllers
         {
             suppliersCRUD = new();
         }
-            public async Task<string> AddProductSupplier(int productId, int supplierId)
+        public async Task<string> AddProductSupplier(int productId, int supplierId)
+        {
+            if (productId < 0 || supplierId < 0)
             {
-                if (productId < 0 || supplierId < 0)
-                {
-                    throw new ArgumentException("Invalid input data");
-                }
-                await suppliersCRUD.Add(new Inventory_System.Entities.ProductSuppliers { ProductId = productId, SupplierId = supplierId });
-                return "Product supplier added successfully";
+                throw new ArgumentException("Invalid input data");
             }
+            await suppliersCRUD.Add(new Inventory_System.Entities.ProductSuppliers { ProductId = productId, SupplierId = supplierId });
+            return "Product supplier added successfully";
+        }
         public async Task<string> UpdateProductSupplier(int id, int productId, int supplierId)
         {
             if (id < 0 || productId < 0 || supplierId < 0)
@@ -33,16 +34,34 @@ namespace SalesSystem.Data.Controllers
             {
                 throw new ArgumentException("Product supplier not found");
             }
-            await suppliersCRUD.Update( productId, supplierId);
+            await suppliersCRUD.Update(productId, supplierId);
             return "Product supplier updated successfully";
         }
         public async Task<string> DeleteProductSupplier(int id)
         {
             if (id < 0)
             {
-                
+                throw new ArgumentException("Invalid input data");
             }
-
+            if (await suppliersCRUD.GetById(id) == null)
+            {
+                throw new ArgumentException("Product supplier not found");
+            }
+            await suppliersCRUD.Delete(id);
+            return "Product supplier deleted successfully";
+        }
+        public async Task<ProductSuppliers> GetProductSupplierById(int id)
+        {
+            if (id < 0)
+            {
+                throw new ArgumentException("Invalid input data");
+            }
+            var productSupplier = await suppliersCRUD.GetById(id);
+            if (productSupplier == null)
+            {
+                throw new ArgumentException("Product supplier not found");
+            }
+            return productSupplier;
         }
     }
 }

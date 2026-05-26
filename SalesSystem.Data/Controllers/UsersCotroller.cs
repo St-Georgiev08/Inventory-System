@@ -1,4 +1,5 @@
-﻿using Inventory_System.Entities;
+﻿using Inventory_System;
+using Inventory_System.Entities;
 using Inventory_System.Enums;
 using SalesSystem.Data.HelpMethods;
 using SalesSystem.Data.Servises;
@@ -13,6 +14,7 @@ namespace SalesSystem.Data.Controllers
     public class UsersCotroller
     {
         private readonly UsersCRUD users;
+        private readonly SalesManagementSystemContext context;
         public UsersCotroller()
         {
             users = new();
@@ -90,7 +92,7 @@ namespace SalesSystem.Data.Controllers
             await users.Delete(id);
             return "User deleted successfully";
         }
-        public async Task<string> AuthenticateUserAsync(string username, string password)
+        public async Task<User> AuthenticateUserAsync(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
@@ -107,7 +109,8 @@ namespace SalesSystem.Data.Controllers
             {
                 throw new ArgumentException("Invalid password");
             }
-            return "Authentication successful";
+            return user;
         }
+       
     }
 }

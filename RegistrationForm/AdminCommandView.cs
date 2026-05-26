@@ -16,5 +16,13 @@ namespace RegistrationForm
         {
             InitializeComponent();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RegistrationForm1 registrationForm1 = new RegistrationForm1();
+            registrationForm1.ShowDialog();
+            this.Close();
+        }
     }
 }
