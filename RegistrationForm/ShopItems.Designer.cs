@@ -45,9 +45,11 @@
             radioButton1 = new RadioButton();
             label1 = new Label();
             button2 = new Button();
+            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // imageList1
@@ -178,7 +180,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(237, 9);
+            label1.Location = new Point(174, 10);
             label1.Name = "label1";
             label1.Size = new Size(475, 41);
             label1.TabIndex = 27;
@@ -187,7 +189,7 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button2.Location = new Point(599, 82);
+            button2.Location = new Point(568, 90);
             button2.Name = "button2";
             button2.Size = new Size(168, 78);
             button2.TabIndex = 28;
@@ -195,12 +197,24 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.Brown;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(720, 12);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(68, 53);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 29;
+            pictureBox3.TabStop = false;
+            // 
             // ShopItems
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Brown;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox3);
             Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(textBox1);
@@ -215,6 +229,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -235,5 +250,6 @@
         private RadioButton radioButton1;
         private Label label1;
         private Button button2;
+        private PictureBox pictureBox3;
     }
 }
