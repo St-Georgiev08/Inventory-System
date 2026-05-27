@@ -8,18 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RegistrationForm
+namespace RegistrationForm.ClientViewsFolder
 {
-    public partial class ClientMainForm : Form
+    public partial class AllClintsOrders : Form
     {
-        public ClientMainForm()
+        public AllClintsOrders()
         {
             InitializeComponent();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            ShopItems shopItems = new();
+            shopItems.ShowDialog();
         }
     }
 }

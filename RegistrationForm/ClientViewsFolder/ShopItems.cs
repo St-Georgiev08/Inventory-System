@@ -17,10 +17,28 @@ namespace RegistrationForm
 {
     public partial class ShopItems : Form
     {
+        private readonly CategoriesController categories;
+        private string searchTerm = string.Empty;
+        private bool sortByName;
+        private bool sortByType;
+        private bool sortByPrice;
+        private bool desc;
         public ShopItems()
         {
+            categories = new();
             InitializeComponent();
             ShopItems_Load();
+            OnLoad();
+        }
+        private async void OnLoad()
+        {
+            await LoadCategories();
+        }
+
+        private async Task LoadCategories()
+        {
+            comboBox1.DataSource = await categories.GetAllCategories();
+            comboBox1.DisplayMember = "Name"; // Assuming the Categories class has a Name property
         }
         private async void ShopItems_Load()
         {
@@ -52,25 +70,54 @@ namespace RegistrationForm
         {
             ShopItems_Load();
             ProductDetailsController product = new();
-                var products = await product.FindAllWith(textBox1.Text);
-            bool m = false;
-            bool n = false;
-            if (this.radioButton1.Checked)
+            string searchTerm = textBox1.Text;
+            bool name = radioButton1.Checked;
+            bool price = radioButton2.Checked;
+            bool desc = checkBox1.Checked;
+            string type = comboBox1.SelectedText;
+            // use the public property
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                n = true;
+                var products = await product.FindAllWith(searchTerm);
+
+
+                var filter = await product.SortByType(products, name,price,desc,type);
+                LoadProducts(filter);
             }
             else
             {
-                m = true;
+                var filter = await product.SortByType(await product.GetAll(), name, price, desc, type);
+                LoadProducts(filter);
             }
-            var filter = await product.SortByType(products, n, m);
-               LoadProducts(filter);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-        
-            
+
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Close();
+            ClientMainForm clientMainForm = new();
+            clientMainForm.ShowDialog();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

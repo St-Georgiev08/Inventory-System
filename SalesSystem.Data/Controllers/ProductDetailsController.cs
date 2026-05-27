@@ -24,6 +24,10 @@ namespace SalesSystem.Data.Controllers
             detailsCRUD = new();
             context = new();
         }
+        public async Task<List<ProductDetails>> GetAll()
+        {
+            return await context.ProductDetails.Include(x=>x.Products).ToListAsync();
+        }
         public async Task<string> AddProductDetails(string description, string img)
         {
             if (string.IsNullOrEmpty(description) || string.IsNullOrEmpty(img))
@@ -75,20 +79,31 @@ namespace SalesSystem.Data.Controllers
         public async Task<List<ProductDetails>> FindAllWith(string text)
         {
          
-            return await context.ProductDetails
+            return await context.ProductDetails.Include(x=>x.Products)
                 .Where(p => p.Products.Name.Contains(text))
                 .ToListAsync();
         }
-        public async Task<List<ProductDetails>> SortByType(List<ProductDetails> products, bool name, bool nameDesc)
+        public async Task<List<ProductDetails>> SortByType(List<ProductDetails> products, bool name, bool price, bool desc, string type)
         {
+            //List<ProductDetails> list1 = new List<ProductDetails>();
+            if (string.IsNullOrEmpty(type))
+                products = products.Where(x => x.Products.Category.Name == type).ToList();
             if (name)
             {
+                if (desc)
+                {
+                    return products.OrderByDescending(x => x.Products.Name).ToList();
+                }
                 var list = products.OrderBy(x => x.Products.Name);
                 return list.ToList();
             }
-            else if (nameDesc)
+            else if (price)
             {
-                var list = products.OrderByDescending(x => x.Products.Name);
+                if(desc)
+                {
+                    return products.OrderByDescending(x => x.Products.Price).ToList();
+                }
+                var list = products.OrderBy(x => x.Products.Price);
                 return list.ToList();
             }
             else

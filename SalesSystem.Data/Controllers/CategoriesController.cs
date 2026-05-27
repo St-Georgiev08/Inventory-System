@@ -19,6 +19,10 @@ namespace SalesSystem.Data.Controllers
         {
             categories = new CategoriesCRUD(Context);
         }
+        public async Task<List<Inventory_System.Entities.Categories>> GetAllCategories()
+        {
+            return await categories.GetAll();
+        }
 
             public async Task<string> AddCategory(string name)
             {

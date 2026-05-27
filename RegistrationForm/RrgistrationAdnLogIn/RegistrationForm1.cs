@@ -1,5 +1,6 @@
 using Inventory_System.Entities;
 using Inventory_System.Enums;
+using RegistrationForm.EmployeeViewsFolder;
 using SalesSystem.Data.Controllers;
 using System.Threading.Tasks;
 
@@ -37,6 +38,20 @@ namespace RegistrationForm
                 this.Hide();
                 AdminCommandView adminCommandView = new AdminCommandView();
                 adminCommandView.ShowDialog();
+                this.Close();
+            }
+            if(us.Role == RoleType.Client)
+            {
+                this.Hide();
+                ClientMainForm clientMainForm = new ClientMainForm();
+                clientMainForm.ShowDialog();
+                this.Close();
+            }
+            if (us.Role == RoleType.Employee)
+            {
+                this.Hide();
+                EmployeeCommandsView view = new();
+                view.ShowDialog();
                 this.Close();
             }
             //this.Hide();

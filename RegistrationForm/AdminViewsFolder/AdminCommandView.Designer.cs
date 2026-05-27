@@ -40,53 +40,58 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(227, 49);
+            label1.Location = new Point(205, 39);
             label1.Name = "label1";
-            label1.Size = new Size(313, 41);
+            label1.Size = new Size(253, 32);
             label1.TabIndex = 0;
             label1.Text = "Admin control tablet";
             // 
             // button1
             // 
-            button1.Location = new Point(189, 161);
+            button1.Location = new Point(165, 121);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(106, 66);
+            button1.Size = new Size(93, 50);
             button1.TabIndex = 1;
             button1.Text = "Add/Update Employee";
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Location = new Point(460, 161);
+            button2.Location = new Point(402, 121);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(105, 66);
+            button2.Size = new Size(92, 50);
             button2.TabIndex = 2;
             button2.Text = "Show event log";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(189, 286);
+            button3.Location = new Point(165, 214);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(106, 66);
+            button3.Size = new Size(93, 50);
             button3.TabIndex = 3;
             button3.Text = "See all orders";
             button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            button4.Location = new Point(460, 286);
+            button4.Location = new Point(402, 214);
+            button4.Margin = new Padding(3, 2, 3, 2);
             button4.Name = "button4";
-            button4.Size = new Size(105, 66);
+            button4.Size = new Size(92, 50);
             button4.TabIndex = 4;
             button4.Text = "See all employees";
             button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            button5.Location = new Point(12, 12);
+            button5.Location = new Point(10, 9);
+            button5.Margin = new Padding(3, 2, 3, 2);
             button5.Name = "button5";
-            button5.Size = new Size(103, 34);
+            button5.Size = new Size(90, 26);
             button5.TabIndex = 5;
             button5.Text = "Log out";
             button5.UseVisualStyleBackColor = true;
@@ -94,10 +99,10 @@
             // 
             // AdminCommandView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Cornsilk;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -106,6 +111,7 @@
             Controls.Add(label1);
             ForeColor = SystemColors.ControlText;
             HelpButton = true;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AdminCommandView";
             Text = "AdminCommandView";
             ResumeLayout(false);
