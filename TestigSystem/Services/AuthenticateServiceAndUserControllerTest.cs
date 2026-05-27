@@ -10,7 +10,7 @@ using TestingControllerUser.Helpers;
 
 namespace TestingControllerUser.Services
 {
-    public class AuthenticateServiceTest
+    public class AuthenticateServiceAndUserControllerTest
     {
         [Test]
         public async Task TestAuthenticateUserAsync()
