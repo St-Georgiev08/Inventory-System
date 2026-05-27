@@ -16,6 +16,10 @@ namespace SalesSystem.Data.Servises
         {
             context = new();
         }
+        public CategoriesCRUD(SalesManagementSystemContext Context)
+        {
+            context = Context;
+        }
         public async Task<int> Count()
         {
             return await context.Categories.CountAsync();

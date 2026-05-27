@@ -1,4 +1,5 @@
-﻿using Inventory_System.Entities;
+﻿using Inventory_System;
+using Inventory_System.Entities;
 using SalesSystem.Data.Servises;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace SalesSystem.Data.Controllers
         public ProductsController()
         {
             product = new();
+        }
+        public ProductsController(SalesManagementSystemContext context)
+        {
+            product = new(context);
         }
         public async Task<List<Products>> GetAllProduct()
         {

@@ -1,4 +1,5 @@
-﻿using Inventory_System.Entities;
+﻿using Inventory_System;
+using Inventory_System.Entities;
 using SalesSystem.Data.Servises;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,11 @@ namespace SalesSystem.Data.Controllers
         private readonly AuditLogsCRUD auditLogs;
         public AuditLogsController()
         {
-            auditLogs = new();
+            auditLogs = new AuditLogsCRUD();
+        }
+        public AuditLogsController(SalesManagementSystemContext context)
+        {
+            auditLogs = new AuditLogsCRUD(context);
         }
         public async Task<List<AuditLogs>> GetAll()
         {

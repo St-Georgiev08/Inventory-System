@@ -14,6 +14,11 @@ namespace SalesSystem.Data.Controllers
     {
         private readonly SalesManagementSystemContext context;
         private readonly ProductDetailsCRUD detailsCRUD;
+        public ProductDetailsController(SalesManagementSystemContext context)
+        {
+            this.context = context;
+            detailsCRUD = new(context);
+        }
         public ProductDetailsController()
         {
             detailsCRUD = new();

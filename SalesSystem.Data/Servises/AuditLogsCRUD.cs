@@ -14,7 +14,11 @@ namespace SalesSystem.Data.Servises
         private readonly SalesManagementSystemContext _context;
         public AuditLogsCRUD()
         {
-            _context = new();
+            _context = new SalesManagementSystemContext();
+        }
+        public AuditLogsCRUD(SalesManagementSystemContext context)
+        {
+            _context = context;
         }
         public async Task<int> Count()
         {

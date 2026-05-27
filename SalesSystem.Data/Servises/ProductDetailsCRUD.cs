@@ -14,7 +14,11 @@ namespace SalesSystem.Data.Servises
         private readonly SalesManagementSystemContext product;
         public ProductDetailsCRUD()
         {
-            product = new();
+            product = new SalesManagementSystemContext();
+        }
+        public ProductDetailsCRUD(SalesManagementSystemContext context)
+        {
+            product = context;
         }
             public async Task<int> Count()
             {

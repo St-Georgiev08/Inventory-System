@@ -15,6 +15,10 @@ namespace SalesSystem.Data.Controllers
         {
             suppliersCRUD = new();
         }
+        public ProductSuppliersController(ProductSuppliersCRUD suppliersCRUD)
+        {
+            this.suppliersCRUD = suppliersCRUD;
+        }
         public async Task<string> AddProductSupplier(int productId, int supplierId)
         {
             if (productId < 0 || supplierId < 0)

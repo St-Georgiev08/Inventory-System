@@ -1,4 +1,5 @@
-﻿using Inventory_System.Entities;
+﻿using Inventory_System;
+using Inventory_System.Entities;
 using SalesSystem.Data.Servises;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace SalesSystem.Data.Controllers
     public class OrderItemsController
     {
         private readonly OrderItemsCRUD orderItems;
-        public OrderItemsController()
+        public OrderItemsController(SalesManagementSystemContext order)
         {
-            orderItems = new();
+            orderItems = new(order);
         }
         public async Task<string> AddOrder(int OrderId, int prId, int Qantity, decimal UnitPrice)
         {

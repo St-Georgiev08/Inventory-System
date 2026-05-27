@@ -14,7 +14,11 @@ namespace SalesSystem.Data.Servises
         private readonly SalesManagementSystemContext context;
         public OrderCRUD()
         {
-            context = new();
+            context = new SalesManagementSystemContext();
+        }
+        public OrderCRUD(SalesManagementSystemContext context1)
+        {
+            context = context1;
         }
         public async Task<int> Count()
         {

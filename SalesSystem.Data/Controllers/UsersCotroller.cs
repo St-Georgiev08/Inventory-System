@@ -19,6 +19,11 @@ namespace SalesSystem.Data.Controllers
         {
             users = new();
         }
+        public UsersCotroller(SalesManagementSystemContext context)
+        {
+            this.context = context;
+            users = new(context);
+        }
         public async Task<List<User>> GetAllUsersAsync()
         {
             int count = await users.Count();
@@ -104,6 +109,7 @@ namespace SalesSystem.Data.Controllers
                 throw new ArgumentException("User not found");
             }
             var hashing = new HashingPaswords();
+            string hash = user.PasswordHash;
             bool isPasswordValid = await hashing.VerifyPassword(password, user.PasswordHash);
             if (!isPasswordValid)
             {

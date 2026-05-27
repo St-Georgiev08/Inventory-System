@@ -1,4 +1,5 @@
-﻿using SalesSystem.Data.Servises;
+﻿using Inventory_System;
+using SalesSystem.Data.Servises;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace SalesSystem.Data.Controllers
         public CategoriesController()
         {
             categories = new();
+        }
+        public CategoriesController(SalesManagementSystemContext Context)
+        {
+            categories = new CategoriesCRUD(Context);
         }
 
             public async Task<string> AddCategory(string name)

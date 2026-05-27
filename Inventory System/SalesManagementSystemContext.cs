@@ -21,14 +21,22 @@ namespace Inventory_System
         public DbSet<User> Users { get; set; }
         public DbSet<AuditLogs> AuditLogs { get; set; }
         public DbSet<ProductDetails> ProductDetails { get; set; }
-
+        public SalesManagementSystemContext()
+        {
+        }
+        public SalesManagementSystemContext(DbContextOptions<SalesManagementSystemContext> options) : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("appSettings.json");
-            var config = builder.Build();
-            var connectionString = config.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseSqlServer(connectionString);
+            if (!optionsBuilder.IsConfigured)
+            {
+                var builder = new ConfigurationBuilder();
+                builder.AddJsonFile("appSettings.json");
+                var config = builder.Build();
+                var connectionString = config.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
