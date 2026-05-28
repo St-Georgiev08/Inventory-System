@@ -12,13 +12,17 @@ namespace SalesSystem.Data.Controllers
     public class OrdersController
     {
         private readonly OrderCRUD orders;
+        private readonly OrderItemsController orderItems;
+        private readonly UsersCotroller usersCotroller;
         public OrdersController()
         {
             orders = new();
+            orderItems = new();
         }
         public OrdersController(SalesManagementSystemContext context)
         {
             orders = new(context);
+            orderItems = new(context);
         }
         public async Task<List<Orders>> GetAll()
         {
@@ -42,15 +46,20 @@ namespace SalesSystem.Data.Controllers
             }
             return orders;
         }
-        public async Task<string> Add(int uId, DateTime dateTime, decimal total)
+        public async Task<string> Add(string name, DateTime dateTime, decimal total)
         {
-            if (uId < 0 || dateTime == default || total < 0)
+            if (string.IsNullOrEmpty(name) || dateTime == default || total < 0)
             {
                 throw new ArgumentException("Invalid input data");
             }
+            var find = (await usersCotroller.GetAllUsersAsync()).FirstOrDefault(x=>x.Username == name);
+            if (find == null)
+            {
+                throw new ArgumentException("Invalid user name");
+            }
             await orders.Add(new Orders
             {
-                UserId = uId,
+                UserId = find.Id,
                 OrderDate = dateTime,
                 TotalAmount = total
             });

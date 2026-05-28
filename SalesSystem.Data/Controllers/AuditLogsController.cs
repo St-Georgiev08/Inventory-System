@@ -20,6 +20,28 @@ namespace SalesSystem.Data.Controllers
         {
             auditLogs = new AuditLogsCRUD(context);
         }
+        public async Task<object> AddAuditLogs(int userId, string Action, string? desc)
+        {
+            DateTime timeSpan = DateTime.Now;
+            if (userId < 0)
+            {
+                //throw new ArgumentException("Invalid id");
+                return null;
+            }
+            if (await auditLogs.GetById(userId) != null)
+            {
+                AuditLogs logs = new()
+                {
+                    UserId = userId,
+                    Action = Action,
+                    Timestamp = timeSpan,
+                    Description = desc
+                };
+                await auditLogs.Add(logs);
+               
+            }
+            return null;
+        }
         public async Task<List<AuditLogs>> GetAll()
         {
             int count = await auditLogs.Count();

@@ -103,6 +103,8 @@ namespace Inventory_System
                 .IsUnique();
             modelBuilder.Entity<Suppliers>().HasIndex(s => s.Name)
                 .IsUnique();
+            modelBuilder.Entity<Categories>().HasIndex(c => c.Name)
+                .IsUnique();
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Username = "admin", PasswordHash = "admin123", PhoneNumber = "0895650627", Email = "stoichogeorgiev@gmail.com", Role = Enums.RoleType.Admin }
             );

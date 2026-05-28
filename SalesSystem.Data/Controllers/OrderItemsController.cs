@@ -12,9 +12,16 @@ namespace SalesSystem.Data.Controllers
     public class OrderItemsController
     {
         private readonly OrderItemsCRUD orderItems;
+        private readonly ProductsController products;
+        public OrderItemsController()
+        {
+            orderItems = new();
+            products = new ProductsController();
+        }
         public OrderItemsController(SalesManagementSystemContext order)
         {
             orderItems = new(order);
+            products = new ProductsController(order);
         }
         public async Task<string> AddOrder(int OrderId, int prId, int Qantity, decimal UnitPrice)
         {
@@ -29,6 +36,12 @@ namespace SalesSystem.Data.Controllers
                 Quantity = Qantity,
                 UnitPrice = UnitPrice
             };
+            var pro = (await products.GetAllProduct()).FirstOrDefault(x=>x.Id == prId);
+            if(pro.Quantity -Qantity >= 0!)
+            {
+                throw new ArgumentException("Not enough products");
+            }
+            pro.Quantity -= Qantity;
             await orderItems.Add(orderItem);
                         return "Order item added successfully";
         }

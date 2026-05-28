@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistrationForm.EmployeeViewsFolder;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,14 @@ namespace RegistrationForm
         public Add_Update_Products()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            EmployeeCommandsView view = new();
+            view.ShowDialog();
+
         }
     }
 }
