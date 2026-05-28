@@ -24,13 +24,13 @@ namespace SalesSystem.Data.Controllers
             return await categories.GetAll();
         }
 
-            public async Task<string> AddCategory(string name)
+            public async Task<string> AddCategory(string name,string? desk)
             {
                 if (string.IsNullOrEmpty(name))
                 {
                     throw new ArgumentException("Category name is required");
                 }
-                await categories.Add(new Inventory_System.Entities.Categories { Name = name });
+                await categories.Add(new Inventory_System.Entities.Categories { Name = name ,Description = desk});
                 return "Category added successfully";
             }
         public async Task<string> UpdateCategory(int id, string name, string? desc)

@@ -46,10 +46,10 @@ namespace SalesSystem.Data.Controllers
             }
             return user;
         }
-        public async Task<string> AddUserAsync(string username, string pass, string role, string phone, string email)
+        public async Task<string> AddUserAsync(string username, string pass, string role, string phone, string? email)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || string.IsNullOrEmpty(role)
-                || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(email))
+                || string.IsNullOrEmpty(phone))
             {
                 throw new ArgumentException("All fields are required");
             }
@@ -85,8 +85,11 @@ namespace SalesSystem.Data.Controllers
             {
                 throw new ArgumentException("Invalid role type");
             }
-            await users.Update(id, username, hash, parsedRole, phone, email);
-            return "User updated successfully";
+            var mm =  users.Update(id, username, hash, parsedRole, phone, email);
+            if (mm != null)
+                return "User updated successfully";
+            else
+                return "Not found";
         }
         public async Task<string> DeleteUserAsync(int id)
         {

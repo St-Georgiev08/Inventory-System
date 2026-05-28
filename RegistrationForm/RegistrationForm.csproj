@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EmployeeViewsFolder\View all clients\**" />
+    <EmbeddedResource Remove="EmployeeViewsFolder\View all clients\**" />
+    <None Remove="EmployeeViewsFolder\View all clients\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SalesSystem.Data\SalesSystem.Data.csproj" />
   </ItemGroup>
 
@@ -25,10 +31,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EmployeeViewsFolder\View all clients\" />
   </ItemGroup>
 
 </Project>
