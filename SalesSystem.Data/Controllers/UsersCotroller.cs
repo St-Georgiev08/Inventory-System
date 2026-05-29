@@ -79,17 +79,19 @@ namespace SalesSystem.Data.Controllers
             {
                 throw new ArgumentException("All fields are required and ID must be valid");
             }
+            // Inside your UpdateUserAsync method:
+            var existingUser = await context.Users.FindAsync(id); // Or your repository equivalent
+            if (existingUser == null)
+            {
+                return "Not found";
+            }
             var hashing = new HashingPaswords();
             var hash = await hashing.HashPassword(pass);
             if (!Enum.TryParse<RoleType>(role, true, out var parsedRole))
             {
                 throw new ArgumentException("Invalid role type");
             }
-            var mm =  users.Update(id, username, hash, parsedRole, phone, email);
-            if (mm != null)
                 return "User updated successfully";
-            else
-                return "Not found";
         }
         public async Task<string> DeleteUserAsync(int id)
         {

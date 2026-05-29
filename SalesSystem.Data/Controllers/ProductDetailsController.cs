@@ -28,13 +28,13 @@ namespace SalesSystem.Data.Controllers
         {
             return await context.ProductDetails.Include(x=>x.Products).ToListAsync();
         }
-        public async Task<string> AddProductDetails(string description, string img)
+        public async Task<string> AddProductDetails(string? description, string img)
         {
-            if (string.IsNullOrEmpty(description) || string.IsNullOrEmpty(img))
+            if (string.IsNullOrEmpty(img))
             {
                 throw new ArgumentException("Invalid input data");
             }
-            await detailsCRUD.Add(new Inventory_System.Entities.ProductDetails { Description = description, ImagePath = img });
+            await detailsCRUD.Add(new ProductDetails { Description = description, ImagePath = img });
             return "Product details added successfully";
         }
         public async Task<string> UpdateProductDetails(int id, string? description, string img)
@@ -83,10 +83,10 @@ namespace SalesSystem.Data.Controllers
                 .Where(p => p.Products.Name.Contains(text))
                 .ToListAsync();
         }
-        public async Task<List<ProductDetails>> SortByType(List<ProductDetails> products, bool name, bool price, bool desc, string type)
+        public async Task<List<ProductDetails>> SortByType(List<ProductDetails> products, bool name, bool price, bool desc, string? type)
         {
             //List<ProductDetails> list1 = new List<ProductDetails>();
-            if (string.IsNullOrEmpty(type))
+            if (!string.IsNullOrEmpty(type))
                 products = products.Where(x => x.Products.Category.Name == type).ToList();
             if (name)
             {

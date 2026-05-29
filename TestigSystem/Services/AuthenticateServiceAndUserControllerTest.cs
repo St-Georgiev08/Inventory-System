@@ -134,17 +134,33 @@ namespace TestingControllerUser.Services
             var context = TestDbShop.CreateContext();
             var passwordHasher = new HashingPaswords();
             string inputPassword = await passwordHasher.HashPassword("testpassword");
-            context.Add(new User
+
+            // 1. Save the user object to a variable
+            var newUser = new User
             {
                 Username = "testuser",
                 PasswordHash = inputPassword,
                 Role = Inventory_System.Enums.RoleType.Client,
                 PhoneNumber = "1234567890",
                 Email = ""
-            });
-            await context.SaveChangesAsync();
+            };
+
+            context.Add(newUser);
+            await context.SaveChangesAsync(); // EF Core populates newUser.Id here
+
             UsersCotroller users = new(context);
-            Assert.That(await users.UpdateUserAsync(0, "updateduser", "newpassword", "Client", "0987654321", "updatedemail@example.com"), Is.EqualTo("User updated successfully"));
+
+            // 2. Pass newUser.Id instead of 0
+            var result = await users.UpdateUserAsync(
+                newUser.Id,
+                "updateduser",
+                "newpassword",
+                "Client",
+                "0987654321",
+                "updatedemail@example.com"
+            );
+
+            Assert.That(result, Is.EqualTo("User updated successfully"));
         }
         [Test]
         public async Task UpdateUserAsync_InvalidId()
@@ -187,7 +203,8 @@ namespace TestingControllerUser.Services
         {
             var context = TestDbShop.CreateContext();
             UsersCotroller users = new(context);
-            Assert.That(await users.UpdateUserAsync(10, "updateduser", "test", "Client", "0987654321", "updatedemail@example.com"), Is.EqualTo("Not found"));
+         
+            Assert.That(await users.UpdateUserAsync(9999, "updateduser", "test", "Client", "098765431", "updatedemail@example.com"), Is.EqualTo("Not found"));
         }
         [Test]
         public async Task AddUserAsync()

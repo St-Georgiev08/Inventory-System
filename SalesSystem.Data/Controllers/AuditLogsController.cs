@@ -12,13 +12,16 @@ namespace SalesSystem.Data.Controllers
     public class AuditLogsController
     {
         private readonly AuditLogsCRUD auditLogs;
+        private readonly UsersCRUD usersCRUD;
         public AuditLogsController()
         {
             auditLogs = new AuditLogsCRUD();
+            usersCRUD = new UsersCRUD();
         }
         public AuditLogsController(SalesManagementSystemContext context)
         {
             auditLogs = new AuditLogsCRUD(context);
+            usersCRUD = new UsersCRUD(context);
         }
         public async Task<object> AddAuditLogs(int userId, string Action, string? desc)
         {
@@ -28,7 +31,8 @@ namespace SalesSystem.Data.Controllers
                 //throw new ArgumentException("Invalid id");
                 return null;
             }
-            if (await auditLogs.GetById(userId) != null)
+            var m = await usersCRUD.GetById(userId);
+            if (m != null)
             {
                 AuditLogs logs = new()
                 {
@@ -50,6 +54,7 @@ namespace SalesSystem.Data.Controllers
                 throw new ArgumentException("No logs in system");
             }
             return await auditLogs.GetAll();
+
         }
     }
 }
