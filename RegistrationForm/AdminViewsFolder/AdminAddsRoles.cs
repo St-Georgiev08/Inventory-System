@@ -72,6 +72,7 @@ namespace RegistrationForm
             {
                 role = "Employee";
             }
+            AuditLogsController auditLogsController = new AuditLogsController();
             UsersCotroller control = new();
             RegistrationForm1 form = new RegistrationForm1();
             if (adminCommandView.GetReasonForClick == "Add")
@@ -81,9 +82,8 @@ namespace RegistrationForm
                 {
                     var add = await control.AddUserAsync(username, password, role, phoneNumber, Email);
                     MessageBox.Show(add, "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    AuditLogsController auditLogsController = new AuditLogsController();
 
-                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} ({username}) by Admin: {form.GetUser.Username}", $"Added user name {username}");
+                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} ({username}) by Admin: {form.GetUser.Username}", $"Added user: {username}");
                 }
                 catch (ArgumentException x)
                 {
@@ -98,17 +98,17 @@ namespace RegistrationForm
                 {
                     var get = (await control.GetAllUsersAsync()).Find(x => x.Username == username).Id;
                     var add = await control.UpdateUserAsync(get,username, password, role, phoneNumber, Email);
-                    MessageBox.Show(add, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    AuditLogsController auditLogsController = new AuditLogsController();
+                    MessageBox.Show(add, "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  
 
                     await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} by Admin: {form.GetUser.Username}", DateTime.Now.ToString());
                 }
-                catch (Exception)
+                catch (ArgumentException x)
                 {
 
                     MessageBox.Show(x.Message, "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+                await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Updated {role} ({username}) by Admin: {form.GetUser.Username}", $"Updated user: {username}");
             }
             
         }
