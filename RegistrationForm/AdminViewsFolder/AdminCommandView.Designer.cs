@@ -34,13 +34,14 @@
             button3 = new Button();
             button4 = new Button();
             button5 = new Button();
+            button6 = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(205, 39);
+            label1.Location = new Point(213, 45);
             label1.Name = "label1";
             label1.Size = new Size(253, 32);
             label1.TabIndex = 0;
@@ -53,12 +54,13 @@
             button1.Name = "button1";
             button1.Size = new Size(93, 50);
             button1.TabIndex = 1;
-            button1.Text = "Add/Update Employee";
+            button1.Text = "Add Employee";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(402, 121);
+            button2.Location = new Point(424, 121);
             button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
             button2.Size = new Size(92, 50);
@@ -78,7 +80,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(402, 214);
+            button4.Location = new Point(424, 214);
             button4.Margin = new Padding(3, 2, 3, 2);
             button4.Name = "button4";
             button4.Size = new Size(92, 50);
@@ -97,12 +99,24 @@
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
+            // button6
+            // 
+            button6.Location = new Point(293, 121);
+            button6.Margin = new Padding(3, 2, 3, 2);
+            button6.Name = "button6";
+            button6.Size = new Size(93, 50);
+            button6.TabIndex = 6;
+            button6.Text = "Update Employee";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // AdminCommandView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Cornsilk;
             ClientSize = new Size(700, 338);
+            Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -126,5 +140,6 @@
         private Button button3;
         private Button button4;
         private Button button5;
+        private Button button6;
     }
 }

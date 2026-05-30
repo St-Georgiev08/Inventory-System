@@ -12,6 +12,7 @@ namespace RegistrationForm
 {
     public partial class AdminCommandView : Form
     {
+        public string GetReasonForClick {  get; set; }
         public AdminCommandView()
         {
             InitializeComponent();
@@ -23,6 +24,23 @@ namespace RegistrationForm
             RegistrationForm1 registrationForm1 = new RegistrationForm1();
             registrationForm1.ShowDialog();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close ();
+            AdminAddsRoles adminAddsRoles  = new AdminAddsRoles();
+            GetReasonForClick = "Add";
+            adminAddsRoles.ShowDialog();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            AdminAddsRoles adminCommandView = new ();
+            GetReasonForClick = "Update";
+            adminCommandView.ShowDialog();
+
         }
     }
 }

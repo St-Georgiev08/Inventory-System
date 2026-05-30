@@ -8,7 +8,7 @@ namespace RegistrationForm
 {
     public partial class RegistrationForm1 : Form
     {
-
+        public User GetUser {  get; set; }
         public RegistrationForm1()
         {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace RegistrationForm
             {
                 us = await user.AuthenticateUserAsync(usernama, password);
                 MessageBox.Show($"Login successful for user: {us.Username}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                GetUser = us;
             }
             catch (ArgumentException x)
             {

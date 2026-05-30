@@ -1,6 +1,7 @@
 ﻿using Inventory_System;
 using Inventory_System.Entities;
 using Inventory_System.Enums;
+using Microsoft.EntityFrameworkCore;
 using SalesSystem.Data.HelpMethods;
 using SalesSystem.Data.Servises;
 using System;
@@ -122,6 +123,19 @@ namespace SalesSystem.Data.Controllers
             }
             return user;
         }
-       
+        public async Task<List<User>> GetUserSuggestionsAsync(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return new List<User>();
+            }
+
+            return await context.Users
+                .Where(u => u.Username.Contains(searchText))
+                .OrderBy(u => u.Username)
+                .Take(5)
+                .ToListAsync();
+        }
+
     }
 }
