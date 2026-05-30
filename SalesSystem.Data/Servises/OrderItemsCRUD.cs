@@ -37,9 +37,9 @@ namespace SalesSystem.Data.Servises
             await _context.OrderItems.AddAsync(orderItem);
             await _context.SaveChangesAsync();
         }
-        public async Task Update(int id, int orderId, int productId, int quantity, decimal price)
+        public async Task Update(int orderId, int productId, int quantity, decimal price)
         {
-            var find = await _context.OrderItems.FindAsync(id);
+            var find = await _context.OrderItems.FindAsync(orderId,productId);
             if (find != null)
             {
                 find.OrderId = orderId;
@@ -49,9 +49,9 @@ namespace SalesSystem.Data.Servises
                 await _context.SaveChangesAsync();
             }
         }
-         public async Task Delete(int id)
+         public async Task Delete(int id, int prid)
         {
-            var find = await _context.OrderItems.FindAsync(id);
+            var find = await _context.OrderItems.FirstOrDefaultAsync(x=>x.ProductId == prid && x.OrderId == id);
             if (find != null)
             {
                 _context.OrderItems.Remove(find);
@@ -59,9 +59,9 @@ namespace SalesSystem.Data.Servises
             }
          }
 
-        public async Task<OrderItems> GetById(int id)
+        public async Task<OrderItems> GetById(int orderId, int productId)
         {
-            return await _context.OrderItems.FindAsync(id);
+            return await _context.OrderItems.FirstOrDefaultAsync(x=>x.OrderId == orderId && x.ProductId == productId);
         }
     }
 }

@@ -18,11 +18,13 @@ namespace SalesSystem.Data.Controllers
         {
             orders = new();
             orderItems = new();
+            orderItems = new();
         }
         public OrdersController(SalesManagementSystemContext context)
         {
             orders = new(context);
             orderItems = new(context);
+            usersCotroller = new(context);
         }
         public async Task<List<Orders>> GetAll()
         {

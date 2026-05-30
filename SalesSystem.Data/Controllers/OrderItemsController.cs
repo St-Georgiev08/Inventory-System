@@ -29,6 +29,11 @@ namespace SalesSystem.Data.Controllers
             {
                 throw new ArgumentException("Invalid input data");
             }
+            var pro = (await products.GetAllProduct()).FirstOrDefault(x => x.Id == prId);
+            if (pro.Quantity - Qantity < 0)
+            {
+                throw new ArgumentException("Not enough products");
+            }
             OrderItems orderItem = new()
             {
                 OrderId = OrderId,
@@ -36,49 +41,46 @@ namespace SalesSystem.Data.Controllers
                 Quantity = Qantity,
                 UnitPrice = UnitPrice
             };
-            var pro = (await products.GetAllProduct()).FirstOrDefault(x=>x.Id == prId);
-            if(pro.Quantity -Qantity >= 0!)
-            {
-                throw new ArgumentException("Not enough products");
-            }
+          
             pro.Quantity -= Qantity;
             await orderItems.Add(orderItem);
                         return "Order item added successfully";
         }
-        public async Task<string> UpdateOrder(int id, int OrderId, int prId, int Qantity, decimal UnitPrice)
+        public async Task<string> UpdateOrder( int OrderId, int prId, int Qantity, decimal UnitPrice)
         {
-            if (id < 0 || OrderId < 0 || prId < 0 || Qantity < 1 || UnitPrice < 1)
+            if (OrderId < 0 || prId < 0 || Qantity < 1 || UnitPrice < 1)
             {
                 throw new ArgumentException("Invalid input data");
             }
-            if (await orderItems.GetById(id) == null)
+            if (await orderItems.GetById(OrderId,prId) == null)
             {
                 throw new ArgumentException("Order item not found");
             }
-            await orderItems.Update(id, OrderId, prId, Qantity, UnitPrice);
+            await orderItems.Update(OrderId, prId, Qantity, UnitPrice);
             return "Order item updated successfully";
         }
-        public async Task<string> DeleteOrderItem(int id)
+        public async Task<string> DeleteOrderItem(int id,int prId)
         {
-            if(id<0 && await orderItems.GetById(id) == null)
+            if(id<0 || prId < 0 || await orderItems.GetById(id,prId) == null)
             {
                 throw new ArgumentException("Invalid order item ID");
             }
-            await orderItems.Delete(id);
+            await orderItems.Delete(id, prId);
             return "Order item deleted successfully";
         }
-            public async Task<OrderItems> GetById(int id)
-            {
-                if (id < 0)
-                {
-                    throw new ArgumentException("Invalid order item ID");
-                }
-                var orderItem = await orderItems.GetById(id);
-                if (orderItem == null)
-                {
-                    throw new ArgumentException("Order item not found");
-                }
-                return orderItem;
-        }
+
+        //    public async Task<OrderItems> GetById(int id)
+        //    {
+        //        if (id < 0)
+        //        {
+        //            throw new ArgumentException("Invalid order item ID");
+        //        }
+        //        var orderItem = await orderItems.GetById(id);
+        //        if (orderItem == null)
+        //        {
+        //            throw new ArgumentException("Order item not found");
+        //        }
+        //        return orderItem;
+        //}
     }
 }

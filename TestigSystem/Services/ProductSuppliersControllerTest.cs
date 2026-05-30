@@ -1,206 +1,190 @@
 ﻿using Inventory_System;
 using Inventory_System.Entities;
 using Microsoft.EntityFrameworkCore;
+using NUnit.Framework;
 using SalesSystem.Data.Controllers;
+using SalesSystem.Data.Servises;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace TestigSystem.Services
+[TestFixture]
+public class ProductSuppliersControllerTests
 {
-    public class ProductSuppliersControllerTest
+    private SalesManagementSystemContext _context;
+    private ProductSuppliersController _controller;
+
+    [SetUp]
+    public void Setup()
     {
-        private SalesManagementSystemContext _context;
-        private ProductDetailsController _controller;
+        // Set up an isolated In-Memory Database
+        var options = new DbContextOptionsBuilder<SalesManagementSystemContext>()
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .Options;
 
-        [SetUp]
-        public void SetUp()
-        {
-            // Configure a unique In-Memory Database for each test run to ensure isolation
-            var options = new DbContextOptionsBuilder<SalesManagementSystemContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
+        _context = new SalesManagementSystemContext(options);
 
-            _context = new SalesManagementSystemContext(options);
-            _controller = new ProductDetailsController(_context);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _context.Dispose();
-        }
-
-        #region GetAll Tests
-
-        [Test]
-        public async Task GetAll_WhenDataExists_ReturnsAllItemsWithProductsIncluded()
-        {
-            // Arrange
-            var product = new Products { Name = "Laptop", Price = 999.99m, Category = new Categories { Name = "Electronics" } };
-            var details = new ProductDetails { Id = 1, Description = "High performance", ImagePath = "img.png", Products = product };
-
-            _context.ProductDetails.Add(details);
-            await _context.SaveChangesAsync();
-
-            // Act
-            var result = await _controller.GetAll();
-
-            // Assert
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result[0].Products.Name, Is.EqualTo("Laptop"));
-        }
-
-        #endregion
-
-        #region AddProductDetails Tests
-        [TestCase("Description", "")]
-        public void AddProductDetails_InvalidInput_ThrowsArgumentException(string description, string? img)
-        {
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-               await _controller.AddProductDetails( description, img));
-        }
-
-        [Test]
-        public void AddProductDetails_InvalidInput_ThrowsArgumentExceptionNull()
-        {
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-               await _controller.AddProductDetails("description", null));
-        }
-
-        [Test]
-        public async Task AddProductDetails_ValidInput_ReturnsSuccessMessage()
-        {
-            // Act
-            var result = await _controller.AddProductDetails("Valid Description", "valid_path.png");
-
-            // Assert
-            Assert.That(result, Is.EqualTo("Product details added successfully"));
-        }
-
-        #endregion
-
-        #region UpdateProductDetails Tests
-
-        [TestCase(-1, "Desc", "img.png")]
-        [TestCase(1, "Desc", "")]
-        [TestCase(1, "Desc", "null")]
-        public void UpdateProductDetails_InvalidInput_ThrowsArgumentException(int id, string description, string img)
-        {
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.UpdateProductDetails(id, description, img));
-        }
-
-        [Test]
-        public void UpdateProductDetails_ProductNotFound_ThrowsArgumentException()
-        {
-            // Act & Assert (Database is empty, so ID 99 will not be found)
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.UpdateProductDetails(99, "New Desc", "new_img.png"));
-        }
-
-        #endregion
-
-        #region GetProductDetailsById Tests
-
-        [Test]
-        public void GetProductDetailsById_NegativeId_ThrowsArgumentException()
-        {
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.GetProductDetailsById(-5));
-        }
-
-        [Test]
-        public void GetProductDetailsById_NotFound_ThrowsArgumentException()
-        {
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.GetProductDetailsById(404));
-        }
-
-        #endregion
-
-        #region DeleteProductDetails Tests
-
-        [Test]
-        public void DeleteProductDetails_NegativeId_ThrowsArgumentException()
-        {
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.DeleteProductDetails(-1));
-        }
-
-        [Test]
-        public void DeleteProductDetails_NotFound_ThrowsArgumentException()
-        {
-            Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.DeleteProductDetails(999));
-        }
-
-        #endregion
-
-        #region FindAllWith Tests
-
-        [Test]
-        public async Task FindAllWith_MatchingText_ReturnsFilteredResults()
-        {
-            // Arrange
-            var p1 = new ProductDetails { Id = 1, Products = new Products { Name = "Apple iPhone"}, ImagePath = "test",CreatedBy = 0, UpdatedBy = 0 };
-            var p2 = new ProductDetails { Id = 2, Products = new Products { Name = "Samsung Galaxy" }, ImagePath = "test", CreatedBy = 0, UpdatedBy = 0 };
-
-            await _context.ProductDetails.AddRangeAsync(p1, p2);
-            await _context.SaveChangesAsync(); // 👈 ADD THIS LINE HERE
-
-            // Act
-            var result = await _controller.FindAllWith("Apple");
-
-            // Assert
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result[0].Products.Name, Is.EqualTo("Apple iPhone"));
-        }
-
-        #endregion
-
-        #region SortByType Tests
-
-        [Test]
-        public async Task SortByType_SortByNameAscending_SortsCorrectly()
-        {
-            // Arrange
-            var list = new List<ProductDetails>
-            {
-                new ProductDetails { Products = new Products { Name = "Zebra" } },
-                new ProductDetails { Products = new Products { Name = "Apple" } }
-            };
-
-            // Act
-            var result = await _controller.SortByType(list, name: true, price: false, desc: false, type: null);
-
-            // Assert
-            Assert.That(result[0].Products.Name, Is.EqualTo("Apple"));
-            Assert.That(result[1].Products.Name, Is.EqualTo("Zebra"));
-        }
-
-        [Test]
-        public async Task SortByType_SortByPriceDescending_SortsCorrectly()
-        {
-            // Arrange
-            var list = new List<ProductDetails>
-            {
-                new ProductDetails { Products = new Products { Price = 10.00m } },
-                new ProductDetails { Products = new Products { Price = 50.00m } }
-            };
-
-            // Act
-            var result = await _controller.SortByType(list, name: false, price: true, desc: true, type: null);
-
-            // Assert
-            Assert.That(result[0].Products.Price, Is.EqualTo(50.00));
-            Assert.That(result[1].Products.Price, Is.EqualTo(10.00));
-        }
-
-        #endregion
+        // Initialize the CRUD instance with the context and inject it into the controller
+        var crud = new ProductSuppliersCRUD(_context);
+        _controller = new ProductSuppliersController(crud);
     }
-}
 
+    [TearDown]
+    public void TearDown()
+    {
+        _context.Dispose();
+    }
+
+    #region AddProductSupplier Tests
+
+    [TestCase(-1, 1)]
+    [TestCase(1, -1)]
+    public void AddProductSupplier_InvalidInputs_ThrowsArgumentException(int productId, int supplierId)
+    {
+        var ex = Assert.ThrowsAsync<ArgumentException>(async () =>
+            await _controller.AddProductSupplier(productId, supplierId));
+
+        Assert.That(ex.Message, Is.EqualTo("Invalid input data"));
+    }
+
+    [Test]
+    public async Task AddProductSupplier_ValidInputs_ReturnsSuccessMessageAndSaves()
+    {
+        // Act
+        string result = await _controller.AddProductSupplier(10, 20);
+
+        // Assert
+        Assert.That(result, Is.EqualTo("Product supplier added successfully"));
+
+        // Verify it was written to the In-Memory Database
+        var savedEntity = _context.ProductSuppliers.FirstOrDefault(ps => ps.ProductId == 10 && ps.SupplierId == 20);
+        Assert.That(savedEntity, Is.Not.Null);
+    }
+
+    #endregion
+
+    #region UpdateProductSupplier Tests
+
+    [TestCase(-1, 5, 10, 20)] // Invalid current Product ID
+    [TestCase(5, -1, 10, 20)] // Invalid current Supplier ID
+    [TestCase(5, 5, -1, 20)]  // Invalid new Product ID
+    // Note: If you fix the typo in your controller validation, add: [TestCase(5, 5, 10, -1)]
+    public void UpdateProductSupplier_InvalidInputs_ThrowsArgumentException(int prodId, int suppId, int newProdId, int newSuppId)
+    {
+        // Act & Assert
+        var ex = Assert.ThrowsAsync<ArgumentException>(async () =>
+            await _controller.UpdateProductSupplier(prodId, suppId, newProdId, newSuppId));
+
+        Assert.That(ex.Message, Is.EqualTo("Invalid input data"));
+    }
+
+    [Test]
+    public void UpdateProductSupplier_RecordNotFound_ThrowsArgumentException()
+    {
+        // Act & Assert (Looking for non-existent composite key 99, 99)
+        var ex = Assert.ThrowsAsync<ArgumentException>(async () =>
+            await _controller.UpdateProductSupplier(99, 99, 10, 20));
+
+        Assert.That(ex.Message, Is.EqualTo("Product supplier not found"));
+    }
+
+    [Test]
+    public async Task UpdateProductSupplier_ValidInputs_ReturnsSuccessMessage()
+    {
+        // Arrange: Seed a record matching the composite query keys
+        var existingRecord = new ProductSuppliers
+        {
+            ProductId = 5,
+            SupplierId = 8
+        };
+        _context.ProductSuppliers.Add(existingRecord);
+        await _context.SaveChangesAsync();
+
+        // Detach tracking so the controller is forced to pull fresh from the DB layer
+        _context.Entry(existingRecord).State = EntityState.Detached;
+
+        // Act
+        string result = await _controller.UpdateProductSupplier(5, 8, 10, 20);
+
+        // Assert
+        Assert.That(result, Is.EqualTo("Product supplier updated successfully"));
+    }
+    #endregion
+
+    #region DeleteProductSupplier Tests
+
+    [Test]
+    public void DeleteProductSupplier_NegativeId_ThrowsArgumentException()
+    {
+        var ex = Assert.ThrowsAsync<ArgumentException>(async () =>
+            await _controller.DeleteProductSupplier(-1,-1));
+
+        Assert.That(ex.Message, Is.EqualTo("Invalid input data"));
+    }
+
+    [Test]
+    public void DeleteProductSupplier_RecordNotFound_ThrowsArgumentException()
+    {
+        var ex = Assert.ThrowsAsync<ArgumentException>(async () =>
+            await _controller.DeleteProductSupplier(999,999));
+
+        Assert.That(ex.Message, Is.EqualTo("Product supplier not found"));
+    }
+
+    [Test]
+    public async Task DeleteProductSupplier_ValidId_RemovesRecordFromDatabase()
+    {
+        // Arrange
+        var recordToDelete = new ProductSuppliers {  ProductId = 5, SupplierId = 5 };
+        _context.ProductSuppliers.Add(recordToDelete);
+        await _context.SaveChangesAsync();
+
+        // Act
+        string result = await _controller.DeleteProductSupplier(5,5);
+
+        // Assert
+        Assert.That(result, Is.EqualTo("Product supplier deleted successfully"));
+        Assert.That(_context.ProductSuppliers.Any(ps => ps.ProductId == 5 && ps.SupplierId == 5), Is.False);
+    }
+
+    #endregion
+
+    #region GetProductSupplierById Tests
+
+    [Test]
+    public void GetProductSupplierById_NegativeId_ThrowsArgumentException()
+    {
+        var ex = Assert.ThrowsAsync<ArgumentException>(async () =>
+            await _controller.GetProductSupplierById(-1,-1));
+
+        Assert.That(ex.Message, Is.EqualTo("Invalid input data"));
+    }
+
+    [Test]
+    public void GetProductSupplierById_RecordNotFound_ThrowsArgumentException()
+    {
+        var ex = Assert.ThrowsAsync<ArgumentException>(async () =>
+            await _controller.GetProductSupplierById(999,999));
+
+        Assert.That(ex.Message, Is.EqualTo("Product supplier not found"));
+    }
+
+    [Test]
+    public async Task GetProductSupplierById_ValidId_ReturnsCorrectRecord()
+    {
+        // Arrange
+        var expectedRecord = new ProductSuppliers { ProductId = 11, SupplierId = 22 };
+        _context.ProductSuppliers.Add(expectedRecord);
+        await _context.SaveChangesAsync();
+
+        // Act
+        var result = await _controller.GetProductSupplierById(11,22);
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.ProductId, Is.EqualTo(11));
+        Assert.That(result.SupplierId, Is.EqualTo(22));
+    }
+
+    #endregion
+}

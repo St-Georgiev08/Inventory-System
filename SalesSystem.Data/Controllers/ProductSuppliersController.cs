@@ -28,39 +28,39 @@ namespace SalesSystem.Data.Controllers
             await suppliersCRUD.Add(new Inventory_System.Entities.ProductSuppliers { ProductId = productId, SupplierId = supplierId });
             return "Product supplier added successfully";
         }
-        public async Task<string> UpdateProductSupplier(int id, int productId, int supplierId)
+        public async Task<string> UpdateProductSupplier(int productId, int supplierId, int productIdnew, int supplierIdnew)
         {
-            if (id < 0 || productId < 0 || supplierId < 0)
+            if (productId < 0 || supplierId < 0 || productIdnew < 0 || productId < 0)
             {
                 throw new ArgumentException("Invalid input data");
             }
-            if (await suppliersCRUD.GetById(id) == null)
+            if (await suppliersCRUD.GetById(productId,supplierId) == null)
             {
                 throw new ArgumentException("Product supplier not found");
             }
             await suppliersCRUD.Update(productId, supplierId);
             return "Product supplier updated successfully";
         }
-        public async Task<string> DeleteProductSupplier(int id)
+        public async Task<string> DeleteProductSupplier(int id, int sub)
         {
             if (id < 0)
             {
                 throw new ArgumentException("Invalid input data");
             }
-            if (await suppliersCRUD.GetById(id) == null)
+            if (await suppliersCRUD.GetById(id,sub) == null)
             {
                 throw new ArgumentException("Product supplier not found");
             }
-            await suppliersCRUD.Delete(id);
+            await suppliersCRUD.Delete(id,sub);
             return "Product supplier deleted successfully";
         }
-        public async Task<ProductSuppliers> GetProductSupplierById(int id)
+        public async Task<ProductSuppliers> GetProductSupplierById(int id,int prId)
         {
             if (id < 0)
             {
                 throw new ArgumentException("Invalid input data");
             }
-            var productSupplier = await suppliersCRUD.GetById(id);
+            var productSupplier = await suppliersCRUD.GetById(id,prId);
             if (productSupplier == null)
             {
                 throw new ArgumentException("Product supplier not found");

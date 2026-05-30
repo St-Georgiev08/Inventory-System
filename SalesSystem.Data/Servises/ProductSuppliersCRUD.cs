@@ -47,9 +47,9 @@ namespace SalesSystem.Data.Servises
                 await _context.SaveChangesAsync();
             }
         }
-        public async Task Delete(int id)
+        public async Task Delete(int id, int sub)
         {
-            var find = await _context.ProductSuppliers.FindAsync(id);
+            var find = await _context.ProductSuppliers.FirstOrDefaultAsync(x=>x.ProductId ==  id && x.SupplierId == sub);
             if (find != null)
             {
                 _context.ProductSuppliers.Remove(find);
@@ -57,9 +57,9 @@ namespace SalesSystem.Data.Servises
             }
         }
 
-        internal async Task<ProductSuppliers> GetById(int id)
+        internal async Task<ProductSuppliers> GetById(int id, int sub)
         {
-            return await _context.ProductSuppliers.FindAsync(id);
+            return await _context.ProductSuppliers.FirstOrDefaultAsync(x=>x.ProductId ==id && x.SupplierId == sub);
         }
     }
 }
