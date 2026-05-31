@@ -33,6 +33,8 @@
             button2 = new Button();
             button3 = new Button();
             label1 = new Label();
+            sqlCommandBuilder1 = new Microsoft.Data.SqlClient.SqlCommandBuilder();
+            button4 = new Button();
             SuspendLayout();
             // 
             // button5
@@ -59,7 +61,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(110, 175);
+            button2.Location = new Point(513, 175);
             button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
             button2.Size = new Size(128, 68);
@@ -70,12 +72,12 @@
             // 
             // button3
             // 
-            button3.Location = new Point(497, 175);
+            button3.Location = new Point(92, 175);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
             button3.Size = new Size(128, 68);
             button3.TabIndex = 9;
-            button3.Text = "Add/Update product in store";
+            button3.Text = "Add product in store";
             button3.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -88,12 +90,24 @@
             label1.TabIndex = 10;
             label1.Text = "This label changes according to the employee's name";
             // 
+            // button4
+            // 
+            button4.Location = new Point(302, 270);
+            button4.Margin = new Padding(3, 2, 3, 2);
+            button4.Name = "button4";
+            button4.Size = new Size(128, 68);
+            button4.TabIndex = 11;
+            button4.Text = "Update product in store";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // EmployeeCommandsView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
             ClientSize = new Size(750, 373);
+            Controls.Add(button4);
             Controls.Add(label1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -113,5 +127,7 @@
         private Button button2;
         private Button button3;
         private Label label1;
+        private Microsoft.Data.SqlClient.SqlCommandBuilder sqlCommandBuilder1;
+        private Button button4;
     }
 }
