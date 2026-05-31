@@ -26,26 +26,14 @@ namespace RegistrationForm.ClientViewsFolder
             ShopItems shopItems = new();
             shopItems.ShowDialog();
         }
-        private async void LoadProducts(List<ProductDetails> products)
-        {
-            flowLayoutPanel1.Controls.Clear();
 
-            foreach (var product in products)
-            {
-                UserControl1 card = new UserControl1();
-
-                card.LoadProduct(product);
-
-                flowLayoutPanel1.Controls.Add(card);
-            }
-        }
         private async void LoadProduct(List<ProductDetails> products)
         {
             flowLayoutPanel1.Controls.Clear();
 
             foreach (var product in products)
             {
-                UserControl2 card = new();
+                UserControl4 card = new();
 
                 card.LoadProduct(product);
 

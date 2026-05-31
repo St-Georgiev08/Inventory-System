@@ -1,6 +1,6 @@
 ﻿namespace RegistrationForm.UserForms
 {
-    partial class UserControl2
+    partial class UserControl3
     {
         /// <summary> 
         /// Required designer variable.
@@ -39,51 +39,51 @@
             // lblPrice
             // 
             lblPrice.AutoSize = true;
-            lblPrice.Location = new Point(321, 123);
+            lblPrice.Location = new Point(324, 128);
             lblPrice.Name = "lblPrice";
             lblPrice.Size = new Size(38, 15);
-            lblPrice.TabIndex = 11;
+            lblPrice.TabIndex = 16;
             lblPrice.Text = "label3";
             // 
             // lblCategory
             // 
             lblCategory.AutoSize = true;
-            lblCategory.Location = new Point(321, 75);
+            lblCategory.Location = new Point(324, 80);
             lblCategory.Name = "lblCategory";
             lblCategory.Size = new Size(68, 15);
-            lblCategory.TabIndex = 10;
+            lblCategory.TabIndex = 15;
             lblCategory.Text = "lblCategory";
             // 
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(321, 29);
+            lblName.Location = new Point(324, 34);
             lblName.Name = "lblName";
             lblName.Size = new Size(38, 15);
-            lblName.TabIndex = 9;
+            lblName.TabIndex = 14;
             lblName.Text = "label1";
             // 
             // button1
             // 
-            button1.Location = new Point(527, 75);
+            button1.Location = new Point(530, 80);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(137, 46);
-            button1.TabIndex = 8;
-            button1.Text = "Cancel order";
+            button1.TabIndex = 13;
+            button1.Text = "Finish order";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(8, 7);
+            pictureBox1.Location = new Point(11, 12);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(237, 176);
-            pictureBox1.TabIndex = 7;
+            pictureBox1.TabIndex = 12;
             pictureBox1.TabStop = false;
             // 
-            // UserControl2
+            // UserControl3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -92,15 +92,15 @@
             Controls.Add(lblName);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
-            Name = "UserControl2";
+            Name = "UserControl3";
             Size = new Size(679, 201);
-            Load += UserControl2_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
         private Label lblPrice;
         private Label lblCategory;
         private Label lblName;

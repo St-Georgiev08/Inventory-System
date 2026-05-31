@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace RegistrationForm.UserForms
 {
-    public partial class UserControl2 : UserControl
+    public partial class UserControl4 : UserControl
     {
         private ProductDetails products { get; set; }
-        public UserControl2()
+        public UserControl4()
         {
             InitializeComponent();
         }
@@ -27,11 +27,6 @@ namespace RegistrationForm.UserForms
             products = product;
             pictureBox1.Image = Image.FromFile(product.ImagePath);
         }
-        private async void UserControl2_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private async void button1_Click(object sender, EventArgs e)
         {
             OrdersController orders = new();
@@ -39,7 +34,7 @@ namespace RegistrationForm.UserForms
             try
             {
                 var get = (await orders.GetAll()).Last().Id;
-             MessageBox.Show(await items.DeleteOrderItem(get,products.Id), "Success", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show(await items.DeleteOrderItem(get, products.Id), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (ArgumentException x)
             {

@@ -28,5 +28,30 @@ namespace RegistrationForm.EmployeeViewsFolder
         {
 
         }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            string find = textBox1.Text;
+            bool Name = radioButton1.Checked;
+            bool desc = radioButton2.Checked;
+            if (!Name && !desc)
+            {
+                MessageBox.Show("You must pick how the list would be sorted!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            UserControl user = new();
+            try
+            {
+                await LoadOrdersAsync(Name, desc);
+            }
+            catch (ArgumentException x)
+            {
+
+                MessageBox.Show(
+                    x.Message,
+                    "Sorting Failed",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
     }
 }
