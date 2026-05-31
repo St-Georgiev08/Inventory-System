@@ -21,5 +21,15 @@ namespace RegistrationForm
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string daqteFrom = textBox1.Text;
+            string dateTo = textBox2.Text;
+            if (string)
+            {
+
+            }
+        }
     }
 }

@@ -152,7 +152,7 @@
             textBox1.Location = new Point(147, 88);
             textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(241, 23);
+            textBox1.Size = new Size(213, 23);
             textBox1.TabIndex = 7;
             // 
             // textBox2

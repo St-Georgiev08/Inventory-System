@@ -127,15 +127,29 @@ namespace RegistrationForm
             radioButton2.Checked = false;
         }
 
+        private CancellationTokenSource _cts;
+
         private async void textBox6_TextChanged(object sender, EventArgs e)
         {
-            UsersCotroller userControl = new();
-            var users = await userControl
-                .GetUserSuggestionsAsync(textBox6.Text);
+            _cts?.Cancel();
 
-            listBox1.DataSource = null;
-            listBox1.DataSource = users;
-            listBox1.DisplayMember = "Username";
+            _cts = new CancellationTokenSource();
+
+            try
+            {
+                await Task.Delay(300, _cts.Token);
+                UsersCotroller userControl = new();
+
+                var users = await userControl
+                    .GetUserSuggestionsAsync(textBox6.Text);
+                listBox1.DataSource = null;
+                listBox1.DataSource = users;
+                listBox1.DisplayMember = "Name";
+            }
+            catch (TaskCanceledException)
+            {
+                // User typed another character before 300ms elapsed
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
