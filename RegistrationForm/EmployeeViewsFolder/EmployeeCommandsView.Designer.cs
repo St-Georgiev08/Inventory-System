@@ -79,6 +79,7 @@
             button3.TabIndex = 9;
             button3.Text = "Add product in store";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // label1
             // 

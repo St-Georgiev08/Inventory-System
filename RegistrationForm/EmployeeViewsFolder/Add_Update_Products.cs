@@ -125,7 +125,7 @@ namespace RegistrationForm
 
                     File.Copy(_selectedImagePath, NewDestinationPath);
                     var selectedCategory = (Categories)comboBox1.SelectedItem;
-                    var product = product.
+                    var products =(await productsController.GetAllProduct()).First(x=>x.Name == );
                     if (decimal.TryParse(textBox2.Text, out decimal value) && int.TryParse(textBox3.Text, out int qantity))
                     {
                         MessageBox.Show(await productsController.UpdateProduct(textBox1.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);

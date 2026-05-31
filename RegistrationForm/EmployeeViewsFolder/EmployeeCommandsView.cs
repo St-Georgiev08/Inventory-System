@@ -12,7 +12,7 @@ namespace RegistrationForm.EmployeeViewsFolder
 {
     public partial class EmployeeCommandsView : Form
     {
-        public string ReasonForUsing {  get; set; }
+        public string ReasonForUsing { get; set; }
         public EmployeeCommandsView()
         {
             InitializeComponent();
@@ -49,6 +49,14 @@ namespace RegistrationForm.EmployeeViewsFolder
             ReasonForUsing = "Update";
             Add_Update_Products addUpdate_Product = new();
             addUpdate_Product.ShowDialog();
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Vie viewMyClientsOrders = new();
+            viewMyClientsOrders.ShowDialog();
             this.Close();
         }
     }
