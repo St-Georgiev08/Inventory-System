@@ -20,14 +20,15 @@ namespace SalesSystem.Data.Servises
         {
             _context = context;
         }
-        //public async Task<int> Count()
-        //{
-        //    return await _context.OrderItems.CountAsync();
-        //}
-        //public async Task<List<OrderItems>> GetAll()
-        //{
-        //    return await _context.OrderItems.ToListAsync();
-        //}
+        public async Task<int> Count()
+        {
+            return await _context.OrderItems.CountAsync();
+        }
+        public async Task<List<OrderItems>> GetAll()
+        {
+            return await _context.OrderItems.Include(x=>x.Order).Include(x=>x.Product)
+                .ToListAsync();
+        }
         //public async Task<OrderItems> GetById(int id)
         //{
         //    return await _context.OrderItems.FindAsync(id);

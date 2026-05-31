@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace RegistrationForm.UserForms
 {
-    public partial class UserControl1 : UserControl
+    public partial class UserControl2 : UserControl
     {
         private ProductDetails products { get; set; }
-        public UserControl1()
+        public UserControl2()
         {
             InitializeComponent();
         }
@@ -27,36 +27,25 @@ namespace RegistrationForm.UserForms
             products = product;
             pictureBox1.Image = Image.FromFile(product.ImagePath);
         }
-        private void button1_Click(object sender, EventArgs e)
+        private async void UserControl2_Load(object sender, EventArgs e)
         {
 
         }
 
-        private async void button1_Click_1(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             OrdersController orders = new();
             OrderItemsController items = new();
-            int num = Convert.ToInt16(numericUpDown1.Value);
-            if (num > 0)
-            {
-                MessageBox.Show("You cannot order 0 items. Pick a number!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             try
             {
-                await orders.Add($"Order for: {products.Products.Name}", DateTime.Now, products.Products.Price * num);
                 var get = (await orders.GetAll()).Last().Id;
-                MessageBox.Show(await items.AddOrder(get, products.Products.Id, num, products.Products.Price), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+             MessageBox.Show(await items.DeleteOrderItem(get,products.Id), "Success", MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch (ArgumentException x)
             {
 
                 MessageBox.Show(x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private async void UserControl1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -23,5 +23,10 @@ namespace RegistrationForm.EmployeeViewsFolder
             EmployeeCommandsView employeeCommandsView = new();
             employeeCommandsView.ShowDialog();
         }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

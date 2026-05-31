@@ -42,7 +42,6 @@
             button2 = new Button();
             pictureBox3 = new PictureBox();
             linkLabel1 = new LinkLabel();
-            button4 = new Button();
             textBox1 = new TextBox();
             label2 = new Label();
             groupBox1 = new GroupBox();
@@ -50,6 +49,8 @@
             comboBox1 = new ComboBox();
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
+            button3 = new Button();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -132,7 +133,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(152, 8);
+            label1.Location = new Point(153, 35);
             label1.Name = "label1";
             label1.Size = new Size(387, 32);
             label1.TabIndex = 27;
@@ -174,16 +175,6 @@
             linkLabel1.TabStop = true;
             linkLabel1.Text = "My account";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
-            // 
-            // button4
-            // 
-            button4.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button4.Location = new Point(551, 176);
-            button4.Name = "button4";
-            button4.Size = new Size(100, 61);
-            button4.TabIndex = 38;
-            button4.Text = "Apply";
-            button4.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -267,13 +258,33 @@
             radioButton1.Text = "Name:";
             radioButton1.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            button3.Location = new Point(710, 370);
+            button3.Name = "button3";
+            button3.Size = new Size(84, 28);
+            button3.TabIndex = 38;
+            button3.Text = "Log out";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label3.Location = new Point(153, 8);
+            label3.Name = "label3";
+            label3.Size = new Size(64, 25);
+            label3.TabIndex = 39;
+            label3.Text = "label3";
+            // 
             // ShopItems
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Brown;
             ClientSize = new Size(796, 400);
-            Controls.Add(button4);
+            Controls.Add(label3);
+            Controls.Add(button3);
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(groupBox1);
@@ -309,7 +320,6 @@
         private Button button2;
         private PictureBox pictureBox3;
         private LinkLabel linkLabel1;
-        private Button button4;
         private TextBox textBox1;
         private Label label2;
         private GroupBox groupBox1;
@@ -317,5 +327,7 @@
         private ComboBox comboBox1;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
+        private Button button3;
+        private Label label3;
     }
 }

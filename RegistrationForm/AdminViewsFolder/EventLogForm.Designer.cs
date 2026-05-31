@@ -131,6 +131,7 @@
             button2.TabIndex = 8;
             button2.Text = "Export to EXCEL";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -142,6 +143,7 @@
             button3.TabIndex = 9;
             button3.Text = "Close\r\n";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // EventLogForm
             // 
@@ -161,6 +163,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "EventLogForm";
             Text = "EventLogForm";
+            Load += EventLogForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

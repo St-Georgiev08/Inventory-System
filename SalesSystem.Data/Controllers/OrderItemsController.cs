@@ -1,9 +1,13 @@
-﻿using Inventory_System;
+﻿using DocumentFormat.OpenXml.InkML;
+using Inventory_System;
 using Inventory_System.Entities;
+using Microsoft.EntityFrameworkCore;
+using SalesSystem.Data.DTOs;
 using SalesSystem.Data.Servises;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,15 +17,18 @@ namespace SalesSystem.Data.Controllers
     {
         private readonly OrderItemsCRUD orderItems;
         private readonly ProductsController products;
+        private readonly SalesManagementSystemContext context;
         public OrderItemsController()
         {
             orderItems = new();
             products = new ProductsController();
+            context = new();
         }
         public OrderItemsController(SalesManagementSystemContext order)
         {
             orderItems = new(order);
             products = new ProductsController(order);
+            context = new();
         }
         public async Task<string> AddOrder(int OrderId, int prId, int Qantity, decimal UnitPrice)
         {
@@ -68,19 +75,41 @@ namespace SalesSystem.Data.Controllers
             await orderItems.Delete(id, prId);
             return "Order item deleted successfully";
         }
+            public async Task<List<OrderGridDto>> GetForGrid()
+        {
+            var orders = await context.OrderItems.Include(x => x.Order).ThenInclude(x=>x.User).Include(x=>x.Product).Select( x => new OrderGridDto
+            {
+                OrderId = x.OrderId,
+                OrderedBy = x.Order.User.Username,
+                Product = x.Product.Name,
+                Qantity = x.Quantity,
+                UnitPrice = x.UnitPrice
+            }).ToListAsync();
+            return orders;
+        }
 
-        //    public async Task<OrderItems> GetById(int id)
-        //    {
-        //        if (id < 0)
-        //        {
-        //            throw new ArgumentException("Invalid order item ID");
-        //        }
-        //        var orderItem = await orderItems.GetById(id);
-        //        if (orderItem == null)
-        //        {
-        //            throw new ArgumentException("Order item not found");
-        //        }
-        //        return orderItem;
-        //}
+
+        public async Task<List<ProductDetails>> GetOrderedProductDetailsByUserAsync(int userId)
+        {
+            return await context.ProductDetails
+                .Where(pd => pd.Products.OrderItems
+                    .Any(oi => oi.Order.UserId == userId))
+                .ToListAsync();
+        }
     }
-}
+    }
+        //public async Task<OrderItems> GetById(int id)
+        //{
+        //    if (id < 0)
+        //    {
+        //        throw new ArgumentException("Invalid order item ID");
+        //    }
+        //    var orderItem = await orderItems.GetById(id);
+        //    if (orderItem == null)
+        //    {
+        //        throw new ArgumentException("Order item not found");
+        //    }
+        //    return orderItem;
+        //}
+
+

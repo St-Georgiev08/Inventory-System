@@ -26,7 +26,7 @@ namespace SalesSystem.Data.Servises
         }
         public async Task<List<AuditLogs>> GetAll()
         {
-            return await _context.AuditLogs.ToListAsync();
+            return await _context.AuditLogs.Include(x=>x.User).ToListAsync();
         }
          public async Task<AuditLogs> GetById(int id)
         {

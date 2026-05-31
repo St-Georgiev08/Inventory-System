@@ -34,18 +34,20 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(301, 138);
+            label1.Location = new Point(263, 104);
             label1.Name = "label1";
-            label1.Size = new Size(158, 20);
+            label1.Size = new Size(125, 15);
             label1.TabIndex = 0;
             label1.Text = "Add_Update_Category";
             // 
             // Add_Update_Categories
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.BurlyWood;
+            ClientSize = new Size(759, 406);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Add_Update_Categories";
             Text = "Add_Update_Categories";
             ResumeLayout(false);

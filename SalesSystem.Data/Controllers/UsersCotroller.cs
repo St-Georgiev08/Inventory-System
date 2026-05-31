@@ -2,6 +2,7 @@
 using Inventory_System.Entities;
 using Inventory_System.Enums;
 using Microsoft.EntityFrameworkCore;
+using SalesSystem.Data.DTOs;
 using SalesSystem.Data.HelpMethods;
 using SalesSystem.Data.Servises;
 using System;
@@ -136,6 +137,27 @@ namespace SalesSystem.Data.Controllers
                 .Take(5)
                 .ToListAsync();
         }
-
+        public async Task<List<User>> OrderUsers(bool name, bool desc)
+        {
+            if (name)
+            {
+                return (await GetAllUsersAsync()).OrderBy(x => x.Username).ToList();
+            }
+            else if(desc)
+            {
+                return (await GetAllUsersAsync()).OrderByDescending(x => x.Username).ToList();
+            }
+            return await GetAllUsersAsync();
+        }
+        public async Task<List<EmployeeDto>> GetDataGrid(bool n, bool dm)
+        {
+            var list = (await OrderUsers(n, dm)).Select(x => new EmployeeDto
+            {
+                Name = x.Username,
+                Phone = x.PhoneNumber,
+                Email = x.Email,
+            }).ToList();
+            return list;
+        }
     }
 }

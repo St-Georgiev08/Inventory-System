@@ -49,5 +49,19 @@ namespace RegistrationForm
             EventLogForm eventLogForm = new EventLogForm();
             eventLogForm.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            SeeAllOrders see = new();
+            see.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            SeeAllEmployees see = new();
+            see.ShowDialog();
+        }
     }
 }

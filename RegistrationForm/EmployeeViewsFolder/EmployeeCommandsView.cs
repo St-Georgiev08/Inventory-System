@@ -28,7 +28,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AddUpdate_Product addUpdate_Product = new();
+            Add_Update_Products addUpdate_Product = new();
             addUpdate_Product.ShowDialog();
             this.Close();
         }

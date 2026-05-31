@@ -17,6 +17,7 @@ namespace RegistrationForm
 {
     public partial class ShopItems : Form
     {
+        private readonly RegistrationForm1 form1 = new RegistrationForm1();
         private readonly CategoriesController categories;
         private string searchTerm = string.Empty;
         private bool sortByName;
@@ -30,8 +31,10 @@ namespace RegistrationForm
             ShopItems_Load();
             OnLoad();
         }
+
         private async void OnLoad()
         {
+            label3.Text = form1.GetUser.Username;
             await LoadCategories();
         }
 

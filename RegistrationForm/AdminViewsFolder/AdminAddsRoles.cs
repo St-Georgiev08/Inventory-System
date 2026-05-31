@@ -21,8 +21,9 @@ namespace RegistrationForm
         public AdminAddsRoles()
         {
             InitializeComponent();
+            OnLoad();
         }
-        private void OnLoad(object sender, EventArgs e)
+        private void OnLoad()
         {
             var reason = adminCommandView.GetReasonForClick;
             if (reason == "Add")

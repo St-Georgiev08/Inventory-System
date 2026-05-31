@@ -23,7 +23,7 @@ namespace SalesSystem.Data.HelpMethods
 
         }
 
-        internal async Task<bool> VerifyPassword(string password, string passwordHash)
+        public async Task<bool> VerifyPassword(string password, string passwordHash)
         {
             string hashOfInput = await HashPassword(password);
             if(StringComparer.OrdinalIgnoreCase.Compare(hashOfInput, passwordHash) == 0)

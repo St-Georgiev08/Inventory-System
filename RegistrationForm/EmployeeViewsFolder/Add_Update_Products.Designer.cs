@@ -39,6 +39,13 @@
             label7 = new Label();
             richTextBox1 = new RichTextBox();
             button2 = new Button();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            openFileDialog1 = new OpenFileDialog();
+            button3 = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -102,7 +109,7 @@
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(181, 220);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
+            comboBox1.Size = new Size(168, 23);
             comboBox1.TabIndex = 6;
             // 
             // label6
@@ -117,7 +124,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(389, 100);
+            label7.Location = new Point(412, 100);
             label7.Name = "label7";
             label7.Size = new Size(84, 15);
             label7.TabIndex = 8;
@@ -125,26 +132,77 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(171, 258);
+            richTextBox1.Location = new Point(180, 258);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(178, 49);
+            richTextBox1.Size = new Size(203, 49);
             richTextBox1.TabIndex = 9;
             richTextBox1.Text = "";
             // 
             // button2
             // 
-            button2.Location = new Point(472, 252);
+            button2.Location = new Point(502, 258);
             button2.Name = "button2";
             button2.Size = new Size(162, 55);
             button2.TabIndex = 10;
             button2.Text = "Add new product:";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(180, 172);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(169, 23);
+            textBox1.TabIndex = 11;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(180, 138);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(169, 23);
+            textBox2.TabIndex = 12;
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(231, 97);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(152, 23);
+            textBox3.TabIndex = 13;
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button3
+            // 
+            button3.Location = new Point(502, 86);
+            button3.Name = "button3";
+            button3.Size = new Size(132, 42);
+            button3.TabIndex = 14;
+            button3.Text = "Add from your device";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(502, 125);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(132, 104);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 15;
+            pictureBox1.TabStop = false;
             // 
             // Add_Update_Products
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            BackColor = Color.BurlyWood;
+            ClientSize = new Size(734, 354);
+            Controls.Add(pictureBox1);
+            Controls.Add(button3);
+            Controls.Add(textBox3);
+            Controls.Add(textBox2);
+            Controls.Add(textBox1);
             Controls.Add(button2);
             Controls.Add(richTextBox1);
             Controls.Add(label7);
@@ -159,6 +217,8 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "Add_Update_Products";
             Text = "Add_Update_Products";
+            Load += Add_Update_Products_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -176,5 +236,11 @@
         private Label label7;
         private RichTextBox richTextBox1;
         private Button button2;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private OpenFileDialog openFileDialog1;
+        private Button button3;
+        private PictureBox pictureBox1;
     }
 }

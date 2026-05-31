@@ -48,7 +48,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(276, 149);
+            button1.Location = new Point(302, 175);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(128, 68);
@@ -59,7 +59,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(84, 149);
+            button2.Location = new Point(110, 175);
             button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
             button2.Size = new Size(128, 68);
@@ -70,7 +70,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(471, 149);
+            button3.Location = new Point(497, 175);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
             button3.Size = new Size(128, 68);
@@ -82,7 +82,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(84, 76);
+            label1.Location = new Point(64, 102);
             label1.Name = "label1";
             label1.Size = new Size(620, 32);
             label1.TabIndex = 10;
@@ -92,12 +92,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(691, 330);
+            BackColor = Color.BurlyWood;
+            ClientSize = new Size(750, 373);
             Controls.Add(label1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(button5);
+            ForeColor = SystemColors.ControlText;
             Name = "EmployeeCommandsView";
             Text = "EmployeeCommandsView";
             ResumeLayout(false);
