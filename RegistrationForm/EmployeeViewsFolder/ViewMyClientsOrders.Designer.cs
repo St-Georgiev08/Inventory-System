@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button5 = new Button();
             textBox1 = new TextBox();
             button2 = new Button();
             label2 = new Label();
@@ -41,16 +40,6 @@
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // button5
-            // 
-            button5.Location = new Point(12, 12);
-            button5.Name = "button5";
-            button5.Size = new Size(115, 44);
-            button5.TabIndex = 8;
-            button5.Text = "Go back";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
             // 
             // textBox1
             // 
@@ -68,6 +57,7 @@
             button2.TabIndex = 32;
             button2.Text = "Close";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // label2
             // 
@@ -157,7 +147,6 @@
             Controls.Add(label1);
             Controls.Add(dataGridView1);
             Controls.Add(button1);
-            Controls.Add(button5);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ViewMyClientsOrders";
             Text = "ViewMyClientsOrders";
@@ -169,8 +158,6 @@
         }
 
         #endregion
-
-        private Button button5;
         private TextBox textBox1;
         private Button button2;
         private Label label2;

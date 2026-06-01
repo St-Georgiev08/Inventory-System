@@ -33,5 +33,10 @@ namespace Inventory_System.Entities
         = new List<Orders>();
 
         public ICollection<AuditLogs> AuditLogs { get; set; } = new List<AuditLogs>();
+
+        public static implicit operator Microsoft.VisualBasic.ApplicationServices.User(User v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

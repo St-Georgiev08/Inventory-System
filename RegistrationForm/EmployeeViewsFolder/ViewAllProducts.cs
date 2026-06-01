@@ -20,13 +20,13 @@ namespace RegistrationForm.EmployeeViewsFolder
         {
             InitializeComponent();
         }
-        private async void LoadProducts(List<ProductDetails> products)
+        private async Task LoadProducts(List<ProductDetails> products)
         {
             flowLayoutPanel1.Controls.Clear();
 
             foreach (var product in products)
             {
-                UserControl1 card = new UserControl1();
+                UserControl2 card = new UserControl2();
 
                 card.LoadProduct(product);
 
@@ -37,7 +37,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         {
             ProductDetailsCRUD productService = new();
             var products = await productService.GetAll();
-            LoadProducts(products);
+            await LoadProducts(products);
         }
         public async void button2_Click(object sender, EventArgs e)
         {
@@ -56,20 +56,30 @@ namespace RegistrationForm.EmployeeViewsFolder
 
 
                 var filter = await product.SortByType(products, name, price, desc, type);
-                LoadProducts(filter);
+                await LoadProducts(filter);
             }
             else
             {
                 var filter = await product.SortByType(await product.GetAll(), name, price, desc, type);
-                LoadProducts(filter);
+                await LoadProducts(filter);
             }
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             EmployeeCommandsView employeeCommandsView = new();
             employeeCommandsView.ShowDialog();
+            this.Close();
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            EmployeeCommandsView employeeCommandsView = new();
+            employeeCommandsView.ShowDialog();
+            this.Close();
         }
     }
 }

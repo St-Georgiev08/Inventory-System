@@ -8,10 +8,11 @@ namespace RegistrationForm
 {
     public partial class RegistrationForm1 : Form
     {
-        public User GetUser {  get; set; }
+       
         public RegistrationForm1()
         {
             InitializeComponent();
+
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -19,12 +20,11 @@ namespace RegistrationForm
             UsersCotroller user = new();
             string usernama = textBox1.Text;
             string password = textBox2.Text;
-            User us = null;
+            var us = new User();
             try
             {
                 us = await user.AuthenticateUserAsync(usernama, password);
                 MessageBox.Show($"Login successful for user: {us.Username}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                GetUser = us;
             }
             catch (ArgumentException x)
             {
@@ -36,14 +36,14 @@ namespace RegistrationForm
             if (us.Role == RoleType.Admin)
             {
                 this.Hide();
-                AdminCommandView adminCommandView = new AdminCommandView();
+                AdminCommandView adminCommandView = new AdminCommandView(us);
                 adminCommandView.ShowDialog();
                 this.Close();
             }
-            if(us.Role == RoleType.Client)
+            if (us.Role == RoleType.Client)
             {
                 this.Hide();
-                ClientMainForm clientMainForm = new ClientMainForm();
+                ShopItems clientMainForm = new ShopItems();
                 clientMainForm.ShowDialog();
                 this.Close();
             }
@@ -63,8 +63,16 @@ namespace RegistrationForm
 
         private async void button2_Click(object sender, EventArgs e)
         {
-           
-            
+            this.Hide();
+            RegistrationForm2 registrationForm2 = new RegistrationForm2();
+            registrationForm2.ShowDialog();
+            this.Close();
+
+        }
+
+        private void RegistrationForm1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

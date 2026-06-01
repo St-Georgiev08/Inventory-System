@@ -139,9 +139,10 @@ namespace RegistrationForm
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             AdminCommandView view = new();
             view.ShowDialog();
+            this.Close();
         }
 
         private void EventLogForm_Load(object sender, EventArgs e)

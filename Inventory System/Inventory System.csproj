@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="IMGs\**" />
+    <EmbeddedResource Remove="IMGs\**" />
+    <None Remove="IMGs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appSettings.json" />
   </ItemGroup>
 
@@ -31,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="IMGs\" />
   </ItemGroup>
 
 </Project>

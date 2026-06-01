@@ -58,9 +58,9 @@ namespace RegistrationForm.ClientViewsFolder
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            this.Hide();
             ShopItems items = new();
-            items.ShowDialog();
+            items.ShowDialog(); this.Close();
         }
     }
 }

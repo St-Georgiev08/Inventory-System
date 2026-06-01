@@ -57,7 +57,7 @@ namespace RegistrationForm.EmployeeViewsFolder
 
 
         }
-       
+
         private async void button1_Click(object sender, EventArgs e)
         {
             string find = textBox1.Text;
@@ -81,6 +81,15 @@ namespace RegistrationForm.EmployeeViewsFolder
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            EmployeeCommandsView view = new EmployeeCommandsView();
+            
+            view.ShowDialog();
+            this.Close();
         }
     }
 }

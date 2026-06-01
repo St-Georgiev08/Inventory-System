@@ -17,15 +17,18 @@ namespace RegistrationForm
 {
     public partial class AdminAddsRoles : Form
     {
-        private AdminCommandView adminCommandView = new();
-        public AdminAddsRoles()
+   
+        private User User { get; set; }
+        private string GetReasonForClick { get; set; }
+        public AdminAddsRoles(User user, string GetReasonForClick)
         {
             InitializeComponent();
             OnLoad();
+            User = user;
         }
         private void OnLoad()
         {
-            var reason = adminCommandView.GetReasonForClick;
+            var reason = GetReasonForClick;
             if (reason == "Add")
             {
                 label2.Visible = true;
@@ -76,48 +79,48 @@ namespace RegistrationForm
             AuditLogsController auditLogsController = new AuditLogsController();
             UsersCotroller control = new();
             RegistrationForm1 form = new RegistrationForm1();
-            if (adminCommandView.GetReasonForClick == "Add")
+            if (GetReasonForClick == "Add")
             {
-                 username = textBox1.Text;
+                username = textBox1.Text;
                 try
                 {
                     var add = await control.AddUserAsync(username, password, role, phoneNumber, Email);
                     MessageBox.Show(add, "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} ({username}) by Admin: {form.GetUser.Username}", $"Added user: {username}");
+                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} ({username}) by Admin: {User.Username}", $"Added user: {username}");
                 }
                 catch (ArgumentException x)
                 {
-                    MessageBox.Show(x.Message, "Problem has been reached!", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show(x.Message, "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-               
+
             }
             else
             {
-                 username = listBox1.SelectedIndex.ToString();
+                username = listBox1.SelectedIndex.ToString();
                 try
                 {
                     var get = (await control.GetAllUsersAsync()).Find(x => x.Username == username).Id;
-                    var add = await control.UpdateUserAsync(get,username, password, role, phoneNumber, Email);
+                    var add = await control.UpdateUserAsync(get, username, password, role, phoneNumber, Email);
                     MessageBox.Show(add, "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                  
 
-                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} by Admin: {form.GetUser.Username}", DateTime.Now.ToString());
+
+                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} by Admin: {User.Username}", DateTime.Now.ToString());
                 }
                 catch (ArgumentException x)
                 {
 
                     MessageBox.Show(x.Message, "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Updated {role} ({username}) by Admin: {form.GetUser.Username}", $"Updated user: {username}");
+                await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Updated {role} ({username}) by Admin: {User.Username}", $"Updated user: {username}");
             }
-            
+
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
-            AdminCommandView admin = new();
+            this.Hide();
+            AdminCommandView admin = new(User);
             admin.ShowDialog();
             textBox1.Clear();
             textBox2.Clear();
@@ -126,6 +129,7 @@ namespace RegistrationForm
             textBox5.Clear();
             radioButton1.Checked = false;
             radioButton2.Checked = false;
+            this.Close();
         }
 
         private CancellationTokenSource _cts;
@@ -163,10 +167,15 @@ namespace RegistrationForm
                 textBox5.Text = user.PhoneNumber;
                 if (user.Role == RoleType.Employee)
                 {
-                    radioButton2 .Checked = true;
+                    radioButton2.Checked = true;
                 }
                 else radioButton1.Checked = true;
             }
+        }
+
+        private void AdminAddsRoles_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

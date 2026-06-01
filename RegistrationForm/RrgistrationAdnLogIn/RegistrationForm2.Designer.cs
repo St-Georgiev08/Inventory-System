@@ -228,6 +228,7 @@
             Controls.Add(label1);
             Name = "RegistrationForm2";
             Text = "RegistrationForm2";
+            Load += RegistrationForm2_Load;
             ResumeLayout(false);
             PerformLayout();
         }

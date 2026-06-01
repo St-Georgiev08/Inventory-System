@@ -24,9 +24,11 @@ namespace RegistrationForm
         private bool sortByType;
         private bool sortByPrice;
         private bool desc;
-        public ShopItems()
+        private User getRole { set; get; }
+        public ShopItems(User user)
         {
             categories = new();
+            getRole = user;
             InitializeComponent();
             ShopItems_Load();
             OnLoad();
@@ -34,7 +36,7 @@ namespace RegistrationForm
 
         private async void OnLoad()
         {
-            label3.Text = form1.GetUser.Username;
+            label3.Text = $"Wellcome, {getRole.Username}";
             await LoadCategories();
         }
 
@@ -107,9 +109,10 @@ namespace RegistrationForm
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            this.Hide();
             ClientMainForm clientMainForm = new();
             clientMainForm.ShowDialog();
+            this.Close();
 
         }
 

@@ -39,12 +39,13 @@
             // 
             // button2
             // 
-            button2.Location = new Point(606, 46);
+            button2.Location = new Point(607, 46);
             button2.Name = "button2";
             button2.Size = new Size(157, 61);
             button2.TabIndex = 23;
-            button2.Text = "Update order";
+            button2.Text = "Update product";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // lblPrice
             // 
@@ -75,12 +76,13 @@
             // 
             // button1
             // 
-            button1.Location = new Point(606, 131);
+            button1.Location = new Point(607, 137);
             button1.Name = "button1";
             button1.Size = new Size(157, 61);
             button1.TabIndex = 19;
-            button1.Text = "Finish order";
+            button1.Text = "Delete product";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // pictureBox1
             // 

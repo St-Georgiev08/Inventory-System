@@ -17,21 +17,24 @@ namespace RegistrationForm.ClientViewsFolder
     public partial class UpdateClientForm : Form
     {
         private RegistrationForm1 form1 = new();
-        public UpdateClientForm()
+        private User User {  get; set; }
+        public UpdateClientForm(User user)
         {
             InitializeComponent();
+            User = user;
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
-            ShopItems shop = new ShopItems();
+            this.Hide();
+            ShopItems shop = new ShopItems(User);
             shop.ShowDialog();
+            this.Close();
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            User user = form1.GetUser;
+            User user = User;
             string name = textBox1.Text;
             string? email = textBox4.Text;
             string ph = textBox5.Text;
@@ -56,7 +59,7 @@ namespace RegistrationForm.ClientViewsFolder
         private async void UpdateClientForm_Load(object sender, EventArgs e)
         {
 
-            User user = form1.GetUser;
+            User user = User;
             textBox1.Text = user.Username;
             textBox4.Text = user.Email;
             textBox5.Text = user.PhoneNumber;
@@ -67,7 +70,7 @@ namespace RegistrationForm.ClientViewsFolder
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
-            ClientMainForm form = new();
+            ClientMainForm form = new(User);
             form.ShowDialog();
         }
     }

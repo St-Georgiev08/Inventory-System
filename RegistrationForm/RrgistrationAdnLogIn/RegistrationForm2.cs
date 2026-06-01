@@ -51,7 +51,7 @@ namespace RegistrationForm
             UsersCotroller userController = new();
             try
             {
-                var m = await userController.AddUserAsync(username, password, "User", phone, email);
+                var m = await userController.AddUserAsync(username, password, "Client", phone, email);
                 MessageBox.Show(m, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 RegistrationForm1 registrationForm1 = new RegistrationForm1();
@@ -77,6 +77,11 @@ namespace RegistrationForm
             RegistrationForm1 registrationForm1 = new RegistrationForm1();
             registrationForm1.ShowDialog();
             this.Close();
+        }
+
+        private void RegistrationForm2_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

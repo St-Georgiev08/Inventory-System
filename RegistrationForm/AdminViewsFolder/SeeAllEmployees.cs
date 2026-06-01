@@ -25,9 +25,10 @@ namespace RegistrationForm
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
+            
             AdminCommandView admin = new();
-            admin.ShowDialog();
+            admin.ShowDialog(); this.Close();
         }
         private readonly UsersCotroller productsController = new();
         private readonly BindingSource _productsSource = new();

@@ -125,9 +125,10 @@ namespace RegistrationForm
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+
+            this.Hide();
             AdminCommandView adminCommandView = new AdminCommandView();
-            adminCommandView.ShowDialog();
+            adminCommandView.ShowDialog(); this.Close();
         }
 
         private void SeeAllOrders_Load(object sender, EventArgs e)

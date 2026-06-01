@@ -30,9 +30,10 @@ namespace RegistrationForm
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             EmployeeCommandsView view = new();
             view.ShowDialog();
+            this.Close();
 
         }
         private string? _selectedImagePath;
@@ -60,7 +61,7 @@ namespace RegistrationForm
         private async void button2_Click(object sender, EventArgs e)
         {
 
-            if(empCommandsView.ReasonForUsing == "Add")
+            if(empCommandsView.ReasonForUsing != "control2")
             {
                 if (string.IsNullOrWhiteSpace(_selectedImagePath))
                 {
@@ -155,8 +156,9 @@ namespace RegistrationForm
         private async void Add_Update_Products_Load(object sender, EventArgs e)
         {
            await LoadCategories();
-            if(empCommandsView.ReasonForUsing == "Update")
+            if(empCommandsView.ReasonForUsing == "control2")
             {
+                empCommandsView.ReasonForUsing = "";
                 textBox1.Text = details.Products.Name;
                 textBox2.Text = details.Products.Price.ToString();
                 textBox3.Text = details.Products.Quantity.ToString();

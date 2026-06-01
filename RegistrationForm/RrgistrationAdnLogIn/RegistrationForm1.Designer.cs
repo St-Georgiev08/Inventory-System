@@ -139,6 +139,7 @@
             Controls.Add(label1);
             Name = "RegistrationForm1";
             Text = "Form1";
+            Load += RegistrationForm1_Load;
             ResumeLayout(false);
             PerformLayout();
         }

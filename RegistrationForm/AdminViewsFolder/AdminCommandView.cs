@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventory_System.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,9 +14,11 @@ namespace RegistrationForm
     public partial class AdminCommandView : Form
     {
         public string GetReasonForClick { get; set; }
-        public AdminCommandView()
+        private User getRole { set; get; }
+        public AdminCommandView(User user)
         {
             InitializeComponent();
+            getRole = user;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -28,40 +31,50 @@ namespace RegistrationForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
-            AdminAddsRoles adminAddsRoles = new AdminAddsRoles();
+            this.Hide();
             GetReasonForClick = "Add";
+            AdminAddsRoles adminAddsRoles = new AdminAddsRoles(getRole,GetReasonForClick);
             adminAddsRoles.ShowDialog();
+            this.Close();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            this.Close();
-            AdminAddsRoles adminCommandView = new();
+            this.Hide();
             GetReasonForClick = "Update";
+            AdminAddsRoles adminCommandView = new(getRole,GetReasonForClick);
             adminCommandView.ShowDialog();
+            this.Close();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             EventLogForm eventLogForm = new EventLogForm();
             eventLogForm.ShowDialog();
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             SeeAllOrders see = new();
             see.ShowDialog();
+            this.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             SeeAllEmployees see = new();
             see.ShowDialog();
+            this.Close();
+        }
+
+        private void AdminCommandView_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

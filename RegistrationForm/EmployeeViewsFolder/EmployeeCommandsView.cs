@@ -59,5 +59,18 @@ namespace RegistrationForm.EmployeeViewsFolder
             viewMyClientsOrders.ShowDialog();
             this.Close();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Add_Update_Categories addUpdate_Categories = new();
+            addUpdate_Categories.ShowDialog();
+            this.Close();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
