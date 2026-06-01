@@ -16,9 +16,13 @@ namespace RegistrationForm.UserForms
     public partial class UserControl3 : UserControl
     {
         private ProductDetails products { get; set; }
-        public UserControl3()
+        private User GetUser { set; get; }
+        public UserControl3(ProductDetails product, User user)
         {
             InitializeComponent();
+            products = product;
+            GetUser = user;
+            LoadProduct(product);
         }
         public async void LoadProduct(ProductDetails product)
         {
@@ -47,9 +51,9 @@ namespace RegistrationForm.UserForms
        
         private async void button2_Click(object sender, EventArgs e)
         {
-               ViewAllProducts view = new ViewAllProducts();
+               ViewAllProducts view = new ViewAllProducts(GetUser);
                
-               Add_Update_Products add = new Add_Update_Products();
+               Add_Update_Products add = new Add_Update_Products("control2", GetUser);
                add.details = products;
                add.ShowDialog();
                view.Close();

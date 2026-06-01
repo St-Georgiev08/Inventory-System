@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventory_System.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,16 +13,18 @@ namespace RegistrationForm.EmployeeViewsFolder
 {
     public partial class EmployeeCommandsView : Form
     {
-        public string ReasonForUsing { get; set; }
-        public EmployeeCommandsView()
+        private string ReasonForUsing { get; set; }
+        private User GetUser { set; get; }
+        public EmployeeCommandsView(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
 
         private async void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            RegistrationForm1 form1 = new RegistrationForm1();
+            RegistrationForm1 form1 = new RegistrationForm1(GetUser);
             form1.ShowDialog();
             this.Close();
         }
@@ -30,7 +33,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         {
             this.Hide();
             ReasonForUsing = "Add";
-            Add_Update_Products addUpdate_Product = new();
+            Add_Update_Products addUpdate_Product = new(ReasonForUsing, GetUser);
             addUpdate_Product.ShowDialog();
             this.Close();
         }
@@ -38,7 +41,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private async void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ViewMyClientsOrders viewMyClientsOrders = new();
+            ViewMyClientsOrders viewMyClientsOrders = new(GetUser);
             viewMyClientsOrders.ShowDialog();
             this.Close();
         }
@@ -47,7 +50,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         {
             this.Hide();
             ReasonForUsing = "Update";
-            Add_Update_Products addUpdate_Product = new();
+            Add_Update_Products addUpdate_Product = new(ReasonForUsing, GetUser);
             addUpdate_Product.ShowDialog();
             this.Close();
         }
@@ -55,7 +58,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ViewMyClientsOrders viewMyClientsOrders = new();
+            ViewMyClientsOrders viewMyClientsOrders = new(GetUser);
             viewMyClientsOrders.ShowDialog();
             this.Close();
         }
@@ -63,7 +66,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button6_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Add_Update_Categories addUpdate_Categories = new();
+            Add_Update_Categories addUpdate_Categories = new(GetUser);
             addUpdate_Categories.ShowDialog();
             this.Close();
         }

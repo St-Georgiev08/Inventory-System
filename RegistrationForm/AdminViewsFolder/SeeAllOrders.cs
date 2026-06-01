@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using Inventory_System.Entities;
 using SalesSystem.Data.Controllers;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,11 @@ namespace RegistrationForm
 {
     public partial class SeeAllOrders : Form
     {
-        public SeeAllOrders()
+        public User GetUser { set; get; }
+        public SeeAllOrders(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
         private readonly OrderItemsController productsController = new();
         private readonly BindingSource _productsSource = new();
@@ -127,7 +130,7 @@ namespace RegistrationForm
         {
 
             this.Hide();
-            AdminCommandView adminCommandView = new AdminCommandView();
+            AdminCommandView adminCommandView = new AdminCommandView(GetUser);
             adminCommandView.ShowDialog(); this.Close();
         }
 

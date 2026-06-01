@@ -30,7 +30,7 @@ namespace RegistrationForm
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AllClintsOrders all = new AllClintsOrders();
+            AllClintsOrders all = new AllClintsOrders(User);
             all.ShowDialog();
             this.Close();
         }

@@ -24,7 +24,7 @@ namespace RegistrationForm
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            RegistrationForm1 registrationForm1 = new RegistrationForm1();
+            RegistrationForm1 registrationForm1 = new RegistrationForm1(getRole);
             registrationForm1.ShowDialog();
             this.Close();
         }
@@ -51,7 +51,7 @@ namespace RegistrationForm
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EventLogForm eventLogForm = new EventLogForm();
+            EventLogForm eventLogForm = new EventLogForm(getRole);
             eventLogForm.ShowDialog();
             this.Close();
         }
@@ -59,7 +59,7 @@ namespace RegistrationForm
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SeeAllOrders see = new();
+            SeeAllOrders see = new(getRole);
             see.ShowDialog();
             this.Close();
         }
@@ -67,7 +67,7 @@ namespace RegistrationForm
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SeeAllEmployees see = new();
+            SeeAllEmployees see = new(getRole);
             see.ShowDialog();
             this.Close();
         }

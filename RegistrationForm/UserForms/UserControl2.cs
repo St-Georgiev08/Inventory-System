@@ -18,9 +18,11 @@ namespace RegistrationForm.UserForms
     {
         private ProductDetails products { get; set; }
         public string Getreason { set; get; }
-        public UserControl2()
+        private User GetUser { set; get; }
+        public UserControl2(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
         public async void LoadProduct(ProductDetails product)
         {
@@ -30,14 +32,15 @@ namespace RegistrationForm.UserForms
             products = product;
             pictureBox1.Image = Image.FromFile(product.ImagePath);
         }
-        private ViewAllProducts Products = new ViewAllProducts();
+         
         private void button2_Click(object sender, EventArgs e)
         {
-            
-            Add_Update_Products add_product = new Add_Update_Products();
+            ViewAllProducts Products = new ViewAllProducts(GetUser);
+            Getreason = "control2";
+            Add_Update_Products add_product = new Add_Update_Products(Getreason, GetUser);
             add_product.Hide();
             add_product.ShowDialog();
-            Getreason = "control2";
+            
             Products.Close();
         }
 

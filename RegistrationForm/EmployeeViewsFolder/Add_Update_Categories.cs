@@ -1,4 +1,5 @@
-﻿using RegistrationForm.EmployeeViewsFolder;
+﻿using Inventory_System.Entities;
+using RegistrationForm.EmployeeViewsFolder;
 using SalesSystem.Data.Controllers;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ namespace RegistrationForm
 {
     public partial class Add_Update_Categories : Form
     {
-        public Add_Update_Categories()
+        private  User GetUser {  get; set; }
+        public Add_Update_Categories(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
         private bool update = false;
         private CategoriesController categoriesController = new();
@@ -88,7 +91,7 @@ namespace RegistrationForm
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EmployeeCommandsView view = new();
+            EmployeeCommandsView view = new(GetUser);
             view.ShowDialog();
             this.Close();
         }

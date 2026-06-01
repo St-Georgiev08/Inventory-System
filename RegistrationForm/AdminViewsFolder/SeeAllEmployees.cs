@@ -16,9 +16,11 @@ namespace RegistrationForm
 {
     public partial class SeeAllEmployees : Form
     {
-        public SeeAllEmployees()
+        public User GetUser { set; get; }
+        public SeeAllEmployees(User user)
         {
             InitializeComponent();
+            GetUser = user;
             radioButton1.Checked = false;
             radioButton2.Checked = false;
         }
@@ -27,7 +29,7 @@ namespace RegistrationForm
         {
             this.Hide();
             
-            AdminCommandView admin = new();
+            AdminCommandView admin = new(GetUser);
             admin.ShowDialog(); this.Close();
         }
         private readonly UsersCotroller productsController = new();

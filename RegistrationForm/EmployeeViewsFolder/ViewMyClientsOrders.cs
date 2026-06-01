@@ -1,4 +1,6 @@
-﻿using SalesSystem.Data.Controllers;
+﻿using Inventory_System.Entities;
+
+using SalesSystem.Data.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,15 +15,17 @@ namespace RegistrationForm.EmployeeViewsFolder
 {
     public partial class ViewMyClientsOrders : Form
     {
-        public ViewMyClientsOrders()
+        private User GetUser { set; get; }   
+        public ViewMyClientsOrders(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();
-            EmployeeCommandsView employeeCommandsView = new();
+            EmployeeCommandsView employeeCommandsView = new(GetUser);
             employeeCommandsView.ShowDialog();
         }
 
@@ -86,7 +90,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EmployeeCommandsView view = new EmployeeCommandsView();
+            EmployeeCommandsView view = new EmployeeCommandsView(GetUser);
             
             view.ShowDialog();
             this.Close();

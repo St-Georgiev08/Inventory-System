@@ -17,10 +17,11 @@ namespace RegistrationForm
 {
     public partial class EventLogForm : Form
     {
-        public EventLogForm()
+        public User GetUser { set; get; }
+        public EventLogForm(User user)
         {
             InitializeComponent();
-
+            GetUser = user;
         }
         private readonly AuditLogsController productsController = new();
         private readonly BindingSource _productsSource = new();
@@ -140,7 +141,7 @@ namespace RegistrationForm
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AdminCommandView view = new();
+            AdminCommandView view = new(GetUser);
             view.ShowDialog();
             this.Close();
         }

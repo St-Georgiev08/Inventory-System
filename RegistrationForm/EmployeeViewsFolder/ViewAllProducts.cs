@@ -16,9 +16,11 @@ namespace RegistrationForm.EmployeeViewsFolder
 {
     public partial class ViewAllProducts : Form
     {
-        public ViewAllProducts()
+        private User GetUser { set; get; }
+        public ViewAllProducts(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
         private async Task LoadProducts(List<ProductDetails> products)
         {
@@ -26,7 +28,7 @@ namespace RegistrationForm.EmployeeViewsFolder
 
             foreach (var product in products)
             {
-                UserControl2 card = new UserControl2();
+                UserControl2 card = new UserControl2(GetUser);
 
                 card.LoadProduct(product);
 
@@ -67,7 +69,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EmployeeCommandsView employeeCommandsView = new();
+            EmployeeCommandsView employeeCommandsView = new (GetUser);
             employeeCommandsView.ShowDialog();
             this.Close();
 
@@ -77,7 +79,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         {
             this.Hide();
 
-            EmployeeCommandsView employeeCommandsView = new();
+            EmployeeCommandsView employeeCommandsView = new(GetUser);
             employeeCommandsView.ShowDialog();
             this.Close();
         }

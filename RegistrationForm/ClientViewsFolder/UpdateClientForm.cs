@@ -16,7 +16,7 @@ namespace RegistrationForm.ClientViewsFolder
 {
     public partial class UpdateClientForm : Form
     {
-        private RegistrationForm1 form1 = new();
+        
         private User User {  get; set; }
         public UpdateClientForm(User user)
         {

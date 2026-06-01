@@ -1,4 +1,5 @@
-﻿using SalesSystem.Data.Controllers;
+﻿using Inventory_System.Entities;
+using SalesSystem.Data.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,7 +55,7 @@ namespace RegistrationForm
                 var m = await userController.AddUserAsync(username, password, "Client", phone, email);
                 MessageBox.Show(m, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
-                RegistrationForm1 registrationForm1 = new RegistrationForm1();
+                RegistrationForm1 registrationForm1 = new RegistrationForm1(new User());
                 registrationForm1.ShowDialog();
                 this.Close();
             }
@@ -74,7 +75,7 @@ namespace RegistrationForm
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            RegistrationForm1 registrationForm1 = new RegistrationForm1();
+            RegistrationForm1 registrationForm1 = new RegistrationForm1(new User());
             registrationForm1.ShowDialog();
             this.Close();
         }

@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Inventory_System.Entities;
 using SalesSystem.Data.Controllers;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ namespace RegistrationForm.EmployeeViewsFolder
 {
     public partial class ShowAllOrders : Form
     {
-        public ShowAllOrders()
+        private User GetUser { set; get; }
+        public ShowAllOrders(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -131,7 +134,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EmployeeCommandsView view = new EmployeeCommandsView();
+            EmployeeCommandsView view = new EmployeeCommandsView(GetUser);
             view.ShowDialog();
             this.Close();
         }
@@ -139,7 +142,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();
-            EmployeeCommandsView view = new EmployeeCommandsView();
+            EmployeeCommandsView view = new EmployeeCommandsView(GetUser);
             view.ShowDialog();
 
         }

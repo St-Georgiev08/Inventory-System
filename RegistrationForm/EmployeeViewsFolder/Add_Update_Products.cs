@@ -16,12 +16,15 @@ namespace RegistrationForm
     public partial class Add_Update_Products : Form
     {
         private readonly CategoriesController categoriesController = new();
-        private readonly EmployeeCommandsView empCommandsView = new EmployeeCommandsView();
         private readonly ProductDetails product = new();
         public ProductDetails details { get; set; }
-        public Add_Update_Products()
+        public string ReasonForUsing { get; set; }
+        private User GetUser { set; get; }
+        public Add_Update_Products(string reason, User getUser  )
         {
             InitializeComponent();
+            ReasonForUsing = reason;
+            GetUser = getUser;
         }
         private async Task LoadCategories()
         {
@@ -31,7 +34,7 @@ namespace RegistrationForm
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EmployeeCommandsView view = new();
+            EmployeeCommandsView view = new(GetUser);
             view.ShowDialog();
             this.Close();
 
@@ -61,7 +64,7 @@ namespace RegistrationForm
         private async void button2_Click(object sender, EventArgs e)
         {
 
-            if(empCommandsView.ReasonForUsing != "control2")
+            if(ReasonForUsing != "control2")
             {
                 if (string.IsNullOrWhiteSpace(_selectedImagePath))
                 {
@@ -152,13 +155,13 @@ namespace RegistrationForm
            
 
         }
-        
+
         private async void Add_Update_Products_Load(object sender, EventArgs e)
         {
            await LoadCategories();
-            if(empCommandsView.ReasonForUsing == "control2")
+            if(ReasonForUsing == "control2")
             {
-                empCommandsView.ReasonForUsing = "";
+                //EmployeeCommandsView.ReasonForUsing = "";
                 textBox1.Text = details.Products.Name;
                 textBox2.Text = details.Products.Price.ToString();
                 textBox3.Text = details.Products.Quantity.ToString();

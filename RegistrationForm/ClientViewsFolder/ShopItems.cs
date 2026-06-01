@@ -17,13 +17,7 @@ namespace RegistrationForm
 {
     public partial class ShopItems : Form
     {
-        private readonly RegistrationForm1 form1 = new RegistrationForm1();
         private readonly CategoriesController categories;
-        private string searchTerm = string.Empty;
-        private bool sortByName;
-        private bool sortByType;
-        private bool sortByPrice;
-        private bool desc;
         private User getRole { set; get; }
         public ShopItems(User user)
         {
@@ -110,7 +104,7 @@ namespace RegistrationForm
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            ClientMainForm clientMainForm = new();
+            ClientMainForm clientMainForm = new(getRole);
             clientMainForm.ShowDialog();
             this.Close();
 

@@ -15,15 +15,17 @@ namespace RegistrationForm.ClientViewsFolder
 {
     public partial class AllClintsOrders : Form
     {
-        public AllClintsOrders()
+        private User GetUser { set; get; }
+        public AllClintsOrders(User user)
         {
             InitializeComponent();
+            GetUser = user;
         }
 
         private async void button5_Click(object sender, EventArgs e)
         {
             this.Close();
-            ShopItems shopItems = new();
+            ShopItems shopItems = new(GetUser);
             shopItems.ShowDialog();
         }
 
@@ -43,8 +45,8 @@ namespace RegistrationForm.ClientViewsFolder
         private readonly OrderItemsController orders = new();
         private async void AllClintsOrders_Load(object sender, EventArgs e)
         {
-            RegistrationForm1 form1 = new RegistrationForm1();
-            var user = form1.GetUser;
+            RegistrationForm1 form1 = new RegistrationForm1(GetUser);
+            var user = GetUser;
             var list = await orders.GetOrderedProductDetailsByUserAsync(user.Id);
             LoadProduct(list);
         }
@@ -59,7 +61,7 @@ namespace RegistrationForm.ClientViewsFolder
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            ShopItems items = new();
+            ShopItems items = new(GetUser);
             items.ShowDialog(); this.Close();
         }
     }

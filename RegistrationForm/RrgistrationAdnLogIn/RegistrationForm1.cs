@@ -8,11 +8,11 @@ namespace RegistrationForm
 {
     public partial class RegistrationForm1 : Form
     {
-       
-        public RegistrationForm1()
+       public User GetUser { set; get; }
+        public RegistrationForm1(User user)
         {
             InitializeComponent();
-
+            GetUser = user;
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -43,14 +43,14 @@ namespace RegistrationForm
             if (us.Role == RoleType.Client)
             {
                 this.Hide();
-                ShopItems clientMainForm = new ShopItems();
+                ShopItems clientMainForm = new ShopItems(GetUser);
                 clientMainForm.ShowDialog();
                 this.Close();
             }
             if (us.Role == RoleType.Employee)
             {
                 this.Hide();
-                EmployeeCommandsView view = new();
+                EmployeeCommandsView view = new EmployeeCommandsView(GetUser);
                 view.ShowDialog();
                 this.Close();
             }

@@ -78,7 +78,7 @@ namespace RegistrationForm
             }
             AuditLogsController auditLogsController = new AuditLogsController();
             UsersCotroller control = new();
-            RegistrationForm1 form = new RegistrationForm1();
+            RegistrationForm1 form = new RegistrationForm1(User);
             if (GetReasonForClick == "Add")
             {
                 username = textBox1.Text;
