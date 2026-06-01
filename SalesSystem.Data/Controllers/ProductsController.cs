@@ -48,14 +48,24 @@ namespace SalesSystem.Data.Controllers
               {
                   throw new ArgumentException("Invalid input data");
               }
-              await product.Add(new Products
+              if ((await product.GetAll()).Any(x=>x.Name == name && x.Price == price && x.CategoryId == catId))
               {
-                  Name = name,
-                  Price = price,
-                  Quantity = quantity,
-                  CategoryId = catId
-              });
-              return "Product added successfully";
+                var get =( await product.GetAll()).First(x=>x.Name == name);
+                get.Quantity += quantity;
+                return "Products quantity is changed! Product exists in system";
+              }
+            else
+            {
+                await product.Add(new Products
+                {
+                    Name = name,
+                    Price = price,
+                    Quantity = quantity,
+                    CategoryId = catId
+                });
+                return "Product added successfully";
+            }
+             
         }
          public async Task<string> UpdateProduct(int id, string name, decimal price, int quantity, int catId)
         {

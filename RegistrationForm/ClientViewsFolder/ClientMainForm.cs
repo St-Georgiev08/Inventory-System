@@ -33,7 +33,7 @@ namespace RegistrationForm
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
-            UpdateClientForm updateClientForm= new UpdateClientForm();
+            UpdateClientForm updateClientForm = new UpdateClientForm();
             updateClientForm.ShowDialog();
         }
 
@@ -42,6 +42,11 @@ namespace RegistrationForm
             this.Close();
             ShopItems all = new ShopItems();
             all.ShowDialog();
+        }
+
+        private void ClientMainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

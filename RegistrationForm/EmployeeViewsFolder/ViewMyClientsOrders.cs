@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalesSystem.Data.Controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +29,35 @@ namespace RegistrationForm.EmployeeViewsFolder
         {
 
         }
+        private readonly UsersCotroller productsController = new();
+        private readonly BindingSource _productsSource = new();
+        private async Task LoadClientsAsync()
+        {
 
+            try
+            {
+                var list = await productsController.GetDataGridClients(radioButton1.Checked, radioButton2.Checked);
+                _productsSource.DataSource = list;
+                dataGridView1.DataSource = _productsSource;
+            }
+            catch (ArgumentException x)
+            {
+
+                MessageBox.Show(x.Message, "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Unexpected error: {ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+
+
+
+        }
+       
         private async void button1_Click(object sender, EventArgs e)
         {
             string find = textBox1.Text;
@@ -41,7 +70,7 @@ namespace RegistrationForm.EmployeeViewsFolder
             UserControl user = new();
             try
             {
-                await LoadOrdersAsync(Name, desc);
+                await LoadClientsAsync();
             }
             catch (ArgumentException x)
             {

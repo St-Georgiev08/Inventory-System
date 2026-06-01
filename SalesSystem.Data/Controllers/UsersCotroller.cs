@@ -159,5 +159,16 @@ namespace SalesSystem.Data.Controllers
             }).ToList();
             return list;
         }
+        public async Task<List<EmployeeDto>> GetDataGridClients(bool n, bool dm)
+        {
+            var list = (await OrderUsers(n, dm)).Where(x=>x.Role == RoleType.Client).Select(x => new EmployeeDto
+            {
+                Name = x.Username,
+                Phone = x.PhoneNumber,
+                Email = x.Email,
+                
+            }).ToList();
+            return list;
+        }
     }
 }

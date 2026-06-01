@@ -1,4 +1,5 @@
 ﻿using Inventory_System.Entities;
+using RegistrationForm.EmployeeViewsFolder;
 using SalesSystem.Data.Controllers;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,16 @@ namespace RegistrationForm.UserForms
 
                 MessageBox.Show(x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+       
+        private async void button2_Click(object sender, EventArgs e)
+        {
+               ViewAllProducts view = new ViewAllProducts();
+               view.Close();
+               Add_Update_Products add = new Add_Update_Products();
+               add.details = products;
+               add.ShowDialog();
+              
         }
     }
 }

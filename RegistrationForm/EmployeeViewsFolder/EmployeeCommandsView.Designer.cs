@@ -39,10 +39,9 @@
             // 
             // button5
             // 
-            button5.Location = new Point(12, 11);
-            button5.Margin = new Padding(3, 2, 3, 2);
+            button5.Location = new Point(14, 15);
             button5.Name = "button5";
-            button5.Size = new Size(90, 26);
+            button5.Size = new Size(103, 35);
             button5.TabIndex = 6;
             button5.Text = "Log out";
             button5.UseVisualStyleBackColor = true;
@@ -50,32 +49,29 @@
             // 
             // button1
             // 
-            button1.Location = new Point(302, 175);
-            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Location = new Point(345, 233);
             button1.Name = "button1";
-            button1.Size = new Size(128, 68);
+            button1.Size = new Size(146, 91);
             button1.TabIndex = 7;
-            button1.Text = "View all orders";
+            button1.Text = "View all orders/ update";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(513, 175);
-            button2.Margin = new Padding(3, 2, 3, 2);
+            button2.Location = new Point(586, 233);
             button2.Name = "button2";
-            button2.Size = new Size(128, 68);
+            button2.Size = new Size(146, 91);
             button2.TabIndex = 8;
-            button2.Text = "View my clients";
+            button2.Text = "View clients";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(92, 175);
-            button3.Margin = new Padding(3, 2, 3, 2);
+            button3.Location = new Point(105, 233);
             button3.Name = "button3";
-            button3.Size = new Size(128, 68);
+            button3.Size = new Size(146, 91);
             button3.TabIndex = 9;
             button3.Text = "Add product in store";
             button3.UseVisualStyleBackColor = true;
@@ -85,29 +81,27 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(64, 102);
+            label1.Location = new Point(59, 136);
             label1.Name = "label1";
-            label1.Size = new Size(620, 32);
+            label1.Size = new Size(763, 41);
             label1.TabIndex = 10;
             label1.Text = "This label changes according to the employee's name";
             // 
             // button4
             // 
-            button4.Location = new Point(302, 270);
-            button4.Margin = new Padding(3, 2, 3, 2);
+            button4.Location = new Point(345, 344);
             button4.Name = "button4";
-            button4.Size = new Size(128, 68);
+            button4.Size = new Size(146, 91);
             button4.TabIndex = 11;
-            button4.Text = "Update product in store";
+            button4.Text = "View clients orders";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
             // 
             // EmployeeCommandsView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
-            ClientSize = new Size(750, 373);
+            ClientSize = new Size(857, 497);
             Controls.Add(button4);
             Controls.Add(label1);
             Controls.Add(button3);
@@ -115,6 +109,7 @@
             Controls.Add(button1);
             Controls.Add(button5);
             ForeColor = SystemColors.ControlText;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "EmployeeCommandsView";
             Text = "EmployeeCommandsView";
             ResumeLayout(false);

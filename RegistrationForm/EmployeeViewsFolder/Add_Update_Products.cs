@@ -18,6 +18,7 @@ namespace RegistrationForm
         private readonly CategoriesController categoriesController = new();
         private readonly EmployeeCommandsView empCommandsView = new EmployeeCommandsView();
         private readonly ProductDetails product = new();
+        public ProductDetails details { get; set; }
         public Add_Update_Products()
         {
             InitializeComponent();
@@ -109,6 +110,7 @@ namespace RegistrationForm
             }
             else
             {
+                
                 try
                 {
                     string imagesFolder =
@@ -125,11 +127,11 @@ namespace RegistrationForm
 
                     File.Copy(_selectedImagePath, NewDestinationPath);
                     var selectedCategory = (Categories)comboBox1.SelectedItem;
-                    var products =(await productsController.GetAllProduct()).First(x=>x.Name == );
+                    var products =(await productsController.GetAllProduct()).First(x=>x.Name == details.Products.Name);
                     if (decimal.TryParse(textBox2.Text, out decimal value) && int.TryParse(textBox3.Text, out int qantity))
                     {
-                        MessageBox.Show(await productsController.UpdateProduct(textBox1.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await productDetailsController.UpdateProductDetails(richTextBox1.Text, newfile);
+                        MessageBox.Show(await productsController.UpdateProduct(products.Id,textBox1.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await productDetailsController.UpdateProductDetails(products.Id,richTextBox1.Text, newfile);
                     }
                     else
                     {
@@ -155,6 +157,11 @@ namespace RegistrationForm
            await LoadCategories();
             if(empCommandsView.ReasonForUsing == "Update")
             {
+                textBox1.Text = details.Products.Name;
+                textBox2.Text = details.Products.Price.ToString();
+                textBox3.Text = details.Products.Quantity.ToString();
+                comboBox1.SelectedValue = details.Products.Category.Name;
+                richTextBox1.Text = details.Description.ToString();
                 string fullPath = Path.Combine(
                 Application.StartupPath,
                  "ProductImages",

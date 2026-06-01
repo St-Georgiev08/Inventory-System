@@ -109,10 +109,19 @@ namespace TestigSystem.Services
         public async Task GetAll_LogsExist_ReturnsListOfLogs()
         {
             // Arrange: Seed data
+            var existingUser = new User
+            {
+                Id = 1,
+                Username = "testuser",
+                PasswordHash = "hashed_password_placeholder", // Satisfies the required constraint
+                PhoneNumber = "000-000-0000"                  // Satisfies the required constraint
+            };
+
+            _context.Users.Add(existingUser);
             _context.AuditLogs.AddRange(new List<AuditLogs>
             {
                 new() { UserId = 1, Action = "Action1", Timestamp = DateTime.Now },
-                new() { UserId = 2, Action = "Action2", Timestamp = DateTime.Now }
+                new() { UserId = 1, Action = "Action2", Timestamp = DateTime.Now }
             });
             await _context.SaveChangesAsync();
 
