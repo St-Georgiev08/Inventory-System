@@ -29,8 +29,18 @@ namespace RegistrationForm.UserForms
             lblName.Text = product.Products.Name;
             lblCategory.Text = product.Products.Category.Name;
             lblPrice.Text = $"{product.Products.Price} euro";
+
             products = product;
-            pictureBox1.Image = Image.FromFile(product.ImagePath);
+
+            string imagePath = Path.Combine(
+                Application.StartupPath,
+                "ProductImages",
+                product.ImagePath);
+
+            if (File.Exists(imagePath))
+            {
+                pictureBox1.Image = Image.FromFile(imagePath);
+            }
         }
         private async void button1_Click(object sender, EventArgs e)
         {

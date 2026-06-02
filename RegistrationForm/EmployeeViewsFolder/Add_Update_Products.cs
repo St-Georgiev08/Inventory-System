@@ -49,18 +49,27 @@ namespace RegistrationForm
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                _selectedImagePath = openFileDialog.FileName;
+                string imagesFolder =
+                    Path.Combine(Application.StartupPath, "Images");
 
-                using (var bmp = new Bitmap(_selectedImagePath))
-                {
-                    pictureBox1.Image = new Bitmap(bmp);
-                }
+                Directory.CreateDirectory(imagesFolder);
+
+                string fileName =
+                    $"{Guid.NewGuid()}{Path.GetExtension(openFileDialog.FileName)}";
+
+                string destinationPath =
+                    Path.Combine(imagesFolder, fileName);
+
+                File.Copy(openFileDialog.FileName, destinationPath, true);
+
+                _selectedImagePath = destinationPath;
+
+                pictureBox1.Image = Image.FromFile(destinationPath);
             }
-
-
         }
         private readonly ProductsController productsController = new ProductsController();
         private readonly ProductDetailsController productDetailsController = new ProductDetailsController();
+        private readonly AuditLogsController auditLogsController = new AuditLogsController();
         private async void button2_Click(object sender, EventArgs e)
         {
 
@@ -90,17 +99,20 @@ namespace RegistrationForm
                     string destinationPath =
                         Path.Combine(imagesFolder, fileName);
 
-                    File.Copy(_selectedImagePath, destinationPath);
+                    File.Copy(_selectedImagePath, destinationPath,true);
                     var selectedCategory = (Categories)comboBox1.SelectedItem;
-                    if (decimal.TryParse(textBox2.Text, out decimal value) && int.TryParse(textBox3.Text, out int qantity))
+                    if (decimal.TryParse(textBox2.Text, out decimal value) && int.TryParse(textBox1.Text, out int qantity))
                     {
-                        MessageBox.Show(await productsController.AddProduct(textBox1.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await productDetailsController.AddProductDetails(richTextBox1.Text, fileName);
+                        MessageBox.Show(await productsController.AddProduct(textBox3.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await productDetailsController.AddProductDetails((await productsController.GetAllProduct()).Last().Id,richTextBox1.Text, destinationPath, GetUser.Id);
+                        await auditLogsController.AddAuditLogs((await productsController.GetAllProduct()).Last().Id, $"Added product: {textBox3.Text} by Employee: {GetUser.Username}", $"Added product: {textBox3.Text}");
+                   
                     }
                     else
                     {
                         MessageBox.Show("Wrong input for qantity or price!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                   
                 }
                 catch (ArgumentException x)
                 {
@@ -129,13 +141,15 @@ namespace RegistrationForm
                     string NewDestinationPath =
                         Path.Combine(imagesFolder, newfile);
 
-                    File.Copy(_selectedImagePath, NewDestinationPath);
+                    File.Copy(_selectedImagePath, NewDestinationPath,true);
                     var selectedCategory = (Categories)comboBox1.SelectedItem;
                     var products =(await productsController.GetAllProduct()).First(x=>x.Name == details.Products.Name);
-                    if (decimal.TryParse(textBox2.Text, out decimal value) && int.TryParse(textBox3.Text, out int qantity))
+                    var detail = (await productDetailsController.GetAll()).First(x => x.Products.Id == products.Id);
+                    if (decimal.TryParse(textBox2.Text, out decimal value) && int.TryParse(textBox1.Text, out int qantity))
                     {
-                        MessageBox.Show(await productsController.UpdateProduct(products.Id,textBox1.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await productDetailsController.UpdateProductDetails(products.Id,richTextBox1.Text, newfile);
+                        MessageBox.Show(await productsController.UpdateProduct(products.Id,textBox3.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await productDetailsController.UpdateProductDetails(detail.Id,products.Id,richTextBox1.Text, NewDestinationPath, GetUser.Id);
+                        await auditLogsController.AddAuditLogs(products.Id, $"Updated product: {textBox3.Text} by Employee: {GetUser.Username}", $"Updated product: {textBox3.Text}");
                     }
                     else
                     {
@@ -152,8 +166,12 @@ namespace RegistrationForm
                     MessageBox.Show(x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-           
 
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            richTextBox1.Clear();
+            pictureBox1.Image = null;
         }
 
         private async void Add_Update_Products_Load(object sender, EventArgs e)
@@ -162,9 +180,9 @@ namespace RegistrationForm
             if(ReasonForUsing == "control2")
             {
                 //EmployeeCommandsView.ReasonForUsing = "";
-                textBox1.Text = details.Products.Name;
+                textBox3.Text = details.Products.Name;
                 textBox2.Text = details.Products.Price.ToString();
-                textBox3.Text = details.Products.Quantity.ToString();
+                textBox1.Text = details.Products.Quantity.ToString();
                 comboBox1.SelectedValue = details.Products.Category.Name;
                 richTextBox1.Text = details.Description.ToString();
                 string fullPath = Path.Combine(

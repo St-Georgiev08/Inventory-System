@@ -41,19 +41,19 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(14, 12);
-            pictureBox1.Margin = new Padding(3, 2, 3, 2);
+            pictureBox1.Location = new Point(16, 16);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(237, 176);
+            pictureBox1.Size = new Size(271, 235);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            button1.Location = new Point(549, 165);
-            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            button1.Location = new Point(611, 220);
             button1.Name = "button1";
-            button1.Size = new Size(128, 34);
+            button1.Size = new Size(146, 45);
             button1.TabIndex = 1;
             button1.Text = "Buy";
             button1.UseVisualStyleBackColor = true;
@@ -62,50 +62,56 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(327, 34);
+            lblName.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            lblName.Location = new Point(374, 45);
             lblName.Name = "lblName";
-            lblName.Size = new Size(38, 15);
+            lblName.Size = new Size(60, 23);
             lblName.TabIndex = 2;
             lblName.Text = "label1";
             // 
             // lblCategory
             // 
             lblCategory.AutoSize = true;
-            lblCategory.Location = new Point(327, 80);
+            lblCategory.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            lblCategory.Location = new Point(374, 107);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(68, 15);
+            lblCategory.Size = new Size(109, 23);
             lblCategory.TabIndex = 3;
             lblCategory.Text = "lblCategory";
             // 
             // lblPrice
             // 
             lblPrice.AutoSize = true;
-            lblPrice.Location = new Point(327, 128);
+            lblPrice.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            lblPrice.Location = new Point(374, 171);
             lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(38, 15);
+            lblPrice.Size = new Size(60, 23);
             lblPrice.TabIndex = 4;
             lblPrice.Text = "label3";
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(549, 137);
+            numericUpDown1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            numericUpDown1.Location = new Point(659, 185);
+            numericUpDown1.Margin = new Padding(3, 5, 3, 5);
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(50, 23);
+            numericUpDown1.Size = new Size(65, 34);
             numericUpDown1.TabIndex = 5;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = SystemColors.ControlDark;
-            label1.Location = new Point(549, 119);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.Location = new Point(611, 160);
             label1.Name = "label1";
-            label1.Size = new Size(119, 15);
+            label1.Size = new Size(156, 20);
             label1.TabIndex = 6;
             label1.Text = "Count of the product";
             // 
             // UserControl1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label1);
             Controls.Add(numericUpDown1);
@@ -114,9 +120,8 @@
             Controls.Add(lblName);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "UserControl1";
-            Size = new Size(679, 201);
+            Size = new Size(776, 268);
             Load += UserControl1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();

@@ -69,7 +69,7 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EmployeeCommandsView employeeCommandsView = new (GetUser);
+            EmployeeCommandsView employeeCommandsView = new(GetUser);
             employeeCommandsView.ShowDialog();
             this.Close();
 
@@ -82,6 +82,26 @@ namespace RegistrationForm.EmployeeViewsFolder
             EmployeeCommandsView employeeCommandsView = new(GetUser);
             employeeCommandsView.ShowDialog();
             this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private readonly CategoriesController categoriesController = new();
+        private async Task ViewAllProducts_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                var list = await categoriesController.GetAllCategories();
+                comboBox1.DataSource = list;
+                comboBox1.DisplayMember = "Name";
+            }
+            catch (ArgumentException x)
+            {
+
+                MessageBox.Show(x.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

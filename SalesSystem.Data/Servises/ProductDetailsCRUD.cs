@@ -26,7 +26,7 @@ namespace SalesSystem.Data.Servises
         }
         public async Task<List<ProductDetails>> GetAll()
         {
-            return await product.ProductDetails.ToListAsync();
+            return await product.ProductDetails.Include(x=>x.Products).ThenInclude(x=>x.Category).ToListAsync();
         }
         public async Task<ProductDetails> GetById(int id)
         {
@@ -37,13 +37,15 @@ namespace SalesSystem.Data.Servises
             await product.ProductDetails.AddAsync(details);
             await product.SaveChangesAsync();
         }
-        public async Task Update(int id, string? description, string img)
+        public async Task Update(int id,int Prid, string? description, string img, int updated)
         {
             var find = await product.ProductDetails.FindAsync(id);
             if (find != null)
             {
+                find.ProductId = Prid;
                 find.Description = description;
                 find.ImagePath = img;
+                find.UpdatedBy = updated;
                 await product.SaveChangesAsync();
             }
         }

@@ -36,6 +36,7 @@
             sqlCommandBuilder1 = new Microsoft.Data.SqlClient.SqlCommandBuilder();
             button4 = new Button();
             button6 = new Button();
+            button7 = new Button();
             SuspendLayout();
             // 
             // button5
@@ -96,6 +97,7 @@
             button4.TabIndex = 11;
             button4.Text = "View clients orders";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click_1;
             // 
             // button6
             // 
@@ -107,12 +109,23 @@
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
+            // button7
+            // 
+            button7.Location = new Point(345, 343);
+            button7.Name = "button7";
+            button7.Size = new Size(146, 91);
+            button7.TabIndex = 13;
+            button7.Text = "All products in system";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click_1;
+            // 
             // EmployeeCommandsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
             ClientSize = new Size(857, 497);
+            Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button4);
             Controls.Add(label1);
@@ -138,5 +151,6 @@
         private Microsoft.Data.SqlClient.SqlCommandBuilder sqlCommandBuilder1;
         private Button button4;
         private Button button6;
+        private Button button7;
     }
 }

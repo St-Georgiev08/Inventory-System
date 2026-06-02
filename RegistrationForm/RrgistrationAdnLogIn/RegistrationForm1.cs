@@ -43,14 +43,14 @@ namespace RegistrationForm
             if (us.Role == RoleType.Client)
             {
                 this.Hide();
-                ShopItems clientMainForm = new ShopItems(GetUser);
+                ShopItems clientMainForm = new ShopItems(us);
                 clientMainForm.ShowDialog();
                 this.Close();
             }
             if (us.Role == RoleType.Employee)
             {
                 this.Hide();
-                EmployeeCommandsView view = new EmployeeCommandsView(GetUser);
+                EmployeeCommandsView view = new EmployeeCommandsView(us);
                 view.ShowDialog();
                 this.Close();
             }

@@ -130,12 +130,20 @@ namespace SalesSystem.Data.Controllers
             {
                 return new List<User>();
             }
-
-            return await context.Users
+            try
+            {
+                return await context.Users
                 .Where(u => u.Username.Contains(searchText))
                 .OrderBy(u => u.Username)
                 .Take(5)
                 .ToListAsync();
+            }
+            catch (NullReferenceException x)
+            {
+
+                return null;
+            }
+            
         }
         public async Task<List<User>> OrderUsers(bool name, bool desc)
         {

@@ -23,38 +23,18 @@ namespace RegistrationForm
         public AdminAddsRoles(User user, string GetReasonForClick)
         {
             InitializeComponent();
-            OnLoad();
             User = user;
+            this.GetReasonForClick = GetReasonForClick;
         }
         private void OnLoad()
         {
-            var reason = GetReasonForClick;
-            if (reason == "Add")
-            {
-                label2.Visible = true;
-                textBox1.Visible = true;
-                label10.Visible = false;
-                listBox1.Visible = false;
-                textBox6.Visible = false;
-            }
-            else
-            {
-                label2.Visible = false;
-                textBox1.Visible = false;
-                label10.Visible = true;
-                listBox1.Visible = true;
-                textBox6.Visible = true;
-            }
+           
         }
 
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
+            
             if (!radioButton1.Checked && !radioButton2.Checked)
             {
                 MessageBox.Show("Role must be picked!", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -102,7 +82,7 @@ namespace RegistrationForm
                 {
                     var get = (await control.GetAllUsersAsync()).Find(x => x.Username == username).Id;
                     var add = await control.UpdateUserAsync(get, username, password, role, phoneNumber, Email);
-                    MessageBox.Show(add, "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(add, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
                     await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} by Admin: {User.Username}", DateTime.Now.ToString());
@@ -114,7 +94,11 @@ namespace RegistrationForm
                 }
                 await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Updated {role} ({username}) by Admin: {User.Username}", $"Updated user: {username}");
             }
-
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -175,7 +159,23 @@ namespace RegistrationForm
 
         private void AdminAddsRoles_Load(object sender, EventArgs e)
         {
-
+            var reason = GetReasonForClick;
+            if (reason == "Add")
+            {
+                label2.Visible = true;
+                textBox1.Visible = true;
+                label10.Visible = false;
+                listBox1.Visible = false;
+                textBox6.Visible = false;
+            }
+            else
+            {
+                label2.Visible = false;
+                textBox1.Visible = false;
+                label10.Visible = true;
+                listBox1.Visible = true;
+                textBox6.Visible = true;
+            }
         }
     }
 }

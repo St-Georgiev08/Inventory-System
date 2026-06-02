@@ -24,14 +24,11 @@ namespace RegistrationForm
             categories = new();
             getRole = user;
             InitializeComponent();
-            ShopItems_Load();
-            OnLoad();
         }
 
         private async void OnLoad()
         {
-            label3.Text = $"Wellcome, {getRole.Username}";
-            await LoadCategories();
+            
         }
 
         private async Task LoadCategories()
@@ -39,19 +36,32 @@ namespace RegistrationForm
             comboBox1.DataSource = await categories.GetAllCategories();
             comboBox1.DisplayMember = "Name"; // Assuming the Categories class has a Name property
         }
-        private async void ShopItems_Load()
+
+        ProductDetailsCRUD productService = new();
+
+        // Correct event-handler signature so the Designer's Load wiring works
+        private async void ShopItems_Load(object sender, EventArgs e)
         {
-            ProductDetailsCRUD productService = new();
-            var products = await productService.GetAll();
-            LoadProducts(products);
+            try
+            {
+                label3.Text = $"Wellcome, {getRole.Username}";
+                await LoadCategories();
+                var products = await productService.GetAll();
+                await LoadProducts(products);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load shop items: {ex.Message}", "Load error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
             AutoScroll = true;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.WrapContents = false;
         }
-        private async void LoadProducts(List<ProductDetails> products)
+        private async Task LoadProducts(List<ProductDetails> products)
         {
             flowLayoutPanel1.Controls.Clear();
 
@@ -59,7 +69,7 @@ namespace RegistrationForm
             {
                 UserControl1 card = new UserControl1();
 
-                card.LoadProduct(product);
+               await card.LoadProduct(product);
 
                 flowLayoutPanel1.Controls.Add(card);
             }
@@ -67,7 +77,6 @@ namespace RegistrationForm
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            ShopItems_Load();
             ProductDetailsController product = new();
             string searchTerm = textBox1.Text;
             bool name = radioButton1.Checked;
@@ -80,13 +89,13 @@ namespace RegistrationForm
                 var products = await product.FindAllWith(searchTerm);
 
 
-                var filter = await product.SortByType(products, name,price,desc,type);
-                LoadProducts(filter);
+                var filter = await product.SortByType(products, name, price, desc, type);
+                await LoadProducts(filter);
             }
             else
             {
                 var filter = await product.SortByType(await product.GetAll(), name, price, desc, type);
-                LoadProducts(filter);
+                await LoadProducts(filter);
             }
         }
 
@@ -117,6 +126,15 @@ namespace RegistrationForm
 
         private void label2_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            RegistrationForm1 form1 = new(getRole);
+            form1.ShowDialog();
+            this.Close();
 
         }
     }

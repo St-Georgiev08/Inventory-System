@@ -19,19 +19,29 @@ namespace RegistrationForm.UserForms
         {
             InitializeComponent();
         }
-        public async void LoadProduct(ProductDetails product)
+        public async Task LoadProduct(ProductDetails product)
         {
             lblName.Text = product.Products.Name;
             lblCategory.Text = product.Products.Category.Name;
             lblPrice.Text = $"{product.Products.Price} euro";
+
             products = product;
-            pictureBox1.Image = Image.FromFile(product.ImagePath);
+
+            string imagePath = Path.Combine(
+                Application.StartupPath,
+                "ProductImages",
+                product.ImagePath);
+
+            if (File.Exists(imagePath))
+            {
+                pictureBox1.Image = Image.FromFile(imagePath);
+            }
         }
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
-
+        private readonly AuditLogsController logs = new();
         private async void button1_Click_1(object sender, EventArgs e)
         {
             OrdersController orders = new();
@@ -46,6 +56,7 @@ namespace RegistrationForm.UserForms
                 await orders.Add($"Order for: {products.Products.Name}", DateTime.Now, products.Products.Price * num);
                 var get = (await orders.GetAll()).Last().Id;
                 MessageBox.Show(await items.AddOrder(get, products.Products.Id, num, products.Products.Price), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await logs.AddAuditLogs(get, $"Added order for: {products.Products.Name} with quantity: {num}", $"Added order for: {products.Products.Name}");
             }
             catch (ArgumentException x)
             {
@@ -58,5 +69,6 @@ namespace RegistrationForm.UserForms
         {
 
         }
+
     }
 }

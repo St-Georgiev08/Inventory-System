@@ -40,32 +40,36 @@
             // lblPrice
             // 
             lblPrice.AutoSize = true;
+            lblPrice.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblPrice.Location = new Point(370, 171);
             lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(50, 20);
+            lblPrice.Size = new Size(70, 28);
             lblPrice.TabIndex = 16;
             lblPrice.Text = "label3";
             // 
             // lblCategory
             // 
             lblCategory.AutoSize = true;
+            lblCategory.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblCategory.Location = new Point(370, 107);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(86, 20);
+            lblCategory.Size = new Size(122, 28);
             lblCategory.TabIndex = 15;
             lblCategory.Text = "lblCategory";
             // 
             // lblName
             // 
             lblName.AutoSize = true;
+            lblName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblName.Location = new Point(370, 45);
             lblName.Name = "lblName";
-            lblName.Size = new Size(50, 20);
+            lblName.Size = new Size(70, 28);
             lblName.TabIndex = 14;
             lblName.Text = "label1";
             // 
             // button1
             // 
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             button1.Location = new Point(606, 130);
             button1.Name = "button1";
             button1.Size = new Size(157, 61);
@@ -79,11 +83,13 @@
             pictureBox1.Location = new Point(13, 16);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(271, 235);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 12;
             pictureBox1.TabStop = false;
             // 
             // button2
             // 
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             button2.Location = new Point(606, 45);
             button2.Name = "button2";
             button2.Size = new Size(157, 61);

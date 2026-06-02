@@ -31,11 +31,7 @@ namespace RegistrationForm.EmployeeViewsFolder
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ReasonForUsing = "Add";
-            Add_Update_Products addUpdate_Product = new(ReasonForUsing, GetUser);
-            addUpdate_Product.ShowDialog();
-            this.Close();
+
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -58,9 +54,12 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ViewMyClientsOrders viewMyClientsOrders = new(GetUser);
-            viewMyClientsOrders.ShowDialog();
+            ReasonForUsing = "Add";
+            Add_Update_Products addUpdate_Product = new(ReasonForUsing, GetUser);
+            addUpdate_Product.ShowDialog();
             this.Close();
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -74,6 +73,22 @@ namespace RegistrationForm.EmployeeViewsFolder
         private void button7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            ViewMyClientsOrders viewMyClientsOrders = new(GetUser);
+            viewMyClientsOrders.ShowDialog();
+            this.Close();
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            ViewAllProducts viewAllProducts = new(GetUser);
+            viewAllProducts.ShowDialog();
+            this.Close();
         }
     }
 }

@@ -121,6 +121,7 @@
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.BackColor = Color.IndianRed;
             flowLayoutPanel1.Location = new Point(13, 235);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(776, 268);
@@ -260,6 +261,7 @@
             button3.TabIndex = 38;
             button3.Text = "Log out";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click_1;
             // 
             // label3
             // 
@@ -291,7 +293,7 @@
             ForeColor = Color.CadetBlue;
             Name = "ShopItems";
             Text = "ShopItems";
-           // Load += this.ShopItems_Load;
+            Load += ShopItems_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

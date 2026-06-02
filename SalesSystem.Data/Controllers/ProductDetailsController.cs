@@ -28,16 +28,16 @@ namespace SalesSystem.Data.Controllers
         {
             return await context.ProductDetails.Include(x=>x.Products).ToListAsync();
         }
-        public async Task<string> AddProductDetails(string? description, string img)
+        public async Task<string> AddProductDetails(int product,string? description, string img, int createdBy)
         {
             if (string.IsNullOrEmpty(img))
             {
                 throw new ArgumentException("Invalid input data");
             }
-            await detailsCRUD.Add(new ProductDetails { Description = description, ImagePath = img });
+            await detailsCRUD.Add(new ProductDetails {ProductId = product, Description = description, ImagePath = img, CreatedBy = createdBy });
             return "Product details added successfully";
         }
-        public async Task<string> UpdateProductDetails(int id, string? description, string img)
+        public async Task<string> UpdateProductDetails(int id,int Prid, string? description, string img, int updatedBy)
         {
             if (id < 0 || string.IsNullOrEmpty(img))
             {
@@ -47,7 +47,7 @@ namespace SalesSystem.Data.Controllers
             {
                 throw new ArgumentException("Product details not found");
             }
-            await detailsCRUD.Update(id, description, img);
+            await detailsCRUD.Update(id,Prid, description, img, updatedBy);
             return "Product details updated successfully";
         }
         public async Task<ProductDetails> GetProductDetailsById(int id)

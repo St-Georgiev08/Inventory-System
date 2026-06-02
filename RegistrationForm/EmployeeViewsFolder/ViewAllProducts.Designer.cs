@@ -40,6 +40,7 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             button1 = new Button();
             label1 = new Label();
+            label3 = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -100,12 +101,12 @@
             // 
             comboBox1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Electronics", "Food items", "Clothing", "Other" });
             comboBox1.Location = new Point(350, 25);
             comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(138, 29);
             comboBox1.TabIndex = 2;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // radioButton2
             // 
@@ -170,11 +171,21 @@
             label1.TabIndex = 45;
             label1.Text = "All products in system";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(370, 111);
+            label3.Name = "label3";
+            label3.Size = new Size(179, 20);
+            label3.TabIndex = 46;
+            label3.Text = "The category is important";
+            // 
             // ViewAllProducts
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(873, 600);
+            Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(textBox1);
@@ -186,6 +197,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "ViewAllProducts";
             Text = "AddUpdate_Product";
+            Load += ViewAllProducts_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -206,5 +218,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Button button1;
         private Label label1;
+        private Label label3;
     }
 }

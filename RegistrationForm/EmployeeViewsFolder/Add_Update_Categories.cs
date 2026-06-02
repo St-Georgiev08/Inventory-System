@@ -1,6 +1,7 @@
 ﻿using Inventory_System.Entities;
 using RegistrationForm.EmployeeViewsFolder;
 using SalesSystem.Data.Controllers;
+using SalesSystem.Data.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +34,7 @@ namespace RegistrationForm
             label2.Visible = true;
             update = true;
         }
-
+        private AuditLogsController auditsLogController = new();
         private async void button2_Click(object sender, EventArgs e)
         {
             string name = "";
@@ -46,6 +47,7 @@ namespace RegistrationForm
                 {
                     var find = (await categoriesController.GetAllCategories()).FirstOrDefault(x => x.Name == name);
                     MessageBox.Show(await categoriesController.UpdateCategory(find.Id, name, desc), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await auditsLogController.AddAuditLogs(GetUser.Id, $"Updated category ({name}) by Employee: {GetUser.Username}", $"Updated category: {name}");
                 }
                 catch (ArgumentException x)
                 {
@@ -60,6 +62,7 @@ namespace RegistrationForm
             {
 
                 MessageBox.Show(await categoriesController.AddCategory(name, desc), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               await auditsLogController.AddAuditLogs(GetUser.Id, $"Added category ({name}) by Employee: {GetUser.Username}", $"Added category: {name}");
             }
             catch (ArgumentException x)
             {

@@ -39,6 +39,7 @@
             // 
             // button2
             // 
+            button2.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
             button2.Location = new Point(607, 46);
             button2.Name = "button2";
             button2.Size = new Size(157, 61);
@@ -50,32 +51,36 @@
             // lblPrice
             // 
             lblPrice.AutoSize = true;
-            lblPrice.Location = new Point(370, 172);
+            lblPrice.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            lblPrice.Location = new Point(333, 173);
             lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(50, 20);
+            lblPrice.Size = new Size(60, 23);
             lblPrice.TabIndex = 22;
             lblPrice.Text = "label3";
             // 
             // lblCategory
             // 
             lblCategory.AutoSize = true;
-            lblCategory.Location = new Point(370, 108);
+            lblCategory.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            lblCategory.Location = new Point(333, 113);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(86, 20);
+            lblCategory.Size = new Size(109, 23);
             lblCategory.TabIndex = 21;
             lblCategory.Text = "lblCategory";
             // 
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(370, 46);
+            lblName.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            lblName.Location = new Point(333, 47);
             lblName.Name = "lblName";
-            lblName.Size = new Size(50, 20);
+            lblName.Size = new Size(60, 23);
             lblName.TabIndex = 20;
             lblName.Text = "label1";
             // 
             // button1
             // 
+            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
             button1.Location = new Point(607, 137);
             button1.Name = "button1";
             button1.Size = new Size(157, 61);
@@ -89,6 +94,7 @@
             pictureBox1.Location = new Point(13, 17);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(271, 235);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 18;
             pictureBox1.TabStop = false;
             // 
