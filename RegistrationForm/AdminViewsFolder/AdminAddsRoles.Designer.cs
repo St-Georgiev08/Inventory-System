@@ -50,6 +50,8 @@
             textBox6 = new TextBox();
             label10 = new Label();
             listBox1 = new ListBox();
+            label11 = new Label();
+            textBox7 = new TextBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -258,11 +260,29 @@
             listBox1.Visible = false;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(470, 87);
+            label11.Name = "label11";
+            label11.Size = new Size(129, 20);
+            label11.TabIndex = 24;
+            label11.Text = "Update username:";
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(470, 107);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(243, 27);
+            textBox7.TabIndex = 25;
+            // 
             // AdminAddsRoles
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(854, 499);
+            Controls.Add(textBox7);
+            Controls.Add(label11);
             Controls.Add(textBox6);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -316,5 +336,7 @@
         private TextBox textBox6;
         private Label label10;
         private ListBox listBox1;
+        private Label label11;
+        private TextBox textBox7;
     }
 }

@@ -77,7 +77,7 @@ namespace RegistrationForm
             }
             else
             {
-                username = listBox1.SelectedIndex.ToString();
+                  username = textBox7.Text;
                 try
                 {
                     var get = (await control.GetAllUsersAsync()).Find(x => x.Username == username).Id;
@@ -149,6 +149,7 @@ namespace RegistrationForm
                 textBox1.Text = user.Username;
                 textBox4.Text = user.Email;
                 textBox5.Text = user.PhoneNumber;
+                textBox7.Text = user.Username;
                 if (user.Role == RoleType.Employee)
                 {
                     radioButton2.Checked = true;
@@ -167,6 +168,8 @@ namespace RegistrationForm
                 label10.Visible = false;
                 listBox1.Visible = false;
                 textBox6.Visible = false;
+                label11.Visible = false;
+                textBox7.Visible = false;
             }
             else
             {
@@ -175,6 +178,8 @@ namespace RegistrationForm
                 label10.Visible = true;
                 listBox1.Visible = true;
                 textBox6.Visible = true;
+                label11.Visible = true;
+                textBox7.Visible = true;
             }
         }
     }

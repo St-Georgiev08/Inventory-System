@@ -20,6 +20,7 @@ namespace SalesSystem.Data.Controllers
         public UsersCotroller()
         {
             users = new();
+            context = new();
         }
         public UsersCotroller(SalesManagementSystemContext context)
         {
@@ -130,12 +131,22 @@ namespace SalesSystem.Data.Controllers
             {
                 return new List<User>();
             }
+            int count = 5;
+            int checkCount = await context.Users.CountAsync();
+            if (checkCount < 5)
+            {
+                count = checkCount;
+            }   
+            else if (checkCount == 0)
+            {
+                return new List<User>();
+            }
             try
             {
                 return await context.Users
                 .Where(u => u.Username.Contains(searchText))
                 .OrderBy(u => u.Username)
-                .Take(5)
+                .Take(count)
                 .ToListAsync();
             }
             catch (NullReferenceException x)
