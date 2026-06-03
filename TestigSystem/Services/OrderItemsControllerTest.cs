@@ -16,7 +16,6 @@ public class OrderItemsControllerTests
     [SetUp]
     public void Setup()
     {
-        // Set up an isolated In-Memory Database for each test run
         var options = new DbContextOptionsBuilder<SalesManagementSystemContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;

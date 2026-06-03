@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory System", "Inventory System\Inventory System.csproj", "{E46E7AAF-1D99-473A-B914-57D09AA2C5FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventorySystem.Data", "Inventory System\InventorySystem.Data.csproj", "{E46E7AAF-1D99-473A-B914-57D09AA2C5FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesSystem.Data", "SalesSystem.Data\SalesSystem.Data.csproj", "{F7F72BC0-BEFD-4728-8C12-97C53BAA218C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesSystem.Business", "SalesSystem.Data\SalesSystem.Business.csproj", "{F7F72BC0-BEFD-4728-8C12-97C53BAA218C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationForm", "RegistrationForm\RegistrationForm.csproj", "{DEDCEDA0-20F0-4686-A1B1-A26B1FEA1278}"
 EndProject

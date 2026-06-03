@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Inventory System\Inventory System.csproj" />
-    <ProjectReference Include="..\SalesSystem.Data\SalesSystem.Data.csproj" />
+    <ProjectReference Include="..\Inventory System\InventorySystem.Data.csproj" />
+    <ProjectReference Include="..\SalesSystem.Data\SalesSystem.Business.csproj" />
   </ItemGroup>
 
   <ItemGroup>

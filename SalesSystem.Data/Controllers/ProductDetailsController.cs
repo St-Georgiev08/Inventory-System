@@ -14,15 +14,21 @@ namespace SalesSystem.Data.Controllers
     {
         private readonly SalesManagementSystemContext context;
         private readonly ProductDetailsCRUD detailsCRUD;
+        private readonly UsersCotroller usersCotroller;
+        private readonly ProductsController productsController;
         public ProductDetailsController(SalesManagementSystemContext context)
         {
             this.context = context;
             detailsCRUD = new(context);
+                usersCotroller = new(context);
+                productsController = new(context);
         }
         public ProductDetailsController()
         {
             detailsCRUD = new();
             context = new();
+                usersCotroller = new();
+                productsController = new();
         }
         public async Task<List<ProductDetails>> GetAll()
         {
@@ -30,6 +36,14 @@ namespace SalesSystem.Data.Controllers
         }
         public async Task<string> AddProductDetails(int product,string? description, string img, int createdBy)
         {
+            if (await productsController.GetProductById(product) == null)
+            {
+                throw new ArgumentException("Product not found");
+            }
+            if (await usersCotroller.GetUserAsync(createdBy) == null)
+            {
+                throw new ArgumentException("User not found");
+            }
             if (string.IsNullOrEmpty(img))
             {
                 throw new ArgumentException("Invalid input data");
@@ -39,7 +53,7 @@ namespace SalesSystem.Data.Controllers
         }
         public async Task<string> UpdateProductDetails(int id,int Prid, string? description, string img, int updatedBy)
         {
-            if (id < 0 || string.IsNullOrEmpty(img))
+            if (id < 0 || string.IsNullOrEmpty(img) || Prid < 0 || updatedBy < 0)
             {
                 throw new ArgumentException("Invalid input data");
             }

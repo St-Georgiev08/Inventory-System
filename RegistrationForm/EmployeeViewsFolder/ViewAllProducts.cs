@@ -89,7 +89,7 @@ namespace RegistrationForm.EmployeeViewsFolder
 
         }
         private readonly CategoriesController categoriesController = new();
-        private async Task ViewAllProducts_Load(object sender, EventArgs e)
+        private async void ViewAllProducts_Load(object sender, EventArgs e)
         {
             try
             {

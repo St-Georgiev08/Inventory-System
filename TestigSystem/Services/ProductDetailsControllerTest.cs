@@ -1,5 +1,6 @@
 ﻿using Inventory_System;
 using Inventory_System.Entities;
+using Inventory_System.Enums;
 using Microsoft.EntityFrameworkCore;
 using SalesSystem.Data.Controllers;
 using System;
@@ -57,25 +58,35 @@ namespace TestigSystem.Services
         #endregion
 
         #region AddProductDetails Tests
-        [TestCase("Description", "")]
-        public void AddProductDetails_InvalidInput_ThrowsArgumentException(string description, string? img)
+        [TestCase("", 1, 1)]
+        [TestCase("null", 1, 1)]
+        [TestCase(null, 9999, 1)]
+        [TestCase(null, 1, 9999)]
+        public  void AddProductDetails_InvalidInput_ThrowsArgumentException(string? img, int productId, int createdBy)
         {
+          
             Assert.ThrowsAsync<ArgumentException>(async () =>
-               await _controller.AddProductDetails( description, img));
+               await _controller.AddProductDetails(productId, "desc", img, createdBy));
         }
 
         [Test]
-        public void AddProductDetails_InvalidInput_ThrowsArgumentExceptionNull()
+        public async Task AddProductDetails_InvalidInput_ThrowsArgumentExceptionNull()
         {
+            _context.Products.Add(new Products { Id = 1, Name = "Test Product", Price = 10.00m, Category = new Categories { Name = "Test Category" } });
+            _context.Users.Add(new User { Id = 1, Username = "TestUser", PasswordHash = "hash", Role = RoleType.Client, PhoneNumber = "1234567890", Email = "test@example.com" });
+            await _context.SaveChangesAsync();
             Assert.ThrowsAsync<ArgumentException>(async () =>
-               await _controller.AddProductDetails("description", null));
+               await _controller.AddProductDetails(1,"description", null,1));
         }
 
         [Test]
         public async Task AddProductDetails_ValidInput_ReturnsSuccessMessage()
         {
+            _context.Products.Add(new Products { Id = 1, Name = "Test Product", Price = 10.00m, Category = new Categories { Name = "Test Category" } });
+            _context.Users.Add(new User { Id = 1, Username = "TestUser", PasswordHash = "hash", Role = RoleType.Client, PhoneNumber = "1234567890", Email = "test@example.com" });
+            await _context.SaveChangesAsync();
             // Act
-            var result = await _controller.AddProductDetails("Valid Description", "valid_path.png");
+            var result = await _controller.AddProductDetails(1,"Valid Description", "valid_path.png", 1);
 
             // Assert
             Assert.That(result, Is.EqualTo("Product details added successfully"));
@@ -85,21 +96,24 @@ namespace TestigSystem.Services
 
         #region UpdateProductDetails Tests
 
-        [TestCase(-1, "Desc", "img.png")]
-        [TestCase(1, "Desc", "")]
-        [TestCase(1, "Desc", "null")]
-        public void UpdateProductDetails_InvalidInput_ThrowsArgumentException(int id, string description, string img)
+        [TestCase(-1,1, "Desc", "img.png", 1)]
+        [TestCase(1, -1, "Desc", "img.png", 1)]
+        [TestCase(1, 1, "Desc", "img.png", -1)]
+        public void UpdateProductDetails_InvalidInput_ThrowsArgumentException(int id ,int productId , string description, string img, int createdBy)
         {
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.UpdateProductDetails(id, description, img));
+                await _controller.UpdateProductDetails(id, productId, description, img, createdBy));
         }
 
         [Test]
-        public void UpdateProductDetails_ProductNotFound_ThrowsArgumentException()
+        public async Task UpdateProductDetails_ProductNotFound_ThrowsArgumentException()
         {
-            // Act & Assert (Database is empty, so ID 99 will not be found)
+            _context.Products.Add(new Products { Id = 1, Name = "Test Product", Price = 10.00m, Category = new Categories { Name = "Test Category" } });
+            _context.Users.Add(new User { Id = 1, Username = "TestUser", PasswordHash = "hash", Role = RoleType.Client, PhoneNumber = "1234567890", Email = "test@example.com" });
+            _context.ProductDetails.Add(new ProductDetails { Id = 1, Description = "Old Desc", ImagePath = "old_img.png", ProductId = 1, CreatedBy = 1, UpdatedBy = 1 });
+            await _context.SaveChangesAsync();
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _controller.UpdateProductDetails(99, "New Desc", "new_img.png"));
+                await _controller.UpdateProductDetails(99,1, "New Desc", "new_img.png",1));
         }
 
         #endregion

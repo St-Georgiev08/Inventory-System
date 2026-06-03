@@ -52,7 +52,7 @@ namespace TestingControllerUser.Services
             UsersCotroller user = new(context);
             //User? us = await user.AuthenticateUserAsync("testuser", "wrongpassword");
             //Assert.That(us, Is.Null);
-            
+
             Assert.ThrowsAsync<ArgumentException>(async () => await user.AuthenticateUserAsync("nonexistentuser", "testpassword"));
         }
         [Test]
@@ -203,7 +203,7 @@ namespace TestingControllerUser.Services
         {
             var context = TestDbShop.CreateContext();
             UsersCotroller users = new(context);
-         
+
             Assert.That(await users.UpdateUserAsync(9999, "updateduser", "test", "Client", "098765431", "updatedemail@example.com"), Is.EqualTo("Not found"));
         }
         [Test]
@@ -211,7 +211,7 @@ namespace TestingControllerUser.Services
         {
             var context = TestDbShop.CreateContext();
             UsersCotroller users = new(context);
-            string us = await users.AddUserAsync("Name", "testpassword", "Client","0895650627","");
+            string us = await users.AddUserAsync("Name", "testpassword", "Client", "0895650627", "");
             Assert.That(us, Is.EqualTo("User added successfully"));
         }
         [Test]
@@ -292,5 +292,6 @@ namespace TestingControllerUser.Services
             await context.SaveChangesAsync();
             Assert.ThrowsAsync<ArgumentException>(async () => await users.GetAllUsersAsync()); ;
         }
+        
     }
 }
