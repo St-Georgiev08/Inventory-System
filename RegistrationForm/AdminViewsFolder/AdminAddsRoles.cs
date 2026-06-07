@@ -17,7 +17,7 @@ namespace RegistrationForm
 {
     public partial class AdminAddsRoles : Form
     {
-   
+
         private User User { get; set; }
         private string GetReasonForClick { get; set; }
         public AdminAddsRoles(User user, string GetReasonForClick)
@@ -28,13 +28,13 @@ namespace RegistrationForm
         }
         private void OnLoad()
         {
-           
+
         }
 
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            
+
             if (!radioButton1.Checked && !radioButton2.Checked)
             {
                 MessageBox.Show("Role must be picked!", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -77,7 +77,7 @@ namespace RegistrationForm
             }
             else
             {
-                  username = textBox7.Text;
+                username = textBox7.Text;
                 try
                 {
                     var get = (await control.GetAllUsersAsync()).Find(x => x.Username == username).Id;
@@ -181,6 +181,18 @@ namespace RegistrationForm
                 label11.Visible = true;
                 textBox7.Visible = true;
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                textBox2.PasswordChar = '*';
+                textBox3.PasswordChar = '*';
+                return;
+            }
+                textBox2.PasswordChar = '\0';
+                textBox3.PasswordChar = '\0';
         }
     }
 }

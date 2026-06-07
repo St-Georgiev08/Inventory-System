@@ -1,4 +1,5 @@
 ﻿using Inventory_System.Entities;
+using RegistrationForm.ClientViewsFolder;
 using RegistrationForm.UserForms;
 using SalesSystem.Business.Controllers;
 using SalesSystem.Business.Servises;
@@ -82,7 +83,7 @@ namespace RegistrationForm
             bool name = radioButton1.Checked;
             bool price = radioButton2.Checked;
             bool desc = checkBox1.Checked;
-            string type = comboBox1.SelectedText;
+            string type = (comboBox1.SelectedItem as Categories)?.Name ?? string.Empty;
             // use the public property
             if (!string.IsNullOrEmpty(searchTerm))
             {
@@ -107,7 +108,10 @@ namespace RegistrationForm
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            AllClintsOrders allClints = new(getRole);
+            allClints.ShowDialog();
+            this.Close();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

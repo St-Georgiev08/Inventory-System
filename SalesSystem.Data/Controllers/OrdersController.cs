@@ -18,7 +18,7 @@ namespace SalesSystem.Business.Controllers
         {
             orders = new();
             orderItems = new();
-            orderItems = new();
+            usersCotroller = new();
         }
         public OrdersController(SalesManagementSystemContext context)
         {

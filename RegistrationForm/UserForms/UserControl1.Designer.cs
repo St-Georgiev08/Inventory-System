@@ -127,6 +127,7 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
+            
         }
 
         #endregion

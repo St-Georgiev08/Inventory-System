@@ -42,10 +42,10 @@
             // 
             pictureBox3.BackColor = Color.Brown;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(315, 21);
+            pictureBox3.Location = new Point(330, 28);
             pictureBox3.Margin = new Padding(3, 2, 3, 2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(142, 82);
+            pictureBox3.Size = new Size(144, 100);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 30;
             pictureBox3.TabStop = false;

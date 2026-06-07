@@ -32,7 +32,7 @@ namespace SalesSystem.Business.Controllers
         }
         public async Task<List<ProductDetails>> GetAll()
         {
-            return await context.ProductDetails.Include(x=>x.Products).ToListAsync();
+            return await context.ProductDetails.Include(x=>x.Products).ThenInclude(x=>x.Category).ToListAsync();
         }
         public async Task<string> AddProductDetails(int product,string? description, string img, int createdBy)
         {
@@ -93,7 +93,7 @@ namespace SalesSystem.Business.Controllers
         public async Task<List<ProductDetails>> FindAllWith(string text)
         {
          
-            return await context.ProductDetails.Include(x=>x.Products)
+            return await context.ProductDetails.Include(x=>x.Products).ThenInclude(x=>x.Category)
                 .Where(p => p.Products.Name.Contains(text))
                 .ToListAsync();
         }

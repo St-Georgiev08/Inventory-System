@@ -101,6 +101,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
+            AutoScroll = true;
         }
 
         #endregion

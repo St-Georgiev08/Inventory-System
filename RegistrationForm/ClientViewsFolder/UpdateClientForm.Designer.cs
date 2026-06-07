@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button3 = new Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateClientForm));
             label1 = new Label();
             label9 = new Label();
             label7 = new Label();
@@ -45,23 +45,15 @@
             label2 = new Label();
             button2 = new Button();
             button1 = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // button3
-            // 
-            button3.Location = new Point(1, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(115, 40);
-            button3.TabIndex = 39;
-            button3.Text = "Go back";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(161, 49);
+            label1.Location = new Point(213, 48);
             label1.Name = "label1";
             label1.Size = new Size(237, 37);
             label1.TabIndex = 40;
@@ -140,77 +132,100 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(423, 299);
+            label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label6.Location = new Point(409, 294);
             label6.Name = "label6";
-            label6.Size = new Size(44, 15);
+            label6.Size = new Size(60, 21);
             label6.TabIndex = 46;
             label6.Text = "Phone:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(96, 296);
+            label5.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label5.Location = new Point(71, 295);
             label5.Name = "label5";
-            label5.Size = new Size(39, 15);
+            label5.Size = new Size(50, 20);
             label5.TabIndex = 45;
             label5.Text = "Email:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(95, 247);
+            label4.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label4.Location = new Point(71, 242);
             label4.Name = "label4";
-            label4.Size = new Size(76, 15);
+            label4.Size = new Size(99, 20);
             label4.TabIndex = 44;
             label4.Text = "Reenter pass:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(96, 207);
+            label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label3.Location = new Point(71, 206);
             label3.Name = "label3";
-            label3.Size = new Size(57, 15);
+            label3.Size = new Size(73, 20);
             label3.TabIndex = 43;
             label3.Text = "Password";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(96, 162);
+            label2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label2.Location = new Point(71, 161);
             label2.Name = "label2";
-            label2.Size = new Size(63, 15);
+            label2.Size = new Size(82, 20);
             label2.TabIndex = 42;
             label2.Text = "Username:";
             // 
             // button2
             // 
+            button2.BackColor = Color.DarkOrange;
             button2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button2.Location = new Point(454, 375);
+            button2.ForeColor = Color.CadetBlue;
+            button2.Location = new Point(454, 348);
             button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
             button2.Size = new Size(123, 40);
             button2.TabIndex = 56;
             button2.Text = "Close";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // button1
             // 
+            button1.BackColor = Color.DarkOrange;
             button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button1.Location = new Point(213, 375);
+            button1.ForeColor = Color.CadetBlue;
+            button1.Location = new Point(213, 348);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(123, 40);
             button1.TabIndex = 55;
             button1.Text = "Enter";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Brown;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(-1, 0);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(187, 122);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 57;
+            pictureBox1.TabStop = false;
             // 
             // UpdateClientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Brown;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label9);
@@ -227,17 +242,15 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button3);
             Name = "UpdateClientForm";
             Text = "UpdateClientForm";
             Load += UpdateClientForm_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button button3;
         private Label label1;
         private Label label9;
         private Label label7;
@@ -254,5 +267,6 @@
         private Label label2;
         private Button button2;
         private Button button1;
+        private PictureBox pictureBox1;
     }
 }

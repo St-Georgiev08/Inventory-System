@@ -53,7 +53,7 @@ namespace RegistrationForm
 
         private void ClientMainForm_Load(object sender, EventArgs e)
         {
-
+            label1.Text = $"Your account operations, {User.Username}";
         }
     }
 }

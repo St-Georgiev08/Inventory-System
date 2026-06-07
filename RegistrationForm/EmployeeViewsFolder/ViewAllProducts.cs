@@ -22,6 +22,12 @@ namespace RegistrationForm.EmployeeViewsFolder
             InitializeComponent();
             GetUser = user;
         }
+        private async void ShopItems_Load()
+        {
+            ProductDetailsCRUD productService = new();
+            var products = await productService.GetAll();
+            await LoadProducts(products);
+        }
         private async Task LoadProducts(List<ProductDetails> products)
         {
             flowLayoutPanel1.Controls.Clear();
@@ -30,27 +36,20 @@ namespace RegistrationForm.EmployeeViewsFolder
             {
                 UserControl2 card = new UserControl2(GetUser);
 
-                card.LoadProduct(product);
+               await card.LoadProduct(product);
 
                 flowLayoutPanel1.Controls.Add(card);
             }
         }
-        private async void ShopItems_Load()
-        {
-            ProductDetailsCRUD productService = new();
-            var products = await productService.GetAll();
-            await LoadProducts(products);
-        }
-        public async void button2_Click(object sender, EventArgs e)
-        {
 
-            ShopItems_Load();
+        private async void button2_Click(object sender, EventArgs e)
+        {
             ProductDetailsController product = new();
             string searchTerm = textBox1.Text;
             bool name = radioButton1.Checked;
             bool price = radioButton2.Checked;
             bool desc = checkBox1.Checked;
-            string type = comboBox1.SelectedText;
+            string type = (comboBox1.SelectedItem as Categories)?.Name ?? string.Empty;
             // use the public property
             if (!string.IsNullOrEmpty(searchTerm))
             {

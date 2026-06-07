@@ -24,7 +24,7 @@ namespace RegistrationForm.UserForms
             InitializeComponent();
             GetUser = user;
         }
-        public async void LoadProduct(ProductDetails product)
+        public async Task LoadProduct(ProductDetails product)
         {
             lblName.Text = product.Products.Name;
             lblCategory.Text = product.Products.Category.Name;
@@ -43,7 +43,7 @@ namespace RegistrationForm.UserForms
             }
         }
          
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             ViewAllProducts Products = new ViewAllProducts(GetUser);
             Getreason = "control2";

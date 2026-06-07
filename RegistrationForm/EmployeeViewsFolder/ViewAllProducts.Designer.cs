@@ -46,9 +46,10 @@
             // 
             // button5
             // 
-            button5.Location = new Point(14, 15);
+            button5.Location = new Point(12, 11);
+            button5.Margin = new Padding(3, 2, 3, 2);
             button5.Name = "button5";
-            button5.Size = new Size(115, 44);
+            button5.Size = new Size(101, 33);
             button5.TabIndex = 7;
             button5.Text = "Go back";
             button5.UseVisualStyleBackColor = true;
@@ -56,18 +57,19 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(97, 191);
+            textBox1.Location = new Point(85, 143);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(325, 27);
+            textBox1.Size = new Size(285, 23);
             textBox1.TabIndex = 43;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(37, 193);
+            label2.Location = new Point(32, 145);
             label2.Name = "label2";
-            label2.Size = new Size(57, 28);
+            label2.Size = new Size(47, 21);
             label2.TabIndex = 42;
             label2.Text = "Find:";
             // 
@@ -78,9 +80,11 @@
             groupBox1.Controls.Add(radioButton2);
             groupBox1.Controls.Add(radioButton1);
             groupBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            groupBox1.Location = new Point(37, 121);
+            groupBox1.Location = new Point(32, 91);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(488, 69);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(427, 52);
             groupBox1.TabIndex = 41;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filter";
@@ -89,10 +93,9 @@
             // 
             checkBox1.AutoSize = true;
             checkBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            checkBox1.Location = new Point(189, 25);
-            checkBox1.Margin = new Padding(3, 4, 3, 4);
+            checkBox1.Location = new Point(165, 19);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(163, 29);
+            checkBox1.Size = new Size(129, 24);
             checkBox1.TabIndex = 3;
             checkBox1.Text = "By descending";
             checkBox1.UseVisualStyleBackColor = true;
@@ -101,10 +104,9 @@
             // 
             comboBox1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(350, 25);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
+            comboBox1.Location = new Point(306, 19);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(138, 29);
+            comboBox1.Size = new Size(121, 25);
             comboBox1.TabIndex = 2;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
@@ -112,9 +114,10 @@
             // 
             radioButton2.AutoSize = true;
             radioButton2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            radioButton2.Location = new Point(114, 24);
+            radioButton2.Location = new Point(100, 18);
+            radioButton2.Margin = new Padding(3, 2, 3, 2);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(75, 29);
+            radioButton2.Size = new Size(61, 24);
             radioButton2.TabIndex = 1;
             radioButton2.TabStop = true;
             radioButton2.Text = "Price";
@@ -124,9 +127,10 @@
             // 
             radioButton1.AutoSize = true;
             radioButton1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            radioButton1.Location = new Point(7, 24);
+            radioButton1.Location = new Point(6, 18);
+            radioButton1.Margin = new Padding(3, 2, 3, 2);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(90, 29);
+            radioButton1.Size = new Size(72, 24);
             radioButton1.TabIndex = 0;
             radioButton1.TabStop = true;
             radioButton1.Text = "Name:";
@@ -135,9 +139,10 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button2.Location = new Point(643, 121);
+            button2.Location = new Point(563, 91);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(168, 77);
+            button2.Size = new Size(147, 58);
             button2.TabIndex = 40;
             button2.Text = "Show";
             button2.UseVisualStyleBackColor = true;
@@ -145,17 +150,19 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Location = new Point(35, 227);
+            flowLayoutPanel1.Location = new Point(31, 170);
+            flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(776, 268);
+            flowLayoutPanel1.Size = new Size(679, 201);
             flowLayoutPanel1.TabIndex = 39;
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button1.Location = new Point(350, 508);
+            button1.Location = new Point(306, 381);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(168, 77);
+            button1.Size = new Size(147, 58);
             button1.TabIndex = 44;
             button1.Text = "Close";
             button1.UseVisualStyleBackColor = true;
@@ -165,26 +172,27 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(254, 45);
+            label1.Location = new Point(222, 34);
             label1.Name = "label1";
-            label1.Size = new Size(330, 41);
+            label1.Size = new Size(269, 32);
             label1.TabIndex = 45;
             label1.Text = "All products in system";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(370, 111);
+            label3.Location = new Point(324, 83);
             label3.Name = "label3";
-            label3.Size = new Size(179, 20);
+            label3.Size = new Size(143, 15);
             label3.TabIndex = 46;
             label3.Text = "The category is important";
             // 
             // ViewAllProducts
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(873, 600);
+            BackColor = Color.BurlyWood;
+            ClientSize = new Size(764, 450);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(button1);
@@ -194,7 +202,6 @@
             Controls.Add(button2);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(button5);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "ViewAllProducts";
             Text = "AddUpdate_Product";
             Load += ViewAllProducts_Load;
