@@ -1,13 +1,13 @@
 ﻿using Inventory_System;
 using Inventory_System.Entities;
-using SalesSystem.Data.Servises;
+using SalesSystem.Business.Servises;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesSystem.Data.Controllers
+namespace SalesSystem.Business.Controllers
 {
     public class OrdersController
     {

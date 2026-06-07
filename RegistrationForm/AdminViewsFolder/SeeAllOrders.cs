@@ -1,7 +1,7 @@
 ﻿using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using Inventory_System.Entities;
-using SalesSystem.Data.Controllers;
+using SalesSystem.Business.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

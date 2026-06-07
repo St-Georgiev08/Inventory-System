@@ -1,7 +1,7 @@
 ﻿using Inventory_System.Entities;
 using RegistrationForm.UserForms;
-using SalesSystem.Data.Controllers;
-using SalesSystem.Data.Servises;
+using SalesSystem.Business.Controllers;
+using SalesSystem.Business.Servises;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

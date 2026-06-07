@@ -3,7 +3,7 @@
 using Inventory_System.Entities;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using SalesSystem.Data.Controllers;
+using SalesSystem.Business.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

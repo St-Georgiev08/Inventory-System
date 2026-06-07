@@ -1,6 +1,6 @@
 ﻿using Inventory_System.Entities;
 using Inventory_System.Enums;
-using SalesSystem.Data.Controllers;
+using SalesSystem.Business.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

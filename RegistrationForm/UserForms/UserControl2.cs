@@ -1,7 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
 using Inventory_System.Entities;
 using RegistrationForm.EmployeeViewsFolder;
-using SalesSystem.Data.Controllers;
+using SalesSystem.Business.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

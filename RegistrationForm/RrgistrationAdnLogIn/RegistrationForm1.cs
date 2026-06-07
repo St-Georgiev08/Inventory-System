@@ -1,7 +1,7 @@
 using Inventory_System.Entities;
 using Inventory_System.Enums;
 using RegistrationForm.EmployeeViewsFolder;
-using SalesSystem.Data.Controllers;
+using SalesSystem.Business.Controllers;
 using System.Threading.Tasks;
 
 namespace RegistrationForm

@@ -2,8 +2,8 @@
 using Inventory_System.Entities;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using SalesSystem.Data.Controllers;
-using SalesSystem.Data.Servises;
+using SalesSystem.Business.Controllers;
+using SalesSystem.Business.Servises;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

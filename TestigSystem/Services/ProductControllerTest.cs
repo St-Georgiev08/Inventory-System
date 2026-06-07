@@ -1,7 +1,7 @@
 ﻿using Inventory_System.Entities;
 using Microsoft.EntityFrameworkCore;
-using SalesSystem.Data.Controllers;
-using SalesSystem.Data.HelpMethods;
+using SalesSystem.Business.Controllers;
+using SalesSystem.Business.HelpMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;

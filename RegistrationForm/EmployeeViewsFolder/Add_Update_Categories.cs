@@ -1,7 +1,7 @@
 ﻿using Inventory_System.Entities;
 using RegistrationForm.EmployeeViewsFolder;
-using SalesSystem.Data.Controllers;
-using SalesSystem.Data.DTOs;
+using SalesSystem.Business.Controllers;
+using SalesSystem.Business.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

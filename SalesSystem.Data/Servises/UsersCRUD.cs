@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesSystem.Data.Servises
+namespace SalesSystem.Business.Servises
 {
     public class UsersCRUD
     {

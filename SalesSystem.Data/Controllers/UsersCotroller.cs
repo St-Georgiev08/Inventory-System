@@ -2,16 +2,16 @@
 using Inventory_System.Entities;
 using Inventory_System.Enums;
 using Microsoft.EntityFrameworkCore;
-using SalesSystem.Data.DTOs;
-using SalesSystem.Data.HelpMethods;
-using SalesSystem.Data.Servises;
+using SalesSystem.Business.DTOs;
+using SalesSystem.Business.Servises;
+using SalesSystem.Business.HelpMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesSystem.Data.Controllers
+namespace SalesSystem.Business.Controllers
 {
     public class UsersCotroller
     {
