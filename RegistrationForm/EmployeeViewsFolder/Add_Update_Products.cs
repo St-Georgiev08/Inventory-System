@@ -20,11 +20,12 @@ namespace RegistrationForm
         public ProductDetails details { get; set; }
         public string ReasonForUsing { get; set; }
         private User GetUser { set; get; }
-        public Add_Update_Products(string reason, User getUser  )
+        public Add_Update_Products(string reason, User getUser, ProductDetails? product  )
         {
             InitializeComponent();
             ReasonForUsing = reason;
             GetUser = getUser;
+            details = product;
         }
         private async Task LoadCategories()
         {
@@ -106,7 +107,6 @@ namespace RegistrationForm
                         MessageBox.Show(await productsController.AddProduct(textBox3.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await productDetailsController.AddProductDetails((await productsController.GetAllProduct()).Last().Id,richTextBox1.Text, destinationPath, GetUser.Id);
                         await auditLogsController.AddAuditLogs((await productsController.GetAllProduct()).Last().Id, $"Added product: {textBox3.Text} by Employee: {GetUser.Username}", $"Added product: {textBox3.Text}");
-                   
                     }
                     else
                     {
@@ -134,21 +134,44 @@ namespace RegistrationForm
 
                     Directory.CreateDirectory(imagesFolder);
 
-                    string newfile =
-                        Guid.NewGuid().ToString() +
-                        Path.GetExtension(_selectedImagePath);
+                    // determine source path: newly chosen file or existing stored image
+                    string sourcePath;
+                    if (!string.IsNullOrWhiteSpace(_selectedImagePath))
+                    {
+                        sourcePath = _selectedImagePath; // user picked new file
+                    }
+                    else if (!string.IsNullOrWhiteSpace(details?.ImagePath))
+                    {
+                        sourcePath = Path.Combine(Application.StartupPath, "ProductImages", details.ImagePath); // existing image in app folder
+                    }
+                    else
+                    {
+                        sourcePath = null; // no image available
+                    }
 
-                    string NewDestinationPath =
-                        Path.Combine(imagesFolder, newfile);
+                    if (string.IsNullOrWhiteSpace(sourcePath) || !File.Exists(sourcePath))
+                    {
+                        // handle missing image (either fail validation or proceed using a default image)
+                        MessageBox.Show("No image available to copy.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                    File.Copy(_selectedImagePath, NewDestinationPath,true);
+                    string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(sourcePath);
+                    string newDestinationPath = Path.Combine(imagesFolder, newFileName);
+
+                    // avoid copying onto itself
+                    if (!string.Equals(Path.GetFullPath(sourcePath), Path.GetFullPath(newDestinationPath), StringComparison.OrdinalIgnoreCase))
+                    {
+                        File.Copy(sourcePath, newDestinationPath, true);
+                    }
+
                     var selectedCategory = (Categories)comboBox1.SelectedItem;
                     var products =(await productsController.GetAllProduct()).First(x=>x.Name == details.Products.Name);
                     var detail = (await productDetailsController.GetAll()).First(x => x.Products.Id == products.Id);
                     if (decimal.TryParse(textBox2.Text, out decimal value) && int.TryParse(textBox1.Text, out int qantity))
                     {
                         MessageBox.Show(await productsController.UpdateProduct(products.Id,textBox3.Text, value, qantity, selectedCategory.Id), "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await productDetailsController.UpdateProductDetails(detail.Id,products.Id,richTextBox1.Text, NewDestinationPath, GetUser.Id);
+                        await productDetailsController.UpdateProductDetails(detail.Id,products.Id,richTextBox1.Text, newDestinationPath, GetUser.Id);
                         await auditLogsController.AddAuditLogs(products.Id, $"Updated product: {textBox3.Text} by Employee: {GetUser.Username}", $"Updated product: {textBox3.Text}");
                     }
                     else
@@ -183,12 +206,17 @@ namespace RegistrationForm
                 textBox3.Text = details.Products.Name;
                 textBox2.Text = details.Products.Price.ToString();
                 textBox1.Text = details.Products.Quantity.ToString();
-                comboBox1.SelectedValue = details.Products.Category.Name;
+                var categories = (List<Categories>)comboBox1.DataSource;
+                var match = categories.FirstOrDefault(c => c.Id == details.Products.Category.Id);
+
+                if (match != null) comboBox1.SelectedItem = match;
+                else MessageBox.Show("Category not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 richTextBox1.Text = details.Description.ToString();
                 string fullPath = Path.Combine(
                 Application.StartupPath,
                  "ProductImages",
-                 product.ImagePath);
+                 details.ImagePath);
 
                 if (File.Exists(fullPath))
                 {

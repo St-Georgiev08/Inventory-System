@@ -26,9 +26,9 @@ namespace RegistrationForm.UserForms
         }
         public async void LoadProduct(ProductDetails product)
         {
-            lblName.Text = product.Products.Name;
-            lblCategory.Text = product.Products.Category.Name;
-            lblPrice.Text = $"{product.Products.Price} euro";
+            lblName.Text = product.Products?.Name ?? "Unknown";
+            lblCategory.Text = product.Products?.Category?.Name ?? "Uncategorized";
+            lblPrice.Text = product.Products != null ? $"{product.Products.Price} €" : "Price unavailable";
 
             products = product;
 
@@ -50,7 +50,7 @@ namespace RegistrationForm.UserForms
             try
             {
                 var get = (await orders.GetAll()).Last().Id;
-                MessageBox.Show(await items.DeleteOrderItem(get, products.Id), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(await items.DeleteOrderItem(get, products.Id, null), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (ArgumentException x)
             {
@@ -62,9 +62,8 @@ namespace RegistrationForm.UserForms
         private async void button2_Click(object sender, EventArgs e)
         {
                ViewAllProducts view = new ViewAllProducts(GetUser);
-               
-               Add_Update_Products add = new Add_Update_Products("control2", GetUser);
-               add.details = products;
+             this.Hide();
+            Add_Update_Products add = new Add_Update_Products("control2", GetUser, products);
                add.ShowDialog();
                view.Close();
 

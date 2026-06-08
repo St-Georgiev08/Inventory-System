@@ -26,7 +26,7 @@ namespace SalesSystem.Business.Servises
         }
         public async Task<List<OrderItems>> GetAll()
         {
-            return await _context.OrderItems.Include(x=>x.Order).Include(x=>x.Product)
+            return await _context.OrderItems.Include(x=>x.Order).ThenInclude(x=>x.User)
                 .ToListAsync();
         }
         //public async Task<OrderItems> GetById(int id)

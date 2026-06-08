@@ -155,6 +155,7 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(679, 201);
             flowLayoutPanel1.TabIndex = 39;
+            flowLayoutPanel1.AutoScroll = true;
             // 
             // button1
             // 

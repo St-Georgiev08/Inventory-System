@@ -45,6 +45,7 @@
             openFileDialog1 = new OpenFileDialog();
             button3 = new Button();
             pictureBox1 = new PictureBox();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -165,7 +166,7 @@
             textBox2.Location = new Point(206, 184);
             textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(193, 27);
+            textBox2.Size = new Size(121, 27);
             textBox2.TabIndex = 12;
             // 
             // textBox3
@@ -201,12 +202,23 @@
             pictureBox1.TabIndex = 15;
             pictureBox1.TabStop = false;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label8.Location = new Point(333, 181);
+            label8.Name = "label8";
+            label8.Size = new Size(23, 28);
+            label8.TabIndex = 16;
+            label8.Text = "€";
+            // 
             // Add_Update_Products
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
             ClientSize = new Size(839, 472);
+            Controls.Add(label8);
             Controls.Add(pictureBox1);
             Controls.Add(button3);
             Controls.Add(textBox3);
@@ -250,5 +262,6 @@
         private OpenFileDialog openFileDialog1;
         private Button button3;
         private PictureBox pictureBox1;
+        private Label label8;
     }
 }

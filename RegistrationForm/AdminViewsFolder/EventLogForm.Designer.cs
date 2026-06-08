@@ -39,16 +39,18 @@
             button2 = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             button3 = new Button();
+            checkBox1 = new CheckBox();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button1.Location = new Point(488, 52);
-            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Location = new Point(558, 69);
             button1.Name = "button1";
-            button1.Size = new Size(168, 52);
+            button1.Size = new Size(192, 69);
             button1.TabIndex = 0;
             button1.Text = "Show";
             button1.UseVisualStyleBackColor = true;
@@ -57,11 +59,10 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(46, 140);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
+            dataGridView1.Location = new Point(53, 187);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(611, 148);
+            dataGridView1.Size = new Size(698, 197);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -69,9 +70,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(46, 117);
+            label1.Location = new Point(53, 156);
             label1.Name = "label1";
-            label1.Size = new Size(82, 21);
+            label1.Size = new Size(101, 28);
             label1.TabIndex = 2;
             label1.Text = "Event log";
             // 
@@ -79,9 +80,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(44, 52);
+            label2.Location = new Point(55, 90);
             label2.Name = "label2";
-            label2.Size = new Size(85, 20);
+            label2.Size = new Size(103, 25);
             label2.TabIndex = 3;
             label2.Text = "From date:";
             // 
@@ -89,9 +90,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label3.Location = new Point(44, 86);
+            label3.Location = new Point(55, 124);
             label3.Name = "label3";
-            label3.Size = new Size(65, 20);
+            label3.Size = new Size(80, 25);
             label3.TabIndex = 4;
             label3.Text = "To date:";
             // 
@@ -99,35 +100,32 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label4.Location = new Point(44, 17);
+            label4.Location = new Point(53, 9);
             label4.Name = "label4";
-            label4.Size = new Size(345, 20);
+            label4.Size = new Size(354, 25);
             label4.TabIndex = 5;
-            label4.Text = "Corect format (YYYY/MMMM/DDDD hh:mm:ss)";
+            label4.Text = "Corect format (YYYY/MM/DD hh:mm:ss)";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(153, 50);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
+            textBox1.Location = new Point(180, 88);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(260, 23);
+            textBox1.Size = new Size(297, 27);
             textBox1.TabIndex = 6;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(153, 84);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
+            textBox2.Location = new Point(180, 121);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(260, 23);
+            textBox2.Size = new Size(297, 27);
             textBox2.TabIndex = 7;
             // 
             // button2
             // 
             button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button2.Location = new Point(46, 292);
-            button2.Margin = new Padding(3, 2, 3, 2);
+            button2.Location = new Point(53, 389);
             button2.Name = "button2";
-            button2.Size = new Size(133, 46);
+            button2.Size = new Size(152, 61);
             button2.TabIndex = 8;
             button2.Text = "Export to EXCEL";
             button2.UseVisualStyleBackColor = true;
@@ -136,21 +134,49 @@
             // button3
             // 
             button3.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button3.Location = new Point(523, 292);
-            button3.Margin = new Padding(3, 2, 3, 2);
+            button3.Location = new Point(598, 389);
             button3.Name = "button3";
-            button3.Size = new Size(133, 46);
+            button3.Size = new Size(152, 61);
             button3.TabIndex = 9;
             button3.Text = "Close\r\n";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            checkBox1.Location = new Point(64, 48);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(112, 29);
+            checkBox1.TabIndex = 10;
+            checkBox1.Text = "Pick date";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(180, 86);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(297, 27);
+            dateTimePicker1.TabIndex = 11;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(180, 121);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(297, 27);
+            dateTimePicker2.TabIndex = 12;
+            // 
             // EventLogForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Cornsilk;
-            ClientSize = new Size(725, 348);
+            ClientSize = new Size(829, 464);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(dateTimePicker1);
+            Controls.Add(checkBox1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(textBox2);
@@ -161,7 +187,6 @@
             Controls.Add(label1);
             Controls.Add(dataGridView1);
             Controls.Add(button1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "EventLogForm";
             Text = "EventLogForm";
             Load += EventLogForm_Load;
@@ -183,5 +208,8 @@
         private Button button2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button button3;
+        private CheckBox checkBox1;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
     }
 }

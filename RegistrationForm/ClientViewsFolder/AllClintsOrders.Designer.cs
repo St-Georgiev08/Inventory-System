@@ -68,6 +68,7 @@
             flowLayoutPanel1.Size = new Size(679, 201);
             flowLayoutPanel1.TabIndex = 32;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
+            flowLayoutPanel1.AutoScroll = true;
             // 
             // pictureBox1
             // 

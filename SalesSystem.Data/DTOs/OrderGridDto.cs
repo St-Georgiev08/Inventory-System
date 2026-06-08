@@ -17,5 +17,7 @@ namespace SalesSystem.Business.DTOs
             public string Product {  get; set; }
             public decimal Qantity { get; set; }
             public decimal UnitPrice { get; set; }
+            public DateTime OrderedOn { set; get; }
+
     }
 }

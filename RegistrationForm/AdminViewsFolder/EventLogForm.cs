@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using Inventory_System;
 using Inventory_System.Entities;
 using SalesSystem.Business.Controllers;
+using SalesSystem.Business.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,16 +24,16 @@ namespace RegistrationForm
             InitializeComponent();
             GetUser = user;
         }
-        private readonly AuditLogsController productsController = new();
+        private readonly AuditLogsController auditLogsController = new();
         private readonly BindingSource _productsSource = new();
-        private async Task LoadAuditsAsync()
+        private async Task LoadAuditsAsync(List<AuditsLogDto> dtos)
         {
 
             try
             {
-                var list = await productsController.GetForGrid();
 
-                _productsSource.DataSource = list;
+
+                _productsSource.DataSource = dtos;
                 dataGridView1.DataSource = _productsSource;
             }
             catch (ArgumentException x)
@@ -119,18 +120,46 @@ namespace RegistrationForm
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            //string daqteFrom = textBox1.Text;
+            //string dateTo = textBox2.Text;
+            //DateTime To;
+            //DateTime From;
+            //bool successfullyParsedTo = DateTime.TryParse(dateTo, out To);
+            //bool successfullyParsedFrom = DateTime.TryParse(daqteFrom, out From);
+            //if (successfullyParsedFrom == false || successfullyParsedTo == false)
+            //{
+            //    MessageBox.Show("Invalid date format! Follow the instructions above the text boxes.", "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            //await LoadAuditsAsync();
+
             string daqteFrom = textBox1.Text;
             string dateTo = textBox2.Text;
             DateTime To;
             DateTime From;
-            bool successfullyParsedTo = DateTime.TryParse(dateTo, out To);
-            bool successfullyParsedFrom = DateTime.TryParse(daqteFrom, out From);
-            if (successfullyParsedFrom == false || successfullyParsedTo == false)
+            List<AuditsLogDto> list = await auditLogsController.GetForGrid();
+            if (checkBox1.Checked == true)
             {
-                MessageBox.Show("Invalid date format! Follow the instructions above the text boxes.", "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                To = dateTimePicker2.Value;
+                From = dateTimePicker1.Value;
             }
-            await LoadAuditsAsync();
+            else
+            {
+
+                bool successfullyParsedTo = DateTime.TryParse(dateTo, out To);
+                bool successfullyParsedFrom = DateTime.TryParse(daqteFrom, out From);
+
+                if (successfullyParsedFrom == false || successfullyParsedTo == false || From >= To || From == To)
+                {
+                    MessageBox.Show("Invalid date format! Follow the instructions above the text boxes.", "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                list = list.Where(x => x.Time >= From.Date && x.Time <= To.Date).ToList();
+                await LoadAuditsAsync(list);
+            }
+            list = list.Where(x => x.Time.Date >= From.Date && x.Time.Date <= To.Date).ToList();
+            await LoadAuditsAsync(list);
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -152,6 +181,28 @@ namespace RegistrationForm
             textBox2.Text = string.Empty;
             _productsSource.DataSource = null;
             dataGridView1.DataSource = _productsSource;
+            dateTimePicker1.Visible = false;
+            dateTimePicker2.Visible = false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                textBox1.Visible = false;
+                textBox2.Visible = false;
+                dateTimePicker1.Visible = true;
+                dateTimePicker2.Visible = true;
+                label4.Text = "Please two different dates! <From> date must be older than <To> date.";
+            }
+            else
+            {
+                textBox1.Visible = true;
+                textBox2.Visible = true;
+                dateTimePicker1.Visible = false;
+                dateTimePicker2.Visible = false;
+                label4.Text = "Corect format(YYYY / MM / DD hh: mm:ss)";
+            }
         }
     }
 }

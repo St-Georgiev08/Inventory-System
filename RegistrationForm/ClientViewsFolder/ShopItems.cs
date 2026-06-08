@@ -68,7 +68,7 @@ namespace RegistrationForm
 
             foreach (var product in products)
             {
-                UserControl1 card = new UserControl1();
+                UserControl1 card = new UserControl1(getRole);
 
                await card.LoadProduct(product);
 

@@ -19,11 +19,11 @@ namespace RegistrationForm.UserForms
         {
             InitializeComponent();
         }
-        public async void LoadProduct(ProductDetails product)
+        public async Task LoadProduct(ProductDetails product)
         {
-            lblName.Text = product.Products.Name;
-            lblCategory.Text = product.Products.Category.Name;
-            lblPrice.Text = $"{product.Products.Price} euro";
+            lblName.Text = product.Products?.Name ?? "Unknown";
+            lblCategory.Text = product.Products?.Category?.Name ?? "Uncategorized";
+            lblPrice.Text = product.Products != null ? $"{product.Products.Price} €" : "Price unavailable";
 
             products = product;
 
@@ -44,7 +44,8 @@ namespace RegistrationForm.UserForms
             try
             {
                 var get = (await orders.GetAll()).Last().Id;
-                MessageBox.Show(await items.DeleteOrderItem(get, products.Id), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(await items.DeleteOrderItem(get, products.ProductId,null), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               await LoadProduct(products);
             }
             catch (ArgumentException x)
             {

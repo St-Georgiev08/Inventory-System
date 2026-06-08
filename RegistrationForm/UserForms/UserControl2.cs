@@ -26,9 +26,9 @@ namespace RegistrationForm.UserForms
         }
         public async Task LoadProduct(ProductDetails product)
         {
-            lblName.Text = product.Products.Name;
-            lblCategory.Text = product.Products.Category.Name;
-            lblPrice.Text = $"{product.Products.Price} euro";
+            lblName.Text = product.Products?.Name ?? "Unknown";
+            lblCategory.Text = product.Products?.Category?.Name ?? "Uncategorized";
+            lblPrice.Text = product.Products != null ? $"{product.Products.Price} €" : "Price unavailable";
 
             products = product;
 
@@ -47,7 +47,7 @@ namespace RegistrationForm.UserForms
         {
             ViewAllProducts Products = new ViewAllProducts(GetUser);
             Getreason = "control2";
-            Add_Update_Products add_product = new Add_Update_Products(Getreason, GetUser);
+            Add_Update_Products add_product = new Add_Update_Products(Getreason, GetUser, products);
             add_product.Hide();
             add_product.ShowDialog();
             
@@ -67,6 +67,15 @@ namespace RegistrationForm.UserForms
 
                 MessageBox.Show(x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Unexpected error: {ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
             
         }
 

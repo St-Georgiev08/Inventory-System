@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace SalesSystem.Business.Controllers
 {
@@ -75,10 +76,10 @@ namespace SalesSystem.Business.Controllers
 
             return "User added successfully";
         }
-        public async Task<string> UpdateUserAsync(int id, string username, string pass, string role, string phone, string email)
+        public async Task<string> UpdateUserAsync(int id, string username, string pass, string role, string phone, string? email)
         {
             if (id < 0 || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || string.IsNullOrEmpty(role)
-                || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(email))
+                || string.IsNullOrEmpty(phone))
             {
                 throw new ArgumentException("All fields are required and ID must be valid");
             }
@@ -94,7 +95,8 @@ namespace SalesSystem.Business.Controllers
             {
                 throw new ArgumentException("Invalid role type");
             }
-                return "User updated successfully";
+            await users.Update(id, username, hash, parsedRole, phone, email);
+            return "User updated successfully";
         }
         public async Task<string> DeleteUserAsync(int id)
         {
@@ -168,12 +170,34 @@ namespace SalesSystem.Business.Controllers
             }
             return await GetAllUsersAsync();
         }
-        public async Task<List<EmployeeDto>> GetDataGrid(bool n, bool dm)
+        public async Task<List<EmployeeDto>> FindAllWith(string text, List<EmployeeDto> dtos)
         {
-            var list = (await OrderUsers(n, dm)).Select(x => new EmployeeDto
+
+            return dtos.Where(x => x.Name.Contains(text, StringComparison.OrdinalIgnoreCase) || x.Email.Contains(text, StringComparison.OrdinalIgnoreCase) || x.Phone.Contains(text, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+        public async Task<List<EmployeeDto>> GetDataGrid(bool name, bool des, string? find)
+        {
+            List<EmployeeDto> list = new List<EmployeeDto>();
+            
+            if(!string.IsNullOrEmpty(find))
             {
+               
+                 list = (await OrderUsers(name, des)).Where(x=>x.Role == RoleType.Employee || x.Role == RoleType.Admin).Select(x => new EmployeeDto
+                 {
+                    Id = x.Id,
+                    Name = x.Username,
+                    Phone = x.PhoneNumber,
+                    Email = x.Email,
+                 }).ToList();
+                var res = await FindAllWith(find, list);
+                return res;
+            }
+            list = (await OrderUsers(name, des)).Where(x => x.Role == RoleType.Employee ||x.Role == RoleType.Admin).Select(x => new EmployeeDto
+            {
+                Id = x.Id,
                 Name = x.Username,
                 Phone = x.PhoneNumber,
+                Role = x.Role.ToString(),
                 Email = x.Email,
             }).ToList();
             return list;
@@ -182,10 +206,11 @@ namespace SalesSystem.Business.Controllers
         {
             var list = (await OrderUsers(n, dm)).Where(x=>x.Role == RoleType.Client).Select(x => new EmployeeDto
             {
+                Id = x.Id,
                 Name = x.Username,
                 Phone = x.PhoneNumber,
-                Email = x.Email,
-                
+                Role = x.Role.ToString(),
+                Email = x.Email
             }).ToList();
             return list;
         }

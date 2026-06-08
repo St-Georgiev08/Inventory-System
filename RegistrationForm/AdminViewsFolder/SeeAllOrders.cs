@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using Inventory_System.Entities;
 using SalesSystem.Business.Controllers;
+using SalesSystem.Business.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,13 +25,13 @@ namespace RegistrationForm
         }
         private readonly OrderItemsController productsController = new();
         private readonly BindingSource _productsSource = new();
-        private async Task LoadOrdersAsync()
+        private async Task LoadOrdersAsync(List<OrderGridDto> gridDto)
         {
 
             try
             {
-                var list = await productsController.GetForGrid();
-                _productsSource.DataSource = list;
+                
+                _productsSource.DataSource = gridDto;
                 dataGridView1.DataSource = _productsSource;
             }
             catch (ArgumentException x)
@@ -56,14 +57,30 @@ namespace RegistrationForm
             string dateTo = textBox2.Text;
             DateTime To;
             DateTime From;
-            bool successfullyParsedTo = DateTime.TryParse(dateTo, out To);
-            bool successfullyParsedFrom = DateTime.TryParse(daqteFrom, out From);
-            if (successfullyParsedFrom == false || successfullyParsedTo == false)
+            List<OrderGridDto> list;
+            list = await productsController.GetForGrid();
+            if (checkBox1.Checked == true)
             {
-                MessageBox.Show("Invalid date format! Follow the instructions above the text boxes.", "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                To = dateTimePicker2.Value;
+                From = dateTimePicker1.Value;
             }
-            await LoadOrdersAsync();
+            else
+            {
+
+                bool successfullyParsedTo = DateTime.TryParse(dateTo, out To);
+                bool successfullyParsedFrom = DateTime.TryParse(daqteFrom, out From);
+
+                if (successfullyParsedFrom == false || successfullyParsedTo == false || From >= To || From == To)
+                {
+                    MessageBox.Show("Invalid date format! Follow the instructions above the text boxes.", "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
+                list = list.Where(x => x.OrderedOn.Date >= From.Date && x.OrderedOn.Date <= To.Date).ToList();
+                await LoadOrdersAsync(list);
+            }
+            list = list.Where(x => x.OrderedOn.Date >= From.Date && x.OrderedOn.Date <= To.Date).ToList();
+            await LoadOrdersAsync(list);
         }
         private async Task ExportToExcelAsync()
         {
@@ -140,6 +157,28 @@ namespace RegistrationForm
             dataGridView1.DataSource = _productsSource;
             textBox1.Text = string.Empty;
             textBox2.Text = string.Empty;
+            dateTimePicker1.Visible = false;
+            dateTimePicker2.Visible = false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                textBox1.Visible = false;
+                textBox2.Visible = false;
+                dateTimePicker1.Visible = true;
+                dateTimePicker2.Visible = true;
+                label4.Text = "Please two different dates! <From> date must be older than <To> date.";
+            }
+            else
+            {
+                textBox1.Visible = true;
+                textBox2.Visible = true;
+                dateTimePicker1.Visible = false;
+                dateTimePicker2.Visible = false;
+                label4.Text = "Corect format(YYYY / MM / DD hh: mm:ss)";
+            }
         }
     }
 }

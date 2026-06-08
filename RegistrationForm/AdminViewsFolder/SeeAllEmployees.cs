@@ -34,14 +34,15 @@ namespace RegistrationForm
         }
         private readonly UsersCotroller productsController = new();
         private readonly BindingSource _productsSource = new();
-        private async Task LoadOrdersAsync(bool name, bool desc)
+        private async Task LoadOrdersAsync(bool name, bool desc, string? find)
         {
 
             try
             {
-                var list = await productsController.GetDataGrid(name, desc);
+                var list = await productsController.GetDataGrid(name, desc, find);
                 _productsSource.DataSource = list;
                 dataGridView1.DataSource = _productsSource;
+                dataGridView1.Columns[0].Visible = false;
             }
             catch (ArgumentException x)
             {
@@ -126,14 +127,14 @@ namespace RegistrationForm
             string find = textBox1.Text;
             bool Name = radioButton1.Checked;
             bool desc = radioButton2.Checked;
-            if (!Name && !desc)
-            {
-                MessageBox.Show("You must pick how the list would be sorted!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //if (!Name && !desc)
+            //{
+            //    MessageBox.Show("You must pick how the list would be sorted!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
             UserControl user = new();
             try
             {
-                await LoadOrdersAsync(Name, desc);
+                await LoadOrdersAsync(Name, desc,find);
             }
             catch (ArgumentException x)
             {

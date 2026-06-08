@@ -66,14 +66,44 @@ namespace SalesSystem.Business.Controllers
             await orderItems.Update(OrderId, prId, Qantity, UnitPrice);
             return "Order item updated successfully";
         }
-        public async Task<string> DeleteOrderItem(int id,int prId)
+        public async Task<string> DeleteOrderItem(int id,int prId,string? Finished)
         {
-            if(id<0 || prId < 0 || await orderItems.GetById(id,prId) == null)
+            if (id < 0 || prId < 0)
             {
                 throw new ArgumentException("Invalid order item ID");
             }
-            await orderItems.Delete(id, prId);
-            return "Order item deleted successfully";
+            var find = (await products.GetAllProduct()).FirstOrDefault(x => x.Id == prId);
+            if(find != null)
+            {
+                var orderItem = await orderItems.GetById(id, prId);
+                if(orderItem != null && Finished != null)
+                {
+                    find.Quantity += orderItem.Quantity;
+                    await orderItems.Delete(id, prId);
+                    return "Order item deleted successfully";
+                }
+                await orderItems.Delete(id, prId);
+                return "Order item deleted successfully";
+            }
+            return "Order item not found";
+        }
+        public async Task<List<EmployeeOrderDto>> GetForGridOrders(int userId)
+        {
+            var orders = await context.OrderItems
+      .Include(x => x.Order)
+      .Include(x => x.Product)
+      .Where(x => x.Order.UserId == userId)
+      .Select(x => new EmployeeOrderDto
+      {
+          OrderId = x.OrderId,
+          ProductId = x.ProductId,
+          ProductName = x.Product.Name,
+          Quantity = x.Quantity,
+          Price = x.UnitPrice
+      })
+      .ToListAsync();
+
+            return orders;
         }
             public async Task<List<OrderGridDto>> GetForGrid()
         {
@@ -83,17 +113,21 @@ namespace SalesSystem.Business.Controllers
                 OrderedBy = x.Order.User.Username,
                 Product = x.Product.Name,
                 Qantity = x.Quantity,
-                UnitPrice = x.UnitPrice
+                UnitPrice = x.UnitPrice,
+                OrderedOn = x.Order.OrderDate
             }).ToListAsync();
             return orders;
         }
 
-
+        public async Task<List<OrderItems>> GetAll()
+        {
+            return await orderItems.GetAll();
+        }
         public async Task<List<ProductDetails>> GetOrderedProductDetailsByUserAsync(int userId)
         {
             return await context.ProductDetails
                 .Where(pd => pd.Products.OrderItems
-                    .Any(oi => oi.Order.UserId == userId))
+                    .Any(oi => oi.Order.UserId == userId)).Include(x=>x.Products).ThenInclude(x=>x.Category)
                 .ToListAsync();
         }
     }

@@ -29,7 +29,7 @@ namespace RegistrationForm.ClientViewsFolder
             shopItems.ShowDialog();
         }
 
-        private async void LoadProduct(List<ProductDetails> products)
+        private async Task LoadProduct(List<ProductDetails> products)
         {
             flowLayoutPanel1.Controls.Clear();
 
@@ -48,7 +48,7 @@ namespace RegistrationForm.ClientViewsFolder
             RegistrationForm1 form1 = new RegistrationForm1(GetUser);
             var user = GetUser;
             var list = await orders.GetOrderedProductDetailsByUserAsync(user.Id);
-            LoadProduct(list);
+            await LoadProduct(list);
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

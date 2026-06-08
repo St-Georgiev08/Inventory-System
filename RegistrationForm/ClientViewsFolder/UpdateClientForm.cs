@@ -42,12 +42,12 @@ namespace RegistrationForm.ClientViewsFolder
             try
             {
                 HashingPaswords hashing = new();
-                if (await hashing.VerifyPassword(textBox3.Text, textBox4.Text))
+                if (textBox2.Text != textBox3.Text)
                 {
-                    MessageBox.Show(await users.UpdateUserAsync(user.Id, name, textBox2.Text, RoleType.Client.ToString(), ph, email)); return;
+                    MessageBox.Show("The reentered password was misspelled! Try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBox3.Text = "";
                 }
-                MessageBox.Show("The reentered password was misspelled! Try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox4.Text = "";
+                    MessageBox.Show(await users.UpdateUserAsync(user.Id, name, textBox2.Text, RoleType.Client.ToString(), ph, email));
             }
             catch (ArgumentException x)
             {
