@@ -16,8 +16,8 @@ namespace RegistrationForm.ClientViewsFolder
 {
     public partial class UpdateClientForm : Form
     {
-        
-        private User User {  get; set; }
+
+        private User User { get; set; }
         public UpdateClientForm(User user)
         {
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace RegistrationForm.ClientViewsFolder
                     MessageBox.Show("The reentered password was misspelled! Try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox3.Text = "";
                 }
-                    MessageBox.Show(await users.UpdateUserAsync(user.Id, name, textBox2.Text, RoleType.Client.ToString(), ph, email));
+                MessageBox.Show(await users.UpdateUserAsync(user.Id, name, textBox2.Text, RoleType.Client.ToString(), ph, email));
             }
             catch (ArgumentException x)
             {
@@ -72,6 +72,18 @@ namespace RegistrationForm.ClientViewsFolder
             this.Close();
             ClientMainForm form = new(User);
             form.ShowDialog();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                textBox2.PasswordChar = '*';
+                textBox3.PasswordChar = '*';
+                return;
+            }
+            textBox2.PasswordChar = '\0';
+            textBox3.PasswordChar = '\0';
         }
     }
 }

@@ -46,6 +46,7 @@
             button2 = new Button();
             button1 = new Button();
             pictureBox1 = new PictureBox();
+            checkBox1 = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -211,12 +212,25 @@
             pictureBox1.TabIndex = 57;
             pictureBox1.TabStop = false;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            checkBox1.Location = new Point(81, 248);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(80, 29);
+            checkBox1.TabIndex = 58;
+            checkBox1.Text = "Show";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // UpdateClientForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Brown;
             ClientSize = new Size(914, 600);
+            Controls.Add(checkBox1);
             Controls.Add(pictureBox1);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -261,5 +275,6 @@
         private Button button2;
         private Button button1;
         private PictureBox pictureBox1;
+        private CheckBox checkBox1;
     }
 }
