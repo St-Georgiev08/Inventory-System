@@ -37,6 +37,7 @@
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             label3 = new Label();
+            checkBox1 = new CheckBox();
             SuspendLayout();
             // 
             // label1
@@ -123,11 +124,24 @@
             label3.TabIndex = 9;
             label3.Text = "No account? Registrate now!";
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            checkBox1.Location = new Point(162, 205);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(80, 29);
+            checkBox1.TabIndex = 10;
+            checkBox1.Text = "Show";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // RegistrationForm1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(checkBox1);
             Controls.Add(label3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
@@ -155,5 +169,6 @@
         private TextBox textBox1;
         private TextBox textBox2;
         private Label label3;
+        private CheckBox checkBox1;
     }
 }

@@ -62,7 +62,12 @@ namespace RegistrationForm
             desc = textBox2.Text;
             try
             {
-
+               var list = await categoriesController.GetAllCategories();
+                    if (list.Any(x => x.Name == name))
+                    {
+                        MessageBox.Show("This category already exists! Try another name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 MessageBox.Show(await categoriesController.AddCategory(name, desc), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                await auditsLogController.AddAuditLogs(GetUser.Id, $"Added category ({name}) by Employee: {GetUser.Username}", $"Added category: {name}");
             }
@@ -73,11 +78,12 @@ namespace RegistrationForm
             }
             textBox1.Text = "";
             textBox2.Text = "";
+            await richBoxText();
         }
 
         private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var m = (await categoriesController.GetAllCategories()).Find(x => x.Name == comboBox1.SelectedValue);
+            var m = (await categoriesController.GetAllCategories()).Find(x => x.Name == (comboBox1.SelectedValue as Categories).Name);
             if (m == null)
             {
                 MessageBox.Show("Problem reached!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -85,16 +91,21 @@ namespace RegistrationForm
             textBox1.Text = m.Name;
             textBox2.Text = m.Description;
         }
-
+        private async Task richBoxText()
+        {
+            var list = await categoriesController.GetAllCategories();
+            richTextBox1.Text = string.Join(Environment.NewLine, list.Select(x => x.Name));
+        }
         private async void Add_Update_Categories_Load(object sender, EventArgs e)
         {
+            richTextBox1.Text = "";
             comboBox1.Visible = false;
             label2.Visible = false;
             label5.Visible = true;
             richTextBox1.Visible = true;
             update = false;
-            var list = await categoriesController.GetAllCategories();
-            richTextBox1.Text = string.Join(Environment.NewLine, list.Select(x => x.Name));
+           await richBoxText();
+
         }
 
         private void button3_Click(object sender, EventArgs e)

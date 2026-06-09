@@ -45,6 +45,7 @@
             textBox5 = new TextBox();
             label10 = new Label();
             button2 = new Button();
+            checkBox1 = new CheckBox();
             SuspendLayout();
             // 
             // textBox2
@@ -204,11 +205,24 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            checkBox1.Location = new Point(130, 168);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(80, 29);
+            checkBox1.TabIndex = 28;
+            checkBox1.Text = "Show";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // RegistrationForm2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(checkBox1);
             Controls.Add(button2);
             Controls.Add(label10);
             Controls.Add(label8);
@@ -252,5 +266,6 @@
         private TextBox textBox5;
         private Label label10;
         private Button button2;
+        private CheckBox checkBox1;
     }
 }

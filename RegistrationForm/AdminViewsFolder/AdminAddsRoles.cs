@@ -37,7 +37,7 @@ namespace RegistrationForm
 
             if (!radioButton1.Checked && !radioButton2.Checked)
             {
-                MessageBox.Show("Role must be picked!", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Role must be picked!", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             string username;
@@ -77,22 +77,24 @@ namespace RegistrationForm
             }
             else
             {
-                username = textBox7.Text;
+                var m = (listBox1.SelectedItem as User).Username;
                 try
                 {
-                    var get = (await control.GetAllUsersAsync()).Find(x => x.Username == username).Id;
-                    var add = await control.UpdateUserAsync(get, username, password, role, phoneNumber, Email);
+                   
+                    
+                    var get = (await control.GetAllUsersAsync()).Find(x => x.Username == m).Id;
+                    var add = await control.UpdateUserAsync(get, m, password, role, phoneNumber, Email);
                     MessageBox.Show(add, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Added {role} by Admin: {User.Username}", DateTime.Now.ToString());
+                    await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == m).Id, $"Added {role} by Admin: {User.Username}", DateTime.Now.ToString());
                 }
                 catch (ArgumentException x)
                 {
 
                     MessageBox.Show(x.Message, "Problem has been reached!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == username).Id, $"Updated {role} ({username}) by Admin: {User.Username}", $"Updated user: {username}");
+                await auditLogsController.AddAuditLogs((await control.GetAllUsersAsync()).Find(x => x.Username == m).Id, $"Updated {role} ({m}) by Admin: {User.Username}", $"Updated user: {m}");
             }
             textBox1.Clear();
             textBox2.Clear();
@@ -185,7 +187,7 @@ namespace RegistrationForm
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == true)
+            if (checkBox1.Checked == false)
             {
                 textBox2.PasswordChar = '*';
                 textBox3.PasswordChar = '*';

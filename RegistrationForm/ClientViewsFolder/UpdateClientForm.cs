@@ -65,6 +65,8 @@ namespace RegistrationForm.ClientViewsFolder
             textBox5.Text = user.PhoneNumber;
             textBox3.Text = "";
             textBox4.Text = "";
+            textBox2.PasswordChar = '*';
+            textBox3.PasswordChar = '*';
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -76,7 +78,7 @@ namespace RegistrationForm.ClientViewsFolder
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == true)
+            if (checkBox1.Checked == false)
             {
                 textBox2.PasswordChar = '*';
                 textBox3.PasswordChar = '*';

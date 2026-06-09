@@ -129,7 +129,7 @@ public class OrderItemsControllerTests
         await _context.SaveChangesAsync();
 
         // Act
-        string result = await _controller.DeleteOrderItem(1,1);
+        string result = await _controller.DeleteOrderItem(1,1,null);
 
         // Assert
         Assert.That(result, Is.EqualTo("Order item deleted successfully"));
@@ -147,7 +147,7 @@ public class OrderItemsControllerTests
 
         // Assert
           Assert.ThrowsAsync<ArgumentException>(async () =>
-           await _controller.DeleteOrderItem(id, prId));
+           await _controller.DeleteOrderItem(id, prId,null));
     }
 
 

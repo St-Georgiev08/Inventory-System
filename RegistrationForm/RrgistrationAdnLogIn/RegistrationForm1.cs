@@ -8,7 +8,7 @@ namespace RegistrationForm
 {
     public partial class RegistrationForm1 : Form
     {
-       public User GetUser { set; get; }
+        public User GetUser { set; get; }
         public RegistrationForm1(User user)
         {
             InitializeComponent();
@@ -72,7 +72,19 @@ namespace RegistrationForm
 
         private void RegistrationForm1_Load(object sender, EventArgs e)
         {
+            textBox2.PasswordChar = '*';
+        }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == false)
+            {
+                textBox2.PasswordChar = '*';
+                
+                return;
+            }
+            textBox2.PasswordChar = '\0';
+           
         }
     }
 }

@@ -82,7 +82,20 @@ namespace RegistrationForm
 
         private void RegistrationForm2_Load(object sender, EventArgs e)
         {
+            textBox2.PasswordChar = '*';
+            textBox3.PasswordChar = '*';
+        }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == false)
+            {
+                textBox2.PasswordChar = '*';
+                textBox3.PasswordChar = '*';
+                return;
+            }
+            textBox2.PasswordChar = '\0';
+            textBox3.PasswordChar = '\0';
         }
     }
 }
