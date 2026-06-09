@@ -33,6 +33,8 @@ namespace RegistrationForm
             comboBox1.Visible = true;
             label2.Visible = true;
             update = true;
+            label5.Visible = false;
+                richTextBox1.Visible = false;
         }
         private AuditLogsController auditsLogController = new();
         private async void button2_Click(object sender, EventArgs e)
@@ -84,11 +86,15 @@ namespace RegistrationForm
             textBox2.Text = m.Description;
         }
 
-        private void Add_Update_Categories_Load(object sender, EventArgs e)
+        private async void Add_Update_Categories_Load(object sender, EventArgs e)
         {
             comboBox1.Visible = false;
             label2.Visible = false;
+            label5.Visible = true;
+            richTextBox1.Visible = true;
             update = false;
+            var list = await categoriesController.GetAllCategories();
+            richTextBox1.Text = string.Join(Environment.NewLine, list.Select(x => x.Name));
         }
 
         private void button3_Click(object sender, EventArgs e)

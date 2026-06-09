@@ -38,15 +38,17 @@
             button2 = new Button();
             comboBox1 = new ComboBox();
             button3 = new Button();
+            richTextBox1 = new RichTextBox();
+            label5 = new Label();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(220, 25);
+            label1.Location = new Point(251, 33);
             label1.Name = "label1";
-            label1.Size = new Size(247, 30);
+            label1.Size = new Size(309, 38);
             label1.TabIndex = 0;
             label1.Text = "Add_Update_Category";
             // 
@@ -54,9 +56,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(164, 121);
+            label2.Location = new Point(187, 161);
             label2.Name = "label2";
-            label2.Size = new Size(131, 25);
+            label2.Size = new Size(160, 31);
             label2.TabIndex = 1;
             label2.Text = "All categories";
             // 
@@ -64,9 +66,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
-            label3.Location = new Point(155, 168);
+            label3.Location = new Point(177, 224);
             label3.Name = "label3";
-            label3.Size = new Size(69, 25);
+            label3.Size = new Size(83, 31);
             label3.TabIndex = 2;
             label3.Text = "Name:";
             // 
@@ -74,34 +76,31 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold);
-            label4.Location = new Point(155, 206);
+            label4.Location = new Point(177, 275);
             label4.Name = "label4";
-            label4.Size = new Size(119, 25);
+            label4.Size = new Size(144, 31);
             label4.TabIndex = 3;
             label4.Text = "Description:";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(310, 172);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
+            textBox1.Location = new Point(354, 229);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(181, 23);
+            textBox1.Size = new Size(206, 27);
             textBox1.TabIndex = 4;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(310, 210);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
+            textBox2.Location = new Point(354, 280);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(181, 23);
+            textBox2.Size = new Size(206, 27);
             textBox2.TabIndex = 5;
             // 
             // button1
             // 
-            button1.Location = new Point(310, 66);
-            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Location = new Point(354, 88);
             button1.Name = "button1";
-            button1.Size = new Size(160, 50);
+            button1.Size = new Size(183, 67);
             button1.TabIndex = 6;
             button1.Text = "I want to update a category";
             button1.UseVisualStyleBackColor = true;
@@ -109,10 +108,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(310, 259);
-            button2.Margin = new Padding(3, 2, 3, 2);
+            button2.Location = new Point(354, 345);
             button2.Name = "button2";
-            button2.Size = new Size(160, 60);
+            button2.Size = new Size(183, 80);
             button2.TabIndex = 7;
             button2.Text = "Add category";
             button2.UseVisualStyleBackColor = true;
@@ -121,30 +119,48 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(310, 121);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
+            comboBox1.Location = new Point(354, 161);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(181, 23);
+            comboBox1.Size = new Size(206, 28);
             comboBox1.TabIndex = 8;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // button3
             // 
-            button3.Location = new Point(10, 9);
-            button3.Margin = new Padding(3, 2, 3, 2);
+            button3.Location = new Point(11, 12);
             button3.Name = "button3";
-            button3.Size = new Size(114, 44);
+            button3.Size = new Size(130, 59);
             button3.TabIndex = 9;
             button3.Text = "Go back";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(661, 117);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(172, 149);
+            richTextBox1.TabIndex = 10;
+            richTextBox1.Text = "";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label5.Location = new Point(641, 88);
+            label5.Name = "label5";
+            label5.Size = new Size(204, 23);
+            label5.TabIndex = 11;
+            label5.Text = "All categories in system:";
+            // 
             // Add_Update_Categories
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
-            ClientSize = new Size(759, 406);
+            ClientSize = new Size(867, 541);
+            Controls.Add(label5);
+            Controls.Add(richTextBox1);
             Controls.Add(button3);
             Controls.Add(comboBox1);
             Controls.Add(button2);
@@ -155,7 +171,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Add_Update_Categories";
             Text = "Add_Update_Categories";
             Load += Add_Update_Categories_Load;
@@ -175,5 +190,7 @@
         private Button button2;
         private ComboBox comboBox1;
         private Button button3;
+        private RichTextBox richTextBox1;
+        private Label label5;
     }
 }
