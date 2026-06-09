@@ -27,8 +27,9 @@ namespace RegistrationForm.UserForms
         public async Task LoadProduct(ProductDetails product)
         {
             lblName.Text = product.Products?.Name ?? "Unknown";
-            lblCategory.Text = product.Products?.Category?.Name ?? "Uncategorized";
+            lblCategory.Text =$"Category: {product.Products?.Category?.Name}" ?? "Uncategorized";
             lblPrice.Text = product.Products != null ? $"{product.Products.Price} €" : "Price unavailable";
+            label1.Text =  $"Quantity: {product.Products?.Quantity.ToString()}" ?? "No description available";
 
             products = product;
 
